@@ -1,0 +1,28 @@
+﻿@model List<WheelsMarket.Services.VehicleTypeSections.ViewModel.AllVehicleTypeSectionViewModel>
+@{
+}
+
+<h1>Type Sections</h1>
+
+<a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning">Add Section</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cat in this.Model)
+        {
+                           <tr>
+                        <td>@cat.Section</td>
+                            <td><a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Delete</a></td>
+                        
+                    </tr>
+        }
+
+
+    </tbody>
+</table>

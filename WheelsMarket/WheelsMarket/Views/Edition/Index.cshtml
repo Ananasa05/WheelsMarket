@@ -1,0 +1,27 @@
+﻿@using WheelsMarket.Services.Editions.ViewModel
+
+<h1>Brand Edition</h1>
+
+<a asp-controller="Edition" asp-action="Create" class="btn btn-warning">Add Edition</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AllEditionViewModel cat in this.Model)
+        {
+                                   <tr>
+                                <td>@cat.Name</td>
+                                <td>@cat.BrandName</td>
+                                    <td><a asp-controller="Edition" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Delete</a></td>
+
+                            </tr>
+        }
+
+
+    </tbody>
+</table>

@@ -1,0 +1,29 @@
+﻿@using WheelsMarket.Services.VehicleTypeTypes.ViewModel
+@{
+}
+
+<h1>Type Type</h1>
+
+<a asp-controller="VehicleTypeType" asp-action="Create" class="btn btn-warning">Add Section</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AllVehicleTypeTypeViewModel cat in this.Model)
+        {
+                               <tr>
+                            <td>@cat.Type</td>
+                            <td>@cat.VehicleTypeSectionName</td>
+                                <td><a asp-controller="VehicleTypeType" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Delete</a></td>
+
+                        </tr>
+        }
+
+
+    </tbody>
+</table>

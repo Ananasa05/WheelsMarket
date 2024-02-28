@@ -1,0 +1,28 @@
+﻿@model List<WheelsMarket.Services.Brands.ViewModel.AllBrandViewModel>
+@{
+}
+
+<h1>Brand</h1>
+
+<a asp-controller="Brand" asp-action="Create" class="btn btn-warning">Add Section</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Name </th>
+            <th> Delete </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brand in this.Model)
+        {
+                               <tr>
+                            <td>@brand.Name</td>
+                                <td><a asp-controller="Brand" asp-action="Delete" asp-route-id="@brand.Id" class="btn btn-danger">Delete</a></td>
+
+                        </tr>
+        }
+
+
+    </tbody>
+</table>
