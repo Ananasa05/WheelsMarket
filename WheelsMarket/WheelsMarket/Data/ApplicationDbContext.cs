@@ -12,12 +12,13 @@ namespace WheelsMarket.Data
             : base(options)
         {
         }
-        public DbSet<Favourite> Favourites { get; set; } = null!;
-        public DbSet<Vehicle> Vehicles { get; set; } = null!;
-        public DbSet<Edition> Editions { get; set; } = null!;
-        public DbSet<Brand> Brands { get; set; } = null!;
-        public DbSet<VehicleTypeSection> VehicleTypeSections { get; set; } = null!;
-        public DbSet<VehicleTypeType> VehicleTypeTypes { get; set; } = null!;
+        public DbSet<Favourite> Favourites { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<Edition> Editions { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<VehicleTypeSection> VehicleTypeSections { get; set; }
+        public DbSet<VehicleTypeType> VehicleTypeTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Favourite>().HasKey(x => new

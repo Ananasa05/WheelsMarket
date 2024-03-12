@@ -283,28 +283,24 @@ namespace WheelsMarket.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Color")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Condition")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Distance")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("EditionId")
+                    b.Property<Guid?>("EditionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Fuel")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("VehicleTypeTypeId")
+                    b.Property<Guid?>("VehicleTypeTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -438,21 +434,15 @@ namespace WheelsMarket.Migrations
                 {
                     b.HasOne("WheelsMarket.Data.Models.Edition", "Edition")
                         .WithMany("Vehicles")
-                        .HasForeignKey("EditionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EditionId");
 
                     b.HasOne("WheelsMarket.Data.Models.User", "User")
                         .WithMany("Vehicles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
                         .WithMany("Vehicles")
-                        .HasForeignKey("VehicleTypeTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("VehicleTypeTypeId");
 
                     b.Navigation("Edition");
 

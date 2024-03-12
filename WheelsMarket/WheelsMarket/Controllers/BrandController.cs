@@ -30,12 +30,12 @@ namespace WheelsMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddBrandViewModel model)
         {
-            var vehicleType = new AddBrandViewModel()
-            {
-                Name = model.Name,
-            };
+            //var vehicleType = new AddBrandViewModel()
+            //{
+            //    Name = model.Name,
+            //};
 
-            await brandService.AddBrandAdminAsync(vehicleType);
+            await brandService.AddBrandAdminAsync(model);
             return RedirectToAction("Index");
         }
 

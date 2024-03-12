@@ -10,9 +10,8 @@ namespace WheelsMarket.Services.Vehicles
     {
         //Task<IEnumerable<AllVehicleViewModel>> ShowAllVehicleAsync();
 
-        Task AddVehicleAsync(AddVehicleViewModel add,User user);
-        SelectList AddVehicleEditionAsync();
-        SelectList AddVehicleTypeAsync();
-
+        Task AddVehicleAsync(AddVehicleViewModel add);
+        SelectList AddVehicleEditionAsync(Guid brandId);
+        SelectList AddBrandAsync();
     }
 }

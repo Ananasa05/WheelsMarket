@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WheelsMarket.Migrations
 {
-    public partial class mig1 : Migration
+    public partial class InitDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -221,12 +221,12 @@ namespace WheelsMarket.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Distance = table.Column<int>(type: "int", nullable: false),
-                    Fuel = table.Column<int>(type: "int", nullable: false),
-                    Condition = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VehicleTypeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EditionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Distance = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Fuel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Condition = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VehicleTypeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EditionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -242,14 +242,12 @@ namespace WheelsMarket.Migrations
                         name: "FK_Vehicles_Editions_EditionId",
                         column: x => x.EditionId,
                         principalTable: "Editions",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vehicles_VehicleTypeTypes_VehicleTypeTypeId",
                         column: x => x.VehicleTypeTypeId,
                         principalTable: "VehicleTypeTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
