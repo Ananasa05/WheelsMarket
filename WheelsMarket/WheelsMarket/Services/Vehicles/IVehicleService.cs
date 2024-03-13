@@ -13,5 +13,7 @@ namespace WheelsMarket.Services.Vehicles
         Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);
         SelectList AddBrandAsync();
+        SelectList AddVehicleTypeTypeAsync(Guid brandId);
+        SelectList AddVehicleTypeSectionAsync();
     }
 }

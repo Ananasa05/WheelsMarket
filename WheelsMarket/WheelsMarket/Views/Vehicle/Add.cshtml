@@ -18,7 +18,7 @@
 			 <br />
 			 <select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
 			 </div>    
-	 <button type="submit" class="btn btn-warning">Ok</button>
+	 @* <button type="submit" class="btn btn-warning">Ok</button> *@
 
 
 			 <div class="mb-3">
@@ -26,6 +26,21 @@
 			 <br />
 			 <select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"></select>
 			 </div>
+
+			  <div class="mb-3">
+			 <label for="" class="form-label">VehicleTypeSection</label>
+			 <br />
+			 <select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
+			 </div>    
+	 <button type="submit" class="btn btn-warning">Ok</button>
+
+
+			 <div class="mb-3">
+			 <label for="" class="form-label">VehicleTypeType</label>
+			 <br />
+			 <select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
+			 </div>
+
 	 <button type="submit" class="btn btn-primary">Submit</button>
 
 		 </form>

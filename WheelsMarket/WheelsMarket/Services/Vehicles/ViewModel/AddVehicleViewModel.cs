@@ -12,5 +12,11 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		[Required]
 
 		public Guid BrandId { get; set; }
+        [Required]
+
+        public Guid VehicleTypeTypeId{ get; set; }
+        [Required]
+
+        public Guid VehicleTypeSectionId { get; set; }
     }
 }

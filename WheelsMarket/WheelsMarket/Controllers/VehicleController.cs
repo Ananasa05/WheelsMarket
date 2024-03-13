@@ -34,18 +34,27 @@ namespace WheelsMarket.Controllers
         public IActionResult Add()
         {
             ViewBag.BrandId = this.vehicleService.AddBrandAsync();
+            ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Add(AddVehicleViewModel viewModel)
         {
-            if (viewModel.BrandId != default(Guid) && viewModel.EditionId == default(Guid))
+            if (viewModel.BrandId != default(Guid) && viewModel.EditionId == default(Guid)&& viewModel.VehicleTypeTypeId == default(Guid) && viewModel.VehicleTypeSectionId != default(Guid))
             {
                 var a = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
                 ViewBag.EditionId = a;
                 ViewBag.BrandId = this.vehicleService.AddBrandAsync();
+				var b = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
+				ViewBag.VehicleTypeTypeId = b;
+				ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
 				return View(viewModel);
             }
+            //else if ()
+            //{
+                
+            //    return View(viewModel);
+            //}
             else
             {
 				if (!ModelState.IsValid) { return View(viewModel); }
@@ -55,13 +64,8 @@ namespace WheelsMarket.Controllers
             
             
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Brand(SelectBrand viewModel)
-        //{
-        //    ViewBag.BrandId = this.vehicleService.AddBrandAsync();
-        //    return View();
-        //}
+      
 
 
-    }//edition prazni li sa, ako sa vzemi mi vs za segashniq brand i vurni view-to
+    }
 }

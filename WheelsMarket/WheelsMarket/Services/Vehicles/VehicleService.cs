@@ -43,20 +43,29 @@ namespace WheelsMarket.Services.Vehicles
         {
             return new SelectList(this.context.Brands, "Id", "Name");
         }
-
+      
         public async Task AddVehicleAsync(AddVehicleViewModel addVehicleViewModel)
         {
             Vehicle model = new Vehicle()
             {
                 Id = Guid.NewGuid(),
                 Color = addVehicleViewModel.Color,
-                EditionId = addVehicleViewModel.EditionId
+                EditionId = addVehicleViewModel.EditionId,
+                VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };
 
             await this.context.Vehicles.AddAsync(model);
             await context.SaveChangesAsync();
         }
+        public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
+        {
+            return new SelectList(this.context.VehicleTypeTypes.Where(x => x.VehicleTypeSectionId == typeSectionId), "Id", "Type");
+        }
 
+        public SelectList AddVehicleTypeSectionAsync()
+        {
+            return new SelectList(this.context.VehicleTypeSections, "Id", "Section");
+        }
 
 
     }
