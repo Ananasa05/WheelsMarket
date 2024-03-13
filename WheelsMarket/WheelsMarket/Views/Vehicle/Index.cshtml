@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (AllVehicleViewModel vehicle in this.Model)
+@*         @foreach (AllVehicleViewModel vehicle in this.Model)
         {
                                        <tr>
                                     <td>@vehicle.Id</td>
@@ -31,4 +31,28 @@
 
 
     </tbody>
+</table>
+ *@
+
+                                       <div class="text-center row">
+    @foreach (AllVehicleViewModel vehicle in this.Model)
+    {
+    <div class="card col-4" style="width: 20rem;">
+    <img class="card-img-top" src="@vehicle.Color"  height="350" alt="Book Image">
+    <div class="card-body">
+
+                    <h5 class="card-title mt-1">@vehicle.Distance</h5>
+    <p class="mb-0">Author: @vehicle.Fuel</p>
+    <p>Publisher: @vehicle.EditionName</p>
+    <p>Publisher: @vehicle.BrandName</p>
+    </div>
+
+               @*  <form class="input-group-sm" asp-route-bookId="@book.Id" asp-controller="Books" asp-action="BooksRead"
+                      method="post">
+    <input type="submit" value="Mark as read" class="fs-6 btn btn-success mb-3 p-2" />
+    </form> *@
+    </div>
+    }
+</div>
+   </tbody>
 </table>
