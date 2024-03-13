@@ -19,7 +19,22 @@ namespace WheelsMarket.Services.Vehicles
             this.context = context;
         }
 
-        public SelectList AddVehicleEditionAsync(Guid brandId)
+		public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync()
+		{
+            var entities = await context.Vehicles.Include(vehicle => vehicle.Edition).ThenInclude(vehicle1=>vehicle1.Brand).ToListAsync();
+            return entities
+                .Select(b => new AllVehicleViewModel
+                {
+                    Id = b.Id,
+                    Color = b.Color,
+                    Distance= b.Distance,
+                    Fuel = b.Fuel,
+                    EditionName = b.Edition.Name,
+                    BrandName = b.Edition.Brand.Name,
+                });
+        }
+
+		public SelectList AddVehicleEditionAsync(Guid brandId)
         {
             return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
         }

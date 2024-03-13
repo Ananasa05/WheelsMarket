@@ -8,7 +8,7 @@ namespace WheelsMarket.Services.Vehicles
 {
     public interface IVehicleService
     {
-        //Task<IEnumerable<AllVehicleViewModel>> ShowAllVehicleAsync();
+        Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync();
 
         Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);

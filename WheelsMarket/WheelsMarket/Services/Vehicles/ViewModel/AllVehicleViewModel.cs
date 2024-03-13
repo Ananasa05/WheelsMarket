@@ -7,8 +7,7 @@
         public string Distance { get; set; }
         public string Fuel { get; set; }
         public string Condition { get; set; }
-        public string VehicleTypeTypeId { get; set; }
-        public string EditionId { get; set; }
-        public string UserId { get; set; }
+        public string EditionName { get; set; }
+        public string BrandName { get; set; }
     }
 }

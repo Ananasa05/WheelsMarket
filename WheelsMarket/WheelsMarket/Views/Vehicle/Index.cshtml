@@ -1,5 +1,34 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+
+<h1>Brand Edition</h1>
+
+<a asp-controller="Edition" asp-action="Create" class="btn btn-warning">Add Edition</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Id </th>
+            <th> Color</th>
+            <th> Distance</th>
+            <th> Fuel</th>
+            <th> EditionName</th>
+            <th> BrandName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AllVehicleViewModel vehicle in this.Model)
+        {
+                                       <tr>
+                                    <td>@vehicle.Id</td>
+                                    <td>@vehicle.Color</td>
+                                    <td>@vehicle.Distance</td>
+                                    <td>@vehicle.Fuel</td>
+                                    <td>@vehicle.EditionName</td>
+                                    <td>@vehicle.BrandName</td>
+
+                                </tr>
+        }
+
+
+    </tbody>
+</table>

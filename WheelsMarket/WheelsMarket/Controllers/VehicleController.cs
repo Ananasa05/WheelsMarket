@@ -7,6 +7,7 @@ using WheelsMarket.Data.Models;
 using WheelsMarket.Services.Brands.ViewModel;
 using WheelsMarket.Services.Brands;
 using WheelsMarket.Services.Editions.ViewModel;
+using WheelsMarket.Services.Editions;
 
 namespace WheelsMarket.Controllers
 {
@@ -22,12 +23,14 @@ namespace WheelsMarket.Controllers
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            return View();
-        }
+		public async Task<IActionResult> Index()
+		{
+			var model = await vehicleService.ShowAllVehiclesAsync();
+			return View(model);
+		}
 
-        [HttpGet]
+
+		[HttpGet]
         public IActionResult Add()
         {
             ViewBag.BrandId = this.vehicleService.AddBrandAsync();
