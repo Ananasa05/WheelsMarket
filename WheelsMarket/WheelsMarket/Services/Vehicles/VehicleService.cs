@@ -19,6 +19,23 @@ namespace WheelsMarket.Services.Vehicles
             this.context = context;
         }
 
+		public async Task DeleteVehicleAdminAsync(Guid id)
+		{
+			var model = await this.context.Vehicles
+				.FirstOrDefaultAsync(x => x.Id == id);
+
+
+			if (model != null)
+			{
+				context.Vehicles.Remove(model);
+				await context.SaveChangesAsync();
+			}
+			else
+			{
+				throw new ArgumentNullException();
+			}
+		}
+
 		public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync()
 		{
             var entities = await context.Vehicles.Include(vehicle => vehicle.Edition).ThenInclude(vehicle1=>vehicle1.Brand).ToListAsync();

@@ -5,16 +5,7 @@
 <a asp-controller="Edition" asp-action="Create" class="btn btn-warning">Add Edition</a>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th> Id </th>
-            <th> Color</th>
-            <th> Distance</th>
-            <th> Fuel</th>
-            <th> EditionName</th>
-            <th> BrandName</th>
-        </tr>
-    </thead>
+  
     <tbody>
 @*         @foreach (AllVehicleViewModel vehicle in this.Model)
         {
@@ -38,6 +29,7 @@
     @foreach (AllVehicleViewModel vehicle in this.Model)
     {
     <div class="card col-4" style="width: 20rem;">
+
     <img class="card-img-top" src="@vehicle.Color"  height="350" alt="Book Image">
     <div class="card-body">
 
@@ -45,13 +37,13 @@
     <p class="mb-0">Author: @vehicle.Fuel</p>
     <p>Publisher: @vehicle.EditionName</p>
     <p>Publisher: @vehicle.BrandName</p>
+                                                    <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Delete</a>
+
     </div>
 
-               @*  <form class="input-group-sm" asp-route-bookId="@book.Id" asp-controller="Books" asp-action="BooksRead"
-                      method="post">
-    <input type="submit" value="Mark as read" class="fs-6 btn btn-success mb-3 p-2" />
-    </form> *@
+               
     </div>
+
     }
 </div>
    </tbody>

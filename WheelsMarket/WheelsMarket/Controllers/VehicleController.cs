@@ -64,8 +64,16 @@ namespace WheelsMarket.Controllers
             
             
         }
-      
+
+		[HttpGet]
+		public async Task<IActionResult> Delete(
+		  [FromRoute]
+			Guid id)
+		{
+			await vehicleService.DeleteVehicleAdminAsync(id);
+			return RedirectToAction("Index");
+		}
 
 
-    }
+	}
 }
