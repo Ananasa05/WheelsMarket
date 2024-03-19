@@ -80,10 +80,15 @@ namespace WheelsMarket.Controllers
 			return RedirectToAction("Index");
 		}
 
-        [HttpGet]
-        public async Task<IActionResult> ByPriceFilter(int min,int max)
+		[HttpGet]
+		public IActionResult ByPriceFilter()
+		{
+			return View();
+		}
+		[HttpPost]
+        public async Task<IActionResult> ByPriceFilter(ByPriceFilterViewModel viewModel)
         {
-            await vehicleService.ByPriceFilter(min, max);
+            await vehicleService.ByPriceFilter(viewModel);
             return RedirectToAction("ShowSelectedInformationForAllVehicles","Vehicle");
         }
 

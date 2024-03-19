@@ -36,9 +36,9 @@ namespace WheelsMarket.Services.Vehicles
 			}
 		}
 
-        public async Task ByPriceFilter(int min, int max)
+        public async Task ByPriceFilter(ByPriceFilterViewModel viewModel)
         {
-            var model = await this.context.Vehicles.Where(x=>x.Price>min && x.Price<max).ToListAsync();
+            var model = await this.context.Vehicles.Where(x=>x.Price>viewModel.min && x.Price<viewModel.max).ToListAsync();
         }
 
         public async Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id)

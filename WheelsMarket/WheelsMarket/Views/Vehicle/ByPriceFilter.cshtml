@@ -1,39 +1,27 @@
-﻿@using WheelsMarket.Services.Vehicles.ViewModel;
-@model AllVehicleViewModel
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+@model ByPriceFilterViewModel
+@{
+}
 
-<form method="post" action="ShowAllInfoForAVehicle" class="mt-5">
+<h1>Add Vehicle</h1>
 
-    <br />
+<div class="row">
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+		<form method="post" asp-action="ByPriceFilter">
+			<div class="mb-3">
+			<label asp-for="@Model.min" class="form-label">Color</label>
+			<input asp-for="@Model.min" class="form-control" aria-required="true"/>
+			<span asp-validation-for="min" class="text-danger"></span>
+			</div>
+			<div class="mb-3">
+			<label asp-for="@Model.max" class="form-label">Distance</label>
+			<input asp-for="@Model.max" class="form-control" aria-required="true"/>
+			<span asp-validation-for="max" class="text-danger"></span>
+			</div>
+		
 
-    <h1 style="color:#fc6c85">Games:</h1>
+	 <button type="submit" class="btn btn-primary">Submit</button>
 
-    <table class="table">
-        <thead>
-            <tr style="color:#fc6c85">
-                <th>Name</th>
-                <th>Price</th>
-                <th>Date of manufacture</th>
-                <th>Type of fuel</th>
-                <th>Conditiond</th>
-                <th>Volume</th>
-                <th>Transmission</th>
-                <th>Section</th>
-                <th>Type of Section</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="color:#fc6c85">
-        <img class="card-img-top" src="@Model.ImageURL"  height="350">
-
-                <td>@Model.BrandName</td>
-                <td>@Model.EditionName</td>
-                <td>@Model.Price</td>
-                <td>@Model.Year</td>
-                <td>@Model.Fuel</td>
-                <td>@Model.TypeSection</td>
-                <td>@Model.TypeType</td>
-
-            </tr>
-        </tbody>
-    </table>
-</form>
+		 </form>
+	</div>
+</div>
