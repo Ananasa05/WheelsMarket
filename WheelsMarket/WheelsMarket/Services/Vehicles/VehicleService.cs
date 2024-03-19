@@ -36,21 +36,61 @@ namespace WheelsMarket.Services.Vehicles
 			}
 		}
 
-		public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync()
+        public async Task ByPriceFilter(int min, int max)
+        {
+            var model = await this.context.Vehicles.Where(x=>x.Price>min && x.Price<max).ToListAsync();
+        }
+
+        public async Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id)
+        {
+            var model = await this.context.Vehicles
+                 .Include(x => x.Edition)
+                 .ThenInclude(x => x.Brand)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (model != null)
+            {
+                var vehicle = new AllVehicleViewModel()
+                {
+                    Id = model.Id,
+                    Distance = model.Distance,
+                    Fuel = model.Fuel,
+                    ImageURL = model.ImageURL,
+                    Price = Convert.ToInt32( model.Price),
+                    Volume = Convert.ToInt32(model.Volume),
+                    Year = model.Year,
+                    //EditionName = model.Edition,
+
+                };
+
+                return vehicle;
+            }
+            else
+            {
+                throw new ArgumentNullException();
+            }
+        }
+
+
+        public async Task<IEnumerable<SelectedInformationForVehicle>> ShowAllVehiclesAsync()
 		{
             var entities = await context.Vehicles.Include(vehicle => vehicle.Edition).ThenInclude(vehicle1=>vehicle1.Brand).ToListAsync();
             return entities
-                .Select(b => new AllVehicleViewModel
+                .Select(b => new SelectedInformationForVehicle
                 {
                     Id = b.Id,
-                    Color = b.Color,
-                    Distance= b.Distance,
+                    Distance = b.Distance,
                     Fuel = b.Fuel,
+                    ImageURL = b.ImageURL,
+                    Price = Convert.ToInt32(b.Price),
+                    Volume = Convert.ToInt32(b.Volume),
+                    Year = b.Year,
                     EditionName = b.Edition.Name,
                     BrandName = b.Edition.Brand.Name,
                 });
-        }
+    }
 
+    
 		public SelectList AddVehicleEditionAsync(Guid brandId)
         {
             return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
@@ -67,6 +107,14 @@ namespace WheelsMarket.Services.Vehicles
             {
                 Id = Guid.NewGuid(),
                 Color = addVehicleViewModel.Color,
+                Distance = addVehicleViewModel.Distance,
+                Fuel = addVehicleViewModel.Fuel,
+                Condition = addVehicleViewModel.Condition,
+                ImageURL = addVehicleViewModel.ImageURL,
+                Price = addVehicleViewModel.Price,
+                Volume = addVehicleViewModel.Volume,
+                Year = addVehicleViewModel.Year,
+				Тransmission = addVehicleViewModel.Тransmission,
                 EditionId = addVehicleViewModel.EditionId,
                 VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };

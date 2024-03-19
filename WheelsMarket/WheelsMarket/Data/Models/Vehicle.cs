@@ -7,11 +7,16 @@ namespace WheelsMarket.Data.Models
     {
         [Key]
         public Guid Id { get; set; }
-        
+        public string? Тransmission { get; set; } = null;
+        public int? Volume { get; set; } = null;
+        public int? Price { get; set; } = null;
         public string? Color { get; set; } = null;
         public string? Distance { get; set; } = null;
         public string? Fuel { get; set; } = null;
         public string? Condition { get; set; } = null;
+        public string? Year { get; set; } = null;
+        public string? ImageURL { get; set; } = null;
+
 
         [ForeignKey(nameof(Models.VehicleTypeType))]
         public Guid? VehicleTypeTypeId { get; set; } = null;

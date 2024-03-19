@@ -8,8 +8,10 @@ namespace WheelsMarket.Services.Vehicles
 {
     public interface IVehicleService
     {
-        Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync();
+        Task<IEnumerable<SelectedInformationForVehicle>> ShowAllVehiclesAsync();
+        Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id);
 		Task DeleteVehicleAdminAsync(Guid id);
+		Task ByPriceFilter(int min, int max);
 
 		Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);

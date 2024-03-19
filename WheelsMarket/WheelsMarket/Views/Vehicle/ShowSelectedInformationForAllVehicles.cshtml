@@ -1,0 +1,37 @@
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+
+<h1>Vehicles</h1>
+
+<a asp-controller="Edition" asp-action="Create" class="btn btn-warning">Add Edition</a>
+
+<table class="table">
+
+    <tbody>
+
+                                       <div class="text-center row">
+            @foreach (SelectedInformationForVehicle vehicle in this.Model)
+            {
+        <div class="card col-4" style="width: 20rem;">
+
+        <img class="card-img-top" src="@vehicle.ImageURL"  height="350">
+        <div class="card-body">
+
+        <p class="mb-0">Цена: @vehicle.Price</p>
+        <p class="mb-0">Дистанция: @vehicle.Distance</p>
+        <p class="mb-0">Гориво: @vehicle.Fuel</p>
+        <p class="mb-0">Обем: @vehicle.Volume</p>
+        <p class="mb-0">Година: @vehicle.Year</p>
+        <p class="mb-0">Марка: @vehicle.BrandName</p>
+        <p class="mb-0">Модел: @vehicle.EditionName</p>
+                                                        <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Delete</a>
+                                                        <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
+
+        </div>
+
+
+        </div>
+
+            }
+</div>
+   </tbody>
+</table>

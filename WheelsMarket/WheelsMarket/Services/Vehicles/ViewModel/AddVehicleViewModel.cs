@@ -6,7 +6,23 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
     {
         [Required]
         public string Color { get; set; }
-		[Required]
+        [Required]
+        public string Distance { get; set; }
+        [Required]
+        public string Fuel { get; set; }
+        [Required]
+        public string Condition { get; set; }
+        [Required]
+        public string ImageURL { get; set; }
+        [Required]
+        public int Price { get; set; }
+        [Required]
+        public int Volume { get; set; }
+        [Required]
+        public string Year { get; set; }
+        [Required]
+        public string Тransmission { get; set; }
+        [Required]
 
 		public Guid EditionId { get; set; }
 		[Required]

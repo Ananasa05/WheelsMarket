@@ -23,14 +23,20 @@ namespace WheelsMarket.Controllers
             this.userManager = userManager;
         }
 
-		public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles()
 		{
 			var model = await vehicleService.ShowAllVehiclesAsync();
 			return View(model);
 		}
+        [HttpGet]
+        public async Task<IActionResult> ShowAllInfoForAVehicle([FromRoute] Guid id)
+        {
+            var model = await vehicleService.ShowAllInformationForVehicle(id);
+            return View(model);
+        }
 
-
-		[HttpGet]
+        [HttpGet]
         public IActionResult Add()
         {
             ViewBag.BrandId = this.vehicleService.AddBrandAsync();
@@ -74,6 +80,12 @@ namespace WheelsMarket.Controllers
 			return RedirectToAction("Index");
 		}
 
+        [HttpGet]
+        public async Task<IActionResult> ByPriceFilter(int min,int max)
+        {
+            await vehicleService.ByPriceFilter(min, max);
+            return RedirectToAction("ShowSelectedInformationForAllVehicles","Vehicle");
+        }
 
-	}
+    }
 }
