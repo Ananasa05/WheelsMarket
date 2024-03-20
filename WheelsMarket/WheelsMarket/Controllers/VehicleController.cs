@@ -24,9 +24,18 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles()
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min,int? max)
 		{
-			var model = await vehicleService.ShowAllVehiclesAsync();
+            IEnumerable<SelectedInformationForVehicle> model = new List<SelectedInformationForVehicle>();
+            if (min!=null&&max!=null)
+            {
+				model = await vehicleService.ByPriceFilter((int)min, (int)max);
+			}
+            else
+            {
+                model = await vehicleService.ShowAllVehiclesAsync();
+
+			}
 			return View(model);
 		}
         [HttpGet]
@@ -85,12 +94,5 @@ namespace WheelsMarket.Controllers
 		{
 			return View();
 		}
-		[HttpPost]
-        public async Task<IActionResult> ByPriceFilter(ByPriceFilterViewModel viewModel)
-        {
-            await vehicleService.ByPriceFilter(viewModel);
-            return RedirectToAction("ShowSelectedInformationForAllVehicles","Vehicle");
-        }
-
     }
 }

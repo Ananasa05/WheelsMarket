@@ -36,12 +36,27 @@ namespace WheelsMarket.Services.Vehicles
 			}
 		}
 
-        public async Task ByPriceFilter(ByPriceFilterViewModel viewModel)
+        public async Task<IEnumerable<SelectedInformationForVehicle>> ByPriceFilter(int min,int max)
         {
-            var model = await this.context.Vehicles.Where(x=>x.Price>viewModel.min && x.Price<viewModel.max).ToListAsync();
+			IEnumerable<SelectedInformationForVehicle> model = 
+                await this.context.Vehicles.Where(x=>x.Price>min&& x.Price<max)
+                .Select(b=> new SelectedInformationForVehicle() {
+					Id = b.Id,
+					Distance = b.Distance,
+					Fuel = b.Fuel,
+					ImageURL = b.ImageURL,
+					Price = Convert.ToInt32(b.Price),
+					Volume = Convert.ToInt32(b.Volume),
+					Year = b.Year,
+					EditionName = b.Edition.Name,
+					BrandName = b.Edition.Brand.Name,
+				})
+                .ToListAsync();
+            return model;
         }
 
-        public async Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id)
+
+		public async Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id)
         {
             var model = await this.context.Vehicles
                  .Include(x => x.Edition)

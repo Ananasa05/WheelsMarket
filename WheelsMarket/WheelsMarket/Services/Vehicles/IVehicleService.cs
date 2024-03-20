@@ -11,7 +11,7 @@ namespace WheelsMarket.Services.Vehicles
         Task<IEnumerable<SelectedInformationForVehicle>> ShowAllVehiclesAsync();
         Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id);
 		Task DeleteVehicleAdminAsync(Guid id);
-		Task ByPriceFilter(ByPriceFilterViewModel viewModel);
+		Task<IEnumerable<SelectedInformationForVehicle>> ByPriceFilter(int min,int max);
 
 		Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);
