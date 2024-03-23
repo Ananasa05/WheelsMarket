@@ -7,7 +7,7 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
         [Required]
         public string Color { get; set; }
         [Required]
-        public string Distance { get; set; }
+        public int Distance { get; set; }
         [Required]
         public string Fuel { get; set; }
         [Required]
@@ -19,7 +19,7 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
         [Required]
         public int Volume { get; set; }
         [Required]
-        public string Year { get; set; }
+        public int Year { get; set; }
         [Required]
         public string Тransmission { get; set; }
         [Required]

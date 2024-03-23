@@ -3,6 +3,9 @@
 <h1>Vehicles</h1>
 
 <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-warning">By Price</a>
+<a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-warning">By Year</a>
+<a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-warning">By Trans</a>
+<a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-warning">By Fuel</a>
 
 
 <table class="table">
@@ -10,7 +13,7 @@
     <tbody>
 
                                        <div class="text-center row">
-            @foreach (SelectedInformationForVehicle vehicle in this.Model)
+            @foreach (AllVehicleViewModel vehicle in this.Model)
             {
         <div class="card col-4" style="width: 20rem;">
 

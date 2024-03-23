@@ -1,0 +1,22 @@
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+
+<h1>Filter By Transmission</h1>
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+        <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
+               <div class="mb-3">
+                <label class="form-label">Скоростна кутия</label>
+                <select name="transName" class="form-control">
+                    <option value="">-- Select Make --</option>
+                    <option value="Ръчна">Ръчна</option>
+                    <option value="Автоматик">Автоматик</option>
+                    <option value="Полуавтоматично">Полуавтоматично</option>
+                    <!-- Add more options for vehicle makes as needed -->
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

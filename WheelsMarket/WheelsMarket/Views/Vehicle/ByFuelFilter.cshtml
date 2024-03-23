@@ -1,0 +1,24 @@
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+
+<h1>Filter By Fuel</h1>
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+        <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
+               <div class="mb-3">
+                <label class="form-label">Скоростна кутия</label>
+                <select name="fuel" class="form-control">
+                    <option value="">-- Select Make --</option>
+                    <option value="Бензин">Бензин</option>
+                    <option value="Дизел">Дизел</option>
+                    <option value="Газ">Газ</option>
+                    <option value="Метан">Метан</option>
+                    <option value="Газ/Бензин">Газ/Бензин</option>
+                    <!-- Add more options for vehicle makes as needed -->
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

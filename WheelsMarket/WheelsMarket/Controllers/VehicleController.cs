@@ -24,20 +24,12 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min,int? max)
-		{
-            IEnumerable<SelectedInformationForVehicle> model = new List<SelectedInformationForVehicle>();
-            if (min!=null&&max!=null)
-            {
-				model = await vehicleService.ByPriceFilter((int)min, (int)max);
-			}
-            else
-            {
-                model = await vehicleService.ShowAllVehiclesAsync();
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel)
+        {
+            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel);
 
-			}
-			return View(model);
-		}
+            return View(model);
+        }
         [HttpGet]
         public async Task<IActionResult> ShowAllInfoForAVehicle([FromRoute] Guid id)
         {
@@ -55,44 +47,60 @@ namespace WheelsMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(AddVehicleViewModel viewModel)
         {
-            if (viewModel.BrandId != default(Guid) && viewModel.EditionId == default(Guid)&& viewModel.VehicleTypeTypeId == default(Guid) && viewModel.VehicleTypeSectionId != default(Guid))
+            if (viewModel.BrandId != default(Guid) && viewModel.EditionId == default(Guid) && viewModel.VehicleTypeTypeId == default(Guid) && viewModel.VehicleTypeSectionId != default(Guid))
             {
                 var a = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
                 ViewBag.EditionId = a;
                 ViewBag.BrandId = this.vehicleService.AddBrandAsync();
-				var b = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
-				ViewBag.VehicleTypeTypeId = b;
-				ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
-				return View(viewModel);
+                var b = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
+                ViewBag.VehicleTypeTypeId = b;
+                ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
+                return View(viewModel);
             }
             //else if ()
             //{
-                
+
             //    return View(viewModel);
             //}
             else
             {
-				if (!ModelState.IsValid) { return View(viewModel); }
-				await this.vehicleService.AddVehicleAsync(viewModel);
-				return RedirectToAction("Index", "Home");
-			}
-            
-            
+                if (!ModelState.IsValid) { return View(viewModel); }
+                await this.vehicleService.AddVehicleAsync(viewModel);
+                return RedirectToAction("Index", "Home");
+            }
+
+
         }
 
-		[HttpGet]
-		public async Task<IActionResult> Delete(
-		  [FromRoute]
-			Guid id)
-		{
-			await vehicleService.DeleteVehicleAdminAsync(id);
-			return RedirectToAction("Index");
-		}
+        [HttpGet]
+        public async Task<IActionResult> Delete(
+          [FromRoute]
+            Guid id)
+        {
+            await vehicleService.DeleteVehicleAdminAsync(id);
+            return RedirectToAction("Index");
+        }
 
-		[HttpGet]
-		public IActionResult ByPriceFilter()
-		{
-			return View();
-		}
+        [HttpGet]
+        public IActionResult ByPriceFilter()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ByYearsFilter()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ByTransFilter()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ByFuelFilter()
+        {
+            return View();
+        }
     }
 }
