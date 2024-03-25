@@ -17,7 +17,11 @@ namespace WheelsMarket.Data.Models
         public int? Year { get; set; } = null;
         public string? EuroStandard { get; set; } = null;
         public int? VinNumber { get; set; } = null;
+        public string? Currency { get; set; } = null;
+        public int? HoursePower { get; set; } = null;
+        public string? Location { get; set; } = null;
         public string? ImageURL { get; set; } = null;
+        public string? MoreInformation { get; set; } = null;
 
 
         [ForeignKey(nameof(Models.VehicleTypeType))]

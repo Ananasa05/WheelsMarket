@@ -81,6 +81,8 @@ namespace WheelsMarket.Services.Vehicles
             var model = await this.context.Vehicles
                  .Include(x => x.Edition)
                  .ThenInclude(x => x.Brand)
+                 .Include(x=>x.VehicleTypeType)
+                 .ThenInclude(x=>x.VehicleTypeSection)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (model != null)
@@ -88,14 +90,25 @@ namespace WheelsMarket.Services.Vehicles
                 var vehicle = new AllVehicleViewModel()
                 {
                     Id = model.Id,
-                    Distance = Convert.ToInt32(model.Distance),
-                    Fuel = model.Fuel,
-                    ImageURL = model.ImageURL,
-                    Price = Convert.ToInt32(model.Price),
-                    Volume = Convert.ToInt32(model.Volume),
-                    Year = Convert.ToInt32(model.Year),
-                    //EditionName = model.Edition,
-
+                    Distance = Convert.ToInt32(model.Distance),//
+                    Fuel = model.Fuel,//
+                    Color = model.Color,//
+                    Condition = model.Condition,//
+                    ImageURL = model.ImageURL,//
+                    Price = Convert.ToInt32(model.Price),//
+                    Volume = Convert.ToInt32(model.Volume),//
+                    Year = Convert.ToInt32(model.Year),//
+                    Тransmission = model.Тransmission,//
+                    EuroStandart = model.EuroStandard,//
+                    Location = model.Location,//
+                    MoreInformation = model.MoreInformation,//
+                    Currency = model.Currency,//
+                    VinNumber = Convert.ToInt32(model.VinNumber),
+                    HoursePower = Convert.ToInt32(model.HoursePower),
+                    EditionName= model.Edition.Name,
+                    BrandName= model.Edition.Brand.Name,
+                    TypeType = model.VehicleTypeType.Type,
+                    TypeSection = model.VehicleTypeType.VehicleTypeSection.Section
                 };
 
                 return vehicle;
@@ -107,9 +120,9 @@ namespace WheelsMarket.Services.Vehicles
         }
 
 
-        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel)
+        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName,string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax)
         {
-            var entitiesDb = context.Vehicles.AsQueryable();
+            var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand).AsQueryable();
 
             if (min != null && max != null)
             {
@@ -123,10 +136,27 @@ namespace WheelsMarket.Services.Vehicles
             {
                 entitiesDb = entitiesDb.Where(x => x.Fuel== fuel);
             }
+            if (brandName!=null&&editionName!=null)
+            {
+                var brand = await context.Brands.Where(x=>x.Name==brandName).FirstOrDefaultAsync();
+                if (brand != null)
+                {
+                    var editionsFilterByBrand = context.Editions.Where(x => x.BrandId == brand.Id);
 
-            var entities = await entitiesDb
-                .Include(v => v.Edition)
-                .ThenInclude(e => e.Brand)
+                    var editionsFilterByName = editionsFilterByBrand.Where(x=>x.Name==editionName).ToList();
+                    entitiesDb = (IQueryable<Vehicle>)editionsFilterByName;
+                }
+            }
+            if (color!=null)
+            {
+				entitiesDb = entitiesDb.Where(x => x.Color == color);
+			}
+            if (hoursePowerMin != null && hoursePowerMax != null)
+            {
+                entitiesDb = entitiesDb.Where(x => x.HoursePower >= hoursePowerMin && x.HoursePower <= hoursePowerMax);
+            }
+
+			var entities = await entitiesDb
                 .ToListAsync();
 
             return entities
@@ -169,6 +199,12 @@ namespace WheelsMarket.Services.Vehicles
                 Volume = addVehicleViewModel.Volume,
                 Year = addVehicleViewModel.Year,
                 Тransmission = addVehicleViewModel.Тransmission,
+                EuroStandard = addVehicleViewModel.EuroStandart,
+                VinNumber=addVehicleViewModel.VinNumber,
+                HoursePower=addVehicleViewModel.HoursePower,
+                Location=addVehicleViewModel.Location,
+                MoreInformation=addVehicleViewModel.MoreInformation,
+                Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
                 VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };

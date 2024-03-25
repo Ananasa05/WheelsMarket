@@ -24,9 +24,9 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax)
         {
-            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel);
+            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionName, brandName,year,location,color,hoursePowerMin,hoursePowerMax);
 
             return View(model);
         }
@@ -66,7 +66,7 @@ namespace WheelsMarket.Controllers
             {
                 if (!ModelState.IsValid) { return View(viewModel); }
                 await this.vehicleService.AddVehicleAsync(viewModel);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ShowAllInfoForAVehicle", "Vehicle");
             }
 
 
@@ -102,5 +102,26 @@ namespace WheelsMarket.Controllers
         {
             return View();
         }
-    }
+        [HttpGet]
+        public IActionResult ByEditionFilter()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult ByBrandFilter()
+        {
+            return View();
+        }
+		[HttpGet]
+		public IActionResult ByColorFilter()
+		{
+			return View();
+		}
+		[HttpGet]
+		public IActionResult ByHoursePowerFilter()
+		{
+			return View();
+		}
+	}
 }
+

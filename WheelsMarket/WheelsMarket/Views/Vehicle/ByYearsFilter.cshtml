@@ -1,70 +1,40 @@
-﻿@* @using WheelsMarket.Services.Vehicles.ViewModel
-@model ByPriceFilterViewModel
-@{
-}
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-
-
-<h1>Add Vehicle</h1>
-
-<div class="row">
-	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
-		<form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-			<div class="mb-3">
-			<label asp-for="@Model.min" class="form-label">Min Year</label>
-			<input asp-for="@Model.min" class="form-control" aria-required="true"/>
-			<span asp-validation-for="min" class="text-danger"></span>
-			</div>
-			<div class="mb-3">
-			<label asp-for="@Model.max" class="form-label">Max Year</label>
-			<input asp-for="@Model.max" class="form-control" aria-required="true"/>
-			<span asp-validation-for="max" class="text-danger"></span>
-			</div>
-		
-
-	 <button type="submit" class="btn btn-primary">Submit</button>
-
-		 </form>
-	</div>
-</div> *@
-
-@using WheelsMarket.Services.Vehicles.ViewModel
-@model ByPriceFilterViewModel
-@{
-}
-
-<h1>Add Vehicle</h1>
+<h1>Filter By Age</h1>
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
         <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-               <div class="mb-3">
-                <label asp-for="@Model.min" class="form-label">Min Price</label>
-                <select asp-for="@Model.min" class="form-control">
-                    <option value="">-- Select Make --</option>
-                    <option value="1998">1998</option>
-                    <option value="1999">1999</option>
-                    <option value="2000">2000</option>
-                    <!-- Add more options for vehicle makes as needed -->
-                </select>
-                <span asp-validation-for="max" class="text-danger"></span>
-            </div>
-
             <div class="mb-3">
-                <label asp-for="@Model.max" class="form-label">Max Price</label>
-                <select asp-for="@Model.max" class="form-control">
-                    <option value="">-- Select Make --</option>
-                    <option value="2002">2002</option>
-                    <option value="2003">2003</option>
-                    <option value="2004">2004</option>
-                    <!-- Add more options for vehicle makes as needed -->
+                <label class="form-label">Скоростна кутия</label>
+                <select id="minYear" name="min" class="form-control">
+                    <option value="">-- Select Min Year --</option>
+                    @for (int year = DateTime.Now.Year; year >= 1990; year--)
+                    {
+                            <option value="@year">@year</option>
+                    }
                 </select>
-                <span asp-validation-for="max" class="text-danger"></span>
-            </div>
 
-          
+                <select id="maxYear" name="max" class="form-control">
+                    <option value="">-- Select Max Year --</option>
+                </select>
+            </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
+
+<script>
+    document.getElementById("minYear").addEventListener("change", function () {
+        var minYear = parseInt(this.value);
+        var maxYearSelect = document.getElementById("maxYear");
+        maxYearSelect.innerHTML = "<option value=''>-- Select Max Year --</option>";
+        for (var year = minYear + 1; year <= new Date().getFullYear(); year++) {
+            var option = document.createElement("option");
+            option.value = year;
+            option.text = year;
+            maxYearSelect.appendChild(option);
+        }
+    });
+</script>

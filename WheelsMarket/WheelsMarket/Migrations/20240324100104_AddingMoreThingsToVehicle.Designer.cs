@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WheelsMarket.Data;
 
@@ -11,9 +12,10 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324100104_AddingMoreThingsToVehicle")]
+    partial class AddingMoreThingsToVehicle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -288,9 +290,6 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("Condition")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Currency")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("Distance")
                         .HasColumnType("int");
 
@@ -309,8 +308,8 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("Location")
+                        .HasColumnType("int");
 
                     b.Property<string>("MoreInformation")
                         .HasColumnType("nvarchar(max)");
@@ -332,6 +331,9 @@ namespace WheelsMarket.Migrations
 
                     b.Property<int?>("Year")
                         .HasColumnType("int");
+
+                    b.Property<string>("currency")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Тransmission")
                         .HasColumnType("nvarchar(max)");
