@@ -12,8 +12,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240320063408_fixedVehicle")]
-    partial class fixedVehicle
+    [Migration("20240328101031_newDatabase")]
+    partial class newDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -169,7 +169,12 @@ namespace WheelsMarket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("VehicleTypeTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleTypeTypeId");
 
                     b.ToTable("Brands");
                 });
@@ -290,6 +295,9 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("Condition")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Currency")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Distance")
                         .HasColumnType("int");
 
@@ -302,7 +310,16 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("Fuel")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("HoursePower")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MoreInformation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Price")
@@ -423,6 +440,17 @@ namespace WheelsMarket.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WheelsMarket.Data.Models.Brand", b =>
+                {
+                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
+                        .WithMany()
+                        .HasForeignKey("VehicleTypeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleTypeType");
+                });
+
             modelBuilder.Entity("WheelsMarket.Data.Models.Edition", b =>
                 {
                     b.HasOne("WheelsMarket.Data.Models.Brand", "Brand")
@@ -463,15 +491,13 @@ namespace WheelsMarket.Migrations
                         .WithMany("Vehicles")
                         .HasForeignKey("UserId");
 
-                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
+                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", null)
                         .WithMany("Vehicles")
                         .HasForeignKey("VehicleTypeTypeId");
 
                     b.Navigation("Edition");
 
                     b.Navigation("User");
-
-                    b.Navigation("VehicleTypeType");
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeType", b =>

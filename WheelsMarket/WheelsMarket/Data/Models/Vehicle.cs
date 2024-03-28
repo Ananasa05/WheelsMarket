@@ -24,10 +24,6 @@ namespace WheelsMarket.Data.Models
         public string? MoreInformation { get; set; } = null;
 
 
-        [ForeignKey(nameof(Models.VehicleTypeType))]
-        public Guid? VehicleTypeTypeId { get; set; } = null;
-        public VehicleTypeType? VehicleTypeType { get; set; } = null;
-
         [ForeignKey(nameof(Models.Edition))]
         public Guid? EditionId { get; set; } = null;
         public Edition? Edition { get; set; } = null;

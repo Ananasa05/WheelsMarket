@@ -6,5 +6,7 @@ namespace WheelsMarket.Services.Brands.ViewModel
     {
         [Required]
         public string Name { get; set; }
+        public Guid VehicleTypeTypeId { get; set; }
+
     }
 }

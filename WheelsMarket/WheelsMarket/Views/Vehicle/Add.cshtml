@@ -10,32 +10,10 @@
 		<form method="post" asp-action="Add">
 
 
-			  <div class="mb-3">
-			 <label for="" class="form-label">VehicleTypeSection</label>
-			 <br />
-			 <select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
-			 </div>    
-
-			 <div class="mb-3">
-			 <label for="" class="form-label">VehicleTypeType</label>
-			 <br />
-			 <select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
-			 </div>
-				 <div class="mb-3">
-			 <label for="" class="form-label">BrandId</label>
-			 <br />
-			 <select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
-			 </div>    
-	 <button type="submit" class="btn btn-warning">Ok</button>
-
-			 <div class="mb-3">
-			 <label for="" class="form-label">Edition</label>
-			 <br />
-			 <select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"></select>
-			 </div>
+			 
 							 <div class="mb-3">
 	<label asp-for="@Model.Fuel" class="form-label">Type Engine</label>
-	<select asp-for="@Model.Fuel" class="form-select" aria-required="true">
+	<select asp-for="@Model.Fuel" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="Бензинов">Бензинов</option>
 		<option value="Дизелов">Дизелов</option>
@@ -48,7 +26,7 @@
 
 			<div class="mb-3">
 	<label asp-for="@Model.Condition" class="form-label">Condition</label>
-	<select asp-for="@Model.Condition" class="form-select" aria-required="true">
+	<select asp-for="@Model.Condition" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="Нов">Нов</option>
 		<option value="Употребяван">Употребяван</option>
@@ -60,7 +38,7 @@
 
 						<div class="mb-3">
 	<label asp-for="@Model.Тransmission" class="form-label">Скоростна кутия</label>
-	<select asp-for="@Model.Тransmission" class="form-select" aria-required="true">
+	<select asp-for="@Model.Тransmission" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="Ръчна">Ръчна</option>
 		<option value="Автоматична">Автоматична</option>
@@ -71,25 +49,25 @@
 
 				<div class="mb-3">
 			<label asp-for="@Model.ImageURL" class="form-label">Image</label>
-			<input asp-for="@Model.ImageURL" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.ImageURL" class="form-control" aria-required="false"/>
 			<span asp-validation-for="ImageURL" class="text-danger"></span>
 			</div>
 
 				<div class="mb-3">
 			<label asp-for="@Model.HoursePower" class="form-label">Мощност [к.с.]</label>
-			<input asp-for="@Model.HoursePower" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.HoursePower" class="form-control" aria-required="false"/>
 			<span asp-validation-for="HoursePower" class="text-danger"></span>
 			</div>
 
 			<div class="mb-3">
 			<label asp-for="@Model.Volume" class="form-label">Кубатура [куб.см]</label>
-			<input asp-for="@Model.Volume" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.Volume" class="form-control" aria-required="false"/>
 			<span asp-validation-for="Volume" class="text-danger"></span>
 			</div>
 			
 									<div class="mb-3">
 	<label asp-for="@Model.EuroStandart" class="form-label">Евро Стандарт</label>
-	<select asp-for="@Model.EuroStandart" class="form-select" aria-required="true">
+	<select asp-for="@Model.EuroStandart" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="Euro 1">Euro 1</option>
 		<option value="Euro 2">Euro 2</option>
@@ -103,13 +81,13 @@
 
 	<div class="mb-3">
 			<label asp-for="@Model.Price" class="form-label">Price</label>
-			<input asp-for="@Model.Price" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.Price" class="form-control" aria-required="false"/>
 			<span asp-validation-for="Price" class="text-danger"></span>
 			</div>
 
 												<div class="mb-3">
 	<label asp-for="@Model.Currency" class="form-label">Валута</label>
-	<select asp-for="@Model.Currency" class="form-select" aria-required="true">
+	<select asp-for="@Model.Currency" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="лв">лв</option>
 		<option value="USD">USD</option>
@@ -120,19 +98,19 @@
 
 <div class="mb-3">
 			<label asp-for="@Model.Distance" class="form-label">Distance</label>
-			<input asp-for="@Model.Distance" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.Distance" class="form-control" aria-required="false"/>
 			<span asp-validation-for="Distance" class="text-danger"></span>
 			</div>
 
 <div class="mb-3">
 			<label asp-for="@Model.Year" class="form-label">Year</label>
-			<input asp-for="@Model.Year" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.Year" class="form-control" aria-required="false"/>
 			<span asp-validation-for="Year" class="text-danger"></span>
 			</div>
 
 									<div class="mb-3">
 	<label asp-for="@Model.Color" class="form-label">Цвят</label>
-	<select asp-for="@Model.Color" class="form-select" aria-required="true">
+	<select asp-for="@Model.Color" class="form-select" aria-required="false">
 		<option value="">Избери</option>
 		<option value="Черен">Черен</option>
 		<option value="Бял">Бял</option>
@@ -161,16 +139,43 @@
 
 		<div class="mb-3">
 			<label asp-for="@Model.Location" class="form-label">Локация (град/село, Област)</label>
-			<input asp-for="@Model.Location" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.Location" class="form-control" aria-required="false"/>
 			<span asp-validation-for="Location" class="text-danger"></span>
 			</div>
 
 
 	<div class="mb-3">
 			<label asp-for="@Model.VinNumber" class="form-label">VIN номер</label>
-			<input asp-for="@Model.VinNumber" class="form-control" aria-required="true"/>
+			<input asp-for="@Model.VinNumber" class="form-control" aria-required="false"/>
 			<span asp-validation-for="VinNumber" class="text-danger"></span>
 			</div>
+
+			 <div class="mb-3">
+			 <label for="" class="form-label">VehicleTypeSection</label>
+			 <br />
+			 <select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
+			 </div>    
+	 <button type="submit" class="btn btn-warning">Ok</button>
+
+			 <div class="mb-3">
+			 <label for="" class="form-label">VehicleTypeType</label>
+			 <br />
+			 <select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
+			 </div>
+	 <button type="submit" class="btn btn-warning">Ok</button>
+
+				 <div class="mb-3">
+			 <label for="" class="form-label">BrandId</label>
+			 <br />
+			 <select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
+			 </div>    
+	 <button type="submit" class="btn btn-warning">Ok</button>
+
+			 <div class="mb-3">
+			 <label for="" class="form-label">Edition</label>
+			 <br />
+			 <select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"></select>
+			 </div>
 
 	 <button type="submit" class="btn btn-primary">Submit</button>
 

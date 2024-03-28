@@ -167,7 +167,12 @@ namespace WheelsMarket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("VehicleTypeTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleTypeTypeId");
 
                     b.ToTable("Brands");
                 });
@@ -321,9 +326,6 @@ namespace WheelsMarket.Migrations
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("VehicleTypeTypeId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("VinNumber")
                         .HasColumnType("int");
 
@@ -341,8 +343,6 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("EditionId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("VehicleTypeTypeId");
 
                     b.ToTable("Vehicles");
                 });
@@ -433,6 +433,17 @@ namespace WheelsMarket.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WheelsMarket.Data.Models.Brand", b =>
+                {
+                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
+                        .WithMany()
+                        .HasForeignKey("VehicleTypeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleTypeType");
+                });
+
             modelBuilder.Entity("WheelsMarket.Data.Models.Edition", b =>
                 {
                     b.HasOne("WheelsMarket.Data.Models.Brand", "Brand")
@@ -473,15 +484,9 @@ namespace WheelsMarket.Migrations
                         .WithMany("Vehicles")
                         .HasForeignKey("UserId");
 
-                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("VehicleTypeTypeId");
-
                     b.Navigation("Edition");
 
                     b.Navigation("User");
-
-                    b.Navigation("VehicleTypeType");
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeType", b =>
@@ -520,11 +525,6 @@ namespace WheelsMarket.Migrations
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeSection", b =>
                 {
                     b.Navigation("VehicleTypeType");
-                });
-
-            modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeType", b =>
-                {
-                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

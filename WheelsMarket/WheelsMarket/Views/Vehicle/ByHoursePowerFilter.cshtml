@@ -1,6 +1,4 @@
-﻿@using WheelsMarket.Services.Vehicles.ViewModel
-
-<h1>Filter By Horsepower</h1>
+﻿<h1>Filter By Horsepower</h1>
 
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
@@ -9,9 +7,9 @@
                 <label class="form-label">Horsepower</label>
                 <select id="minHorsepower" name="min" class="form-control">
                     <option value="">-- Select Min Horsepower --</option>
-                    @for (int hp = 50; hp <= 500; hp += 20)
+                    @for (int hp = 50; hp <= 510; hp += 20)
                     {
-                                <option value="@hp">@hp</option>
+                            <option value="@hp">@hp</option>
                     }
                 </select>
 
@@ -30,11 +28,18 @@
         var minHorsepower = parseInt(this.value);
         var maxHorsepowerSelect = document.getElementById("maxHorsepower");
         maxHorsepowerSelect.innerHTML = "<option value=''>-- Select Max Horsepower --</option>";
-        for (var hp = minHorsepower + 20; hp <= 500; hp += 20) {
+        if (minHorsepower >= 510) {
             var option = document.createElement("option");
-            option.value = hp;
-            option.text = hp;
+            option.value = "510+";
+            option.text = "510+";
             maxHorsepowerSelect.appendChild(option);
+        } else {
+            for (var hp = minHorsepower + 20; hp <= 510; hp += 20) {
+                var option = document.createElement("option");
+                option.value = hp;
+                option.text = hp;
+                maxHorsepowerSelect.appendChild(option);
+            }
         }
     });
 </script>

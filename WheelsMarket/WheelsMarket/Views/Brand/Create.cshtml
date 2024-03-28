@@ -12,5 +12,10 @@
         <label for="" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="Name">
     </div>
+     <div class="mb-3">
+             <label for="" class="form-label">TypeTypeId</label>
+             <br />
+             <select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
+             </div>
      <button type="submit" class="btn btn-primary">Submit</button>
 </form>

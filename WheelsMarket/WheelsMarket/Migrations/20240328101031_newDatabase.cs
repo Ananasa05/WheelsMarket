@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WheelsMarket.Migrations
 {
-    public partial class InitDb : Migration
+    public partial class newDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,18 +46,6 @@ namespace WheelsMarket.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Brands",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Brands", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -179,25 +167,6 @@ namespace WheelsMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Editions",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Editions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Editions_Brands_BrandId",
-                        column: x => x.BrandId,
-                        principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "VehicleTypeTypes",
                 columns: table => new
                 {
@@ -217,17 +186,66 @@ namespace WheelsMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Brands",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VehicleTypeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Brands", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Brands_VehicleTypeTypes_VehicleTypeTypeId",
+                        column: x => x.VehicleTypeTypeId,
+                        principalTable: "VehicleTypeTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Editions",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BrandId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Editions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Editions_Brands_BrandId",
+                        column: x => x.BrandId,
+                        principalTable: "Brands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Тransmission = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Volume = table.Column<int>(type: "int", nullable: true),
+                    Price = table.Column<int>(type: "int", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Distance = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Distance = table.Column<int>(type: "int", nullable: true),
                     Fuel = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Condition = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VehicleTypeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Year = table.Column<int>(type: "int", nullable: true),
+                    EuroStandard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VinNumber = table.Column<int>(type: "int", nullable: true),
+                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HoursePower = table.Column<int>(type: "int", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageURL = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MoreInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EditionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    VehicleTypeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -236,8 +254,7 @@ namespace WheelsMarket.Migrations
                         name: "FK_Vehicles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Vehicles_Editions_EditionId",
                         column: x => x.EditionId,
@@ -313,6 +330,11 @@ namespace WheelsMarket.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Brands_VehicleTypeTypeId",
+                table: "Brands",
+                column: "VehicleTypeTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Editions_BrandId",
                 table: "Editions",
                 column: "BrandId");
@@ -376,10 +398,10 @@ namespace WheelsMarket.Migrations
                 name: "Editions");
 
             migrationBuilder.DropTable(
-                name: "VehicleTypeTypes");
+                name: "Brands");
 
             migrationBuilder.DropTable(
-                name: "Brands");
+                name: "VehicleTypeTypes");
 
             migrationBuilder.DropTable(
                 name: "VehicleTypeSections");

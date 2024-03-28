@@ -33,12 +33,11 @@ namespace WheelsMarket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddVehicleTypeSectionViewModel model)
         {
-            var vehicleType = new AddVehicleTypeSectionViewModel()
+            if (!ModelState.IsValid)
             {
-                Section = model.Section,
-            };
-
-            await vehicleTypeSectionService.AddVehicleTypeSectionAsync(vehicleType);
+                return View(model);
+            }
+            await vehicleTypeSectionService.AddVehicleTypeSectionAsync(model);
             return RedirectToAction("Index");
         }
 

@@ -25,19 +25,23 @@ namespace WheelsMarket.Controllers
         [HttpGet] 
         public IActionResult Create()
         {
+            ViewBag.VehicleTypeTypeId = this.brandService.AddBrandAdminAsync();
+
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(AddBrandViewModel model)
         {
-            //var vehicleType = new AddBrandViewModel()
-            //{
-            //    Name = model.Name,
-            //};
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             await brandService.AddBrandAdminAsync(model);
             return RedirectToAction("Index");
         }
+
+
 
 
         [HttpGet]

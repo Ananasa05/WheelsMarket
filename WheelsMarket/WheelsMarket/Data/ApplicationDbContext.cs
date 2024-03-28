@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Emit;
+using WheelsMarket.Data.Configuration;
 using WheelsMarket.Data.Models;
 
 namespace WheelsMarket.Data
@@ -21,6 +22,11 @@ namespace WheelsMarket.Data
         public DbSet<VehicleTypeType> VehicleTypeTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            //builder.ApplyConfiguration(new BrandConfiguration());
+            //builder.ApplyConfiguration(new EditionConfiguration());
+            //builder.ApplyConfiguration(new VehicleTypeSectionConfiguration());
+            //builder.ApplyConfiguration(new VehicleTypeTypeConfiguration());
+
             builder.Entity<Favourite>().HasKey(x => new
             {
                 x.UserId,
@@ -39,212 +45,7 @@ namespace WheelsMarket.Data
                .HasForeignKey(f => f.VehicleId)
                .OnDelete(DeleteBehavior.NoAction);
 
-
-            //builder.Entity<VehicleTypeSection>()
-            //   .HasData(new VehicleTypeSection()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Section = "Автомобили и джипове",
-            //       Type = "Ван"
-            //   },
-            //   new VehicleTypeSection()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Section = "Автомобили и джипове",
-            //       Type = "Джип"
-            //   },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Кабрио"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Купе"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Миниван"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Пикап"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Седан"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Стреч лимузина"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Автомобили и джипове",
-            //        Type = "Хечбек"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Хечбек"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Катафалка"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Линейка"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Пътнически"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Самосвал"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Самосвал с кран"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Товарен"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Товаропътнически"
-            //    },
-            //    new VehicleTypeSection()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Section = "Бусове",
-            //        Type = "Фургон"
-            //    });
-
-            //builder.Entity<Brand>()
-            //   .HasData(new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Audi",
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "BMW"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Citroen"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Fiat"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Honda"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Hyundai"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Kia"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Mazda"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Mercedes Benz"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Mitsubishi"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Nissan"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Opel"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Peugeot"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Renault"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Seat"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Skoda"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "Toyota"
-            //   },
-            //   new Brand()
-            //   {
-            //       Id = Guid.NewGuid(),
-            //       Name = "VW"
-            //   });
-
-
-
-           base.OnModelCreating(builder);
+            base.OnModelCreating(builder);
         }
 
 

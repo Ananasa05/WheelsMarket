@@ -12,8 +12,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240324100755_CurrencyFix")]
-    partial class CurrencyFix
+    [Migration("20240328101300_rewire2")]
+    partial class rewire2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -169,7 +169,12 @@ namespace WheelsMarket.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("VehicleTypeTypeId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleTypeTypeId");
 
                     b.ToTable("Brands");
                 });
@@ -311,8 +316,8 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Location")
-                        .HasColumnType("int");
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MoreInformation")
                         .HasColumnType("nvarchar(max)");
@@ -321,9 +326,6 @@ namespace WheelsMarket.Migrations
                         .HasColumnType("int");
 
                     b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("VehicleTypeTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("VinNumber")
@@ -343,8 +345,6 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("EditionId");
 
                     b.HasIndex("UserId");
-
-                    b.HasIndex("VehicleTypeTypeId");
 
                     b.ToTable("Vehicles");
                 });
@@ -435,6 +435,17 @@ namespace WheelsMarket.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WheelsMarket.Data.Models.Brand", b =>
+                {
+                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
+                        .WithMany()
+                        .HasForeignKey("VehicleTypeTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("VehicleTypeType");
+                });
+
             modelBuilder.Entity("WheelsMarket.Data.Models.Edition", b =>
                 {
                     b.HasOne("WheelsMarket.Data.Models.Brand", "Brand")
@@ -475,15 +486,9 @@ namespace WheelsMarket.Migrations
                         .WithMany("Vehicles")
                         .HasForeignKey("UserId");
 
-                    b.HasOne("WheelsMarket.Data.Models.VehicleTypeType", "VehicleTypeType")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("VehicleTypeTypeId");
-
                     b.Navigation("Edition");
 
                     b.Navigation("User");
-
-                    b.Navigation("VehicleTypeType");
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeType", b =>
@@ -522,11 +527,6 @@ namespace WheelsMarket.Migrations
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeSection", b =>
                 {
                     b.Navigation("VehicleTypeType");
-                });
-
-            modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeType", b =>
-                {
-                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

@@ -40,36 +40,31 @@ namespace WheelsMarket.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            ViewBag.BrandId = this.vehicleService.AddBrandAsync();
             ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Add(AddVehicleViewModel viewModel)
         {
-            if (viewModel.BrandId != default(Guid) && viewModel.EditionId == default(Guid) && viewModel.VehicleTypeTypeId == default(Guid) && viewModel.VehicleTypeSectionId != default(Guid))
-            {
-                var a = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
-                ViewBag.EditionId = a;
-                ViewBag.BrandId = this.vehicleService.AddBrandAsync();
-                var b = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
-                ViewBag.VehicleTypeTypeId = b;
-                ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
-                return View(viewModel);
-            }
-            //else if ()
-            //{
+            ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
 
-            //    return View(viewModel);
-            //}
-            else
+            if (viewModel.VehicleTypeSectionId != default(Guid))
             {
-                if (!ModelState.IsValid) { return View(viewModel); }
-                await this.vehicleService.AddVehicleAsync(viewModel);
-                return RedirectToAction("ShowAllInfoForAVehicle", "Vehicle");
+                ViewBag.VehicleTypeTypeId = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
+                if (viewModel.VehicleTypeTypeId != default(Guid))
+                {
+                    ViewBag.BrandId = this.vehicleService.AddBrandAsync(viewModel.VehicleTypeTypeId);
+                    if (viewModel.BrandId != default(Guid))
+                    {
+                        ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
+                    }
+                }
+
             }
 
-
+            if (!ModelState.IsValid) { return View(viewModel); }
+            await this.vehicleService.AddVehicleAsync(viewModel);
+            return RedirectToAction("ShowAllInfoForAVehicle", "Vehicle");
         }
 
         [HttpGet]

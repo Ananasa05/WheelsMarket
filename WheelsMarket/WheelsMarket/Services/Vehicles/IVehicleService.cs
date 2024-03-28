@@ -15,8 +15,8 @@ namespace WheelsMarket.Services.Vehicles
 		Task<IEnumerable<AllVehicleViewModel>> ByTransmisionFilter(string name);
         Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);
-        SelectList AddBrandAsync();
-        SelectList AddVehicleTypeTypeAsync(Guid brandId);
+        SelectList AddBrandAsync(Guid typeTypeId);
+        SelectList AddVehicleTypeTypeAsync(Guid typeSectionId);
         SelectList AddVehicleTypeSectionAsync();
     }
 }

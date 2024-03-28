@@ -81,8 +81,8 @@ namespace WheelsMarket.Services.Vehicles
             var model = await this.context.Vehicles
                  .Include(x => x.Edition)
                  .ThenInclude(x => x.Brand)
-                 .Include(x=>x.VehicleTypeType)
-                 .ThenInclude(x=>x.VehicleTypeSection)
+                 //.Include(x=>x.VehicleTypeType)
+                 //.ThenInclude(x=>x.VehicleTypeSection)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (model != null)
@@ -107,8 +107,8 @@ namespace WheelsMarket.Services.Vehicles
                     HoursePower = Convert.ToInt32(model.HoursePower),
                     EditionName= model.Edition.Name,
                     BrandName= model.Edition.Brand.Name,
-                    TypeType = model.VehicleTypeType.Type,
-                    TypeSection = model.VehicleTypeType.VehicleTypeSection.Section
+                    //TypeType = model.VehicleTypeType.Type,
+                    //TypeSection = model.VehicleTypeType.VehicleTypeSection.Section
                 };
 
                 return vehicle;
@@ -175,16 +175,9 @@ namespace WheelsMarket.Services.Vehicles
         }
 
 
-        public SelectList AddVehicleEditionAsync(Guid brandId)
-        {
-            return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
-        }
+       
 
-        public SelectList AddBrandAsync()
-        {
-            return new SelectList(this.context.Brands, "Id", "Name");
-        }
-
+     
         public async Task AddVehicleAsync(AddVehicleViewModel addVehicleViewModel)
         {
             Vehicle model = new Vehicle()
@@ -206,12 +199,13 @@ namespace WheelsMarket.Services.Vehicles
                 MoreInformation=addVehicleViewModel.MoreInformation,
                 Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
-                VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
+                //VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };
 
             await this.context.Vehicles.AddAsync(model);
             await context.SaveChangesAsync();
-        }
+        }//modify this code so specific vehicle to be to specific person
+
         public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
         {
             return new SelectList(this.context.VehicleTypeTypes.Where(x => x.VehicleTypeSectionId == typeSectionId), "Id", "Type");
@@ -222,8 +216,16 @@ namespace WheelsMarket.Services.Vehicles
             return new SelectList(this.context.VehicleTypeSections, "Id", "Section");
         }
 
+		public SelectList AddBrandAsync(Guid typeTypeId)
+		{
+			return new SelectList(this.context.Brands.Where(x=>x.VehicleTypeTypeId==typeTypeId), "Id", "Name");
+		}
 
-    }
+		public SelectList AddVehicleEditionAsync(Guid brandId)
+		{
+			return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
+		}
+	}
 }
 
 
