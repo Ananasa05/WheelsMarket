@@ -18,6 +18,7 @@
                                 <td>@cat.Name</td>
                                 <td>@cat.BrandName</td>
                                     <td><a asp-controller="Edition" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Delete</a></td>
+                                        <td><a asp-controller="Edition" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-danger">Edit</a></td>
 
                             </tr>
         }

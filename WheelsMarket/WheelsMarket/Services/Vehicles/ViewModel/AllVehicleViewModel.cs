@@ -17,8 +17,9 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		public string EuroStandart { get; set; }
 		public int VinNumber { get; set; }
 		public int HoursePower { get; set; }
-		public string Location { get; set; }
-		public string MoreInformation { get; set; }
+        public string LocationRegion { get; set; }
+        public string LocationTown { get; set; }
+        public string MoreInformation { get; set; }
 		public string Currency { get; set; }
 		public string EditionName { get; set; }
         public string BrandName { get; set; }

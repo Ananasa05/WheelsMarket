@@ -3,6 +3,9 @@ using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using WheelsMarket.Services.VehicleTypeTypes;
 using WheelsMarket.Services.Editions;
 using WheelsMarket.Services.Editions.ViewModel;
+using WheelsMarket.Data.Models;
+using WheelsMarket.Services.Brands.ViewModel;
+using WheelsMarket.Services.Brands;
 
 namespace WheelsMarket.Controllers
 {
@@ -43,6 +46,42 @@ namespace WheelsMarket.Controllers
         {
             await editionService.DeleteEditionAsync(id);
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            Edition ediiton = await editionService.GetEditionIdAsync(id);
+
+            if (ediiton != null)
+            {
+                EditEditionViewModel viewModel = new EditEditionViewModel()
+                {
+                    Id = ediiton.Id,
+                    Name = ediiton.Name
+                };
+                return View("Edit", viewModel);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditEditionViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Edition edition = await editionService.GetEditionIdAsync(model.Id);
+
+                if (edition != null)
+                {
+                    edition.Name = model.Name;
+
+                    await editionService.EditEditionAsync(edition);
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View("Edit", model);
         }
     }
 }

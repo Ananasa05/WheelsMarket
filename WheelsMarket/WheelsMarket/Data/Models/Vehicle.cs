@@ -19,7 +19,8 @@ namespace WheelsMarket.Data.Models
         public int? VinNumber { get; set; } = null;
         public string? Currency { get; set; } = null;
         public int? HoursePower { get; set; } = null;
-        public string? Location { get; set; } = null;
+        public string? LocationRegion { get; set; } = null;
+        public string? LocationTown { get; set; } = null;
         public string? ImageURL { get; set; } = null;
         public string? MoreInformation { get; set; } = null;
 

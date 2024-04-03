@@ -100,7 +100,7 @@ namespace WheelsMarket.Services.Vehicles
                     Year = Convert.ToInt32(model.Year),//
                     Тransmission = model.Тransmission,//
                     EuroStandart = model.EuroStandard,//
-                    Location = model.Location,//
+                    //Location = model.Location,//
                     MoreInformation = model.MoreInformation,//
                     Currency = model.Currency,//
                     VinNumber = Convert.ToInt32(model.VinNumber),
@@ -120,7 +120,7 @@ namespace WheelsMarket.Services.Vehicles
         }
 
 
-        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName,string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax)
+        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName,string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
         {
             var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand).AsQueryable();
 
@@ -155,6 +155,14 @@ namespace WheelsMarket.Services.Vehicles
             {
                 entitiesDb = entitiesDb.Where(x => x.HoursePower >= hoursePowerMin && x.HoursePower <= hoursePowerMax);
             }
+			if (locationRegion != null)
+			{
+				entitiesDb = entitiesDb.Where(x => x.LocationRegion == locationRegion);
+			}
+			if (locationTown!= null)
+			{
+				entitiesDb = entitiesDb.Where(x => x.LocationTown == locationTown);
+			}
 
 			var entities = await entitiesDb
                 .ToListAsync();
@@ -173,10 +181,6 @@ namespace WheelsMarket.Services.Vehicles
                     BrandName = b.Edition.Brand.Name,
                 });
         }
-
-
-       
-
      
         public async Task AddVehicleAsync(AddVehicleViewModel addVehicleViewModel)
         {
@@ -195,8 +199,9 @@ namespace WheelsMarket.Services.Vehicles
                 EuroStandard = addVehicleViewModel.EuroStandart,
                 VinNumber=addVehicleViewModel.VinNumber,
                 HoursePower=addVehicleViewModel.HoursePower,
-                Location=addVehicleViewModel.Location,
-                MoreInformation=addVehicleViewModel.MoreInformation,
+                LocationRegion = addVehicleViewModel.LocationRegion,
+                LocationTown = addVehicleViewModel.LocationTown,
+                //MoreInformation =addVehicleViewModel.MoreInformation,
                 Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
                 //VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
@@ -225,7 +230,8 @@ namespace WheelsMarket.Services.Vehicles
 		{
 			return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
 		}
-	}
+      
+    }
 }
 
 

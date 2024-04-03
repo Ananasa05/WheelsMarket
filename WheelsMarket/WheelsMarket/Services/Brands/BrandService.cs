@@ -76,15 +76,15 @@ namespace WheelsMarket.Services.Brands
             }
         }
 
-        //public async Task AddBrandAsync(AddBrandViewModel addBrandViewModel)
-        //{
-        //    var brand = new Brand()
-        //    {
-        //        Name = addBrandViewModel.Name
-        //    };
+        public async Task<Brand> GetBrandIdAsync(Guid id)
+        {
+            return await context.Brands.FindAsync(id);
+        }
 
-        //    await context.Brands.AddAsync(brand);
-        //    await context.SaveChangesAsync();
-        //}
+        public async Task EditBrandAsync(Brand vts)
+        {
+            context.Update(vts);
+            await context.SaveChangesAsync();
+        }
     }
 }

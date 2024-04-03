@@ -3,6 +3,9 @@ using WheelsMarket.Services.VehicleTypeSections.ViewModel;
 using WheelsMarket.Services.VehicleTypeSections;
 using WheelsMarket.Services.Brands;
 using WheelsMarket.Services.Brands.ViewModel;
+using WheelsMarket.Data.Models;
+using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
+using WheelsMarket.Services.VehicleTypeTypes;
 
 namespace WheelsMarket.Controllers
 {
@@ -41,9 +44,6 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("Index");
         }
 
-
-
-
         [HttpGet]
         public async Task<IActionResult> Delete(
             [FromRoute]
@@ -53,5 +53,41 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            Brand brand = await brandService.GetBrandIdAsync(id);
+
+            if (brand != null)
+            {
+                EditBrandViewModel viewModel = new EditBrandViewModel()
+                {
+                    Id = brand.Id,
+                    Name = brand.Name
+                };
+                return View("Edit", viewModel);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditBrandViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Brand brand = await brandService.GetBrandIdAsync(model.Id);
+
+                if (brand != null)
+                {
+                    brand.Name = model.Name;
+                    //vts.VehicleTypeSectionId = model.VehicleTypeSectionsId;
+
+                    await brandService.EditBrandAsync(brand);
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View("Edit", model);
+        }
     }
 }

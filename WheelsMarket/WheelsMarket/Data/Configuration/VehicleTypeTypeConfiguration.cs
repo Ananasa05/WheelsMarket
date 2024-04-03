@@ -16,7 +16,7 @@ namespace WheelsMarket.Data.Configuration
             List<VehicleTypeType> typeTypes = new List<VehicleTypeType>();
             VehicleTypeType typeType = new VehicleTypeType()
             {
-                Id = Guid.Parse("631cbfed-14b6-4350-a5cf-9f9980501428"),
+                Id = Guid.Parse("c80fdbba-9d3d-485c-bb9d-085da4e9b69e"),
                 Type = "Ван",
                 VehicleTypeSectionId= Guid.Parse("631cbfed-14b6-4350-a5cf-9f9980501428")
 
@@ -25,7 +25,7 @@ namespace WheelsMarket.Data.Configuration
 
             typeType = new VehicleTypeType()
             {
-                Id = Guid.Parse("f2ad3170-37d5-483d-a4f2-26b933c67118"),
+                Id = Guid.Parse("5e07a858-09c8-4653-9603-e59dcc1aea23"),
                 Type = "Джип",
                 VehicleTypeSectionId = Guid.Parse("631cbfed-14b6-4350-a5cf-9f9980501428")
 

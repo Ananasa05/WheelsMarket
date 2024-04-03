@@ -5,6 +5,7 @@ using WheelsMarket.Services.VehicleTypeTypes;
 using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WheelsMarket.Data;
+using WheelsMarket.Data.Models;
 
 namespace WheelsMarket.Controllers
 {
@@ -48,6 +49,42 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            VehicleTypeType vtt = await vehicleTypeTypeService.GetVehicleTypeTypeIdAsync(id);
 
+            if (vtt != null)
+            {
+                EditVehicleTypeTypeViewModel viewModel = new EditVehicleTypeTypeViewModel()
+                {
+                    Id = vtt.Id,
+                    Type = vtt.Type
+                    //VehicleTypeSectionsId = (Guid)vts.VehicleTypeSectionId,
+                };
+                return View("Edit", viewModel);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditVehicleTypeTypeViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                VehicleTypeType vtt = await vehicleTypeTypeService.GetVehicleTypeTypeIdAsync(model.Id);
+
+                if (vtt != null)
+                {
+                    vtt.Type = model.Type;
+                    //vts.VehicleTypeSectionId = model.VehicleTypeSectionsId;
+
+                    await vehicleTypeTypeService.EditVehicleTypeTypeAsync(vtt);
+
+                    return RedirectToAction("Index");
+                }
+            }
+            return View("Edit", model);
+        }
     }
 }

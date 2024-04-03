@@ -60,5 +60,15 @@ namespace WheelsMarket.Services.Editions
                 throw new ArgumentNullException();
             }
         }
+        public async Task<Edition> GetEditionIdAsync(Guid id)
+        {
+            return await context.Editions.FindAsync(id);
+        }
+
+        public async Task EditEditionAsync(Edition edition)
+        {
+            context.Update(edition);
+            await context.SaveChangesAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using WheelsMarket.Data.Models;
 using WheelsMarket.Services.Brands.ViewModel;
 using WheelsMarket.Services.VehicleTypeSections.ViewModel;
 using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
@@ -14,6 +15,8 @@ namespace WheelsMarket.Services.Brands
 
         Task AddBrandAdminAsync(AddBrandViewModel add);
         SelectList AddBrandAdminAsync();
+        Task<Brand> GetBrandIdAsync(Guid id);
+        Task EditBrandAsync(Brand vts);
 
     }
 }

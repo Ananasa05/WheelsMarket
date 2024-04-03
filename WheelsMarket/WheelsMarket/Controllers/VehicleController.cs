@@ -24,9 +24,9 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
         {
-            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionName, brandName,year,location,color,hoursePowerMin,hoursePowerMax);
+            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionName, brandName,year,location,color,hoursePowerMin,hoursePowerMax,locationRegion,locationTown);
 
             return View(model);
         }
@@ -59,12 +59,19 @@ namespace WheelsMarket.Controllers
                         ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
                     }
                 }
-
             }
 
-            if (!ModelState.IsValid) { return View(viewModel); }
+            if (!ModelState.IsValid 
+                || viewModel.VehicleTypeSectionId == default(Guid)
+                || viewModel.VehicleTypeTypeId == default(Guid)
+				|| viewModel.BrandId == default(Guid)
+				|| viewModel.EditionId == default(Guid)
+               )
+            {
+                  return View(viewModel); 
+            }
             await this.vehicleService.AddVehicleAsync(viewModel);
-            return RedirectToAction("ShowAllInfoForAVehicle", "Vehicle");
+            return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
 
         [HttpGet]
@@ -114,6 +121,16 @@ namespace WheelsMarket.Controllers
 		}
 		[HttpGet]
 		public IActionResult ByHoursePowerFilter()
+		{
+			return View();
+		}
+		[HttpGet]
+		public IActionResult ByLocationTownFilter()
+		{
+			return View();
+		}
+		[HttpGet]
+		public IActionResult ByLocationRegionFilter()
 		{
 			return View();
 		}

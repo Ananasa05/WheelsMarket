@@ -55,5 +55,16 @@ namespace WheelsMarket.Services.VehicleTypeSections
                 throw new ArgumentNullException();
             }
         }
-    }
+
+		public async Task<VehicleTypeSection> GetVehicleTypeSectionIdAsync(Guid id)
+		{
+			return await context.VehicleTypeSections.FindAsync(id);
+		}
+
+		public async Task EditVehicleTypeSectionAsync(VehicleTypeSection vts)
+		{
+			context.Update(vts);
+			await context.SaveChangesAsync();
+		}
+	}
 }

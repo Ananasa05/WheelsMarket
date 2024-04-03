@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WheelsMarket.Data.Models;
 using WheelsMarket.Services.VehicleTypeSections;
 using WheelsMarket.Services.VehicleTypeSections.ViewModel;
 
@@ -51,5 +52,41 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("Index");
         }
 
-    }
+		[HttpGet]
+		public async Task<IActionResult> Edit(Guid id)
+		{
+		    VehicleTypeSection vts = await vehicleTypeSectionService.GetVehicleTypeSectionIdAsync(id);
+
+			if (vts != null)
+			{
+				EditVehicleTypeSectionViewModel viewModel = new EditVehicleTypeSectionViewModel()
+				{
+					Id = vts.Id,
+					Section = vts.Section,
+				};
+				return View("Edit", viewModel);
+			}
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(EditVehicleTypeSectionViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				VehicleTypeSection vts = await vehicleTypeSectionService.GetVehicleTypeSectionIdAsync(model.Id);
+
+				if (vts != null)
+				{
+					vts.Section= model.Section;
+
+					await vehicleTypeSectionService.EditVehicleTypeSectionAsync(vts);
+
+					return RedirectToAction("Index");
+				}
+			}
+			return View("Edit", model);
+		}
+
+	}
 }

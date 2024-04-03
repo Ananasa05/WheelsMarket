@@ -22,10 +22,10 @@ namespace WheelsMarket.Data
         public DbSet<VehicleTypeType> VehicleTypeTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //builder.ApplyConfiguration(new BrandConfiguration());
-            //builder.ApplyConfiguration(new EditionConfiguration());
-            //builder.ApplyConfiguration(new VehicleTypeSectionConfiguration());
-            //builder.ApplyConfiguration(new VehicleTypeTypeConfiguration());
+            builder.ApplyConfiguration(new BrandConfiguration());
+            builder.ApplyConfiguration(new EditionConfiguration());
+            builder.ApplyConfiguration(new VehicleTypeSectionConfiguration());
+            builder.ApplyConfiguration(new VehicleTypeTypeConfiguration());
 
             builder.Entity<Favourite>().HasKey(x => new
             {
@@ -38,13 +38,8 @@ namespace WheelsMarket.Data
                 .WithMany(u => u.Favourites)
                 .HasForeignKey(f => f.UserId)
                 .OnDelete(DeleteBehavior.NoAction);
-
             builder.Entity<Favourite>()
-               .HasOne<Vehicle>(f => f.Vehicle)
-               .WithMany(v => v.FavouritesBy)
-               .HasForeignKey(f => f.VehicleId)
-               .OnDelete(DeleteBehavior.NoAction);
-
+                .HasKey(x => new { x.UserId, x.VehicleId });
             base.OnModelCreating(builder);
         }
 

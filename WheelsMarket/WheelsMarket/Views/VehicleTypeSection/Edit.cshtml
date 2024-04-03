@@ -1,0 +1,21 @@
+﻿@model WheelsMarket.Services.VehicleTypeSections.ViewModel.EditVehicleTypeSectionViewModel
+@{
+}
+
+<h1>Edit</h1>
+<form method="post" action="Edit" class="mt-5">
+
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <br />
+        <input type="text" class="form-control" asp-for="Id" readonly />
+        <br />
+    </div>
+        <div class="mb-3">
+        <label for="" class="form-label">Section</label>
+        <br />
+        <input type="text" class="form-control" asp-for="Section" />
+        <br />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

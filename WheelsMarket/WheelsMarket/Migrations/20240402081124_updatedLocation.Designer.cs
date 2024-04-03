@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WheelsMarket.Data;
 
@@ -11,9 +12,10 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240402081124_updatedLocation")]
+    partial class updatedLocation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -395,11 +397,14 @@ namespace WheelsMarket.Migrations
 
             modelBuilder.Entity("WheelsMarket.Data.Models.Favourite", b =>
                 {
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("VehicleId")
+                    b.Property<Guid>("VehicleId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsFavourite")
+                        .HasColumnType("bit");
 
                     b.HasKey("UserId", "VehicleId");
 
@@ -747,7 +752,7 @@ namespace WheelsMarket.Migrations
                     b.HasOne("WheelsMarket.Data.Models.Vehicle", "Vehicle")
                         .WithMany("FavouritesBy")
                         .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
