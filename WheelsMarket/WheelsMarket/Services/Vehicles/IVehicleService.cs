@@ -18,6 +18,7 @@ namespace WheelsMarket.Services.Vehicles
         SelectList AddBrandAsync(Guid typeTypeId);
         SelectList AddVehicleTypeTypeAsync(Guid typeSectionId);
         SelectList AddVehicleTypeSectionAsync();
-      
+		
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace WheelsMarket.Services.Vehicles.ViewModel
 {
@@ -18,10 +19,10 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		public int HoursePower { get; set; }
 		public string LocationRegion { get; set; }
 		public string LocationTown { get; set; }
-		//public string MoreInformation { get; set; }
-		public string Currency { get; set; }
+        public string MoreInformation { get; set; }
+        public string Currency { get; set; }
 		public Guid EditionId { get; set; }
-		public Guid BrandId { get; set; }
+        public Guid BrandId { get; set; }
         public Guid VehicleTypeTypeId{ get; set; }
         public Guid VehicleTypeSectionId { get; set; }
     }

@@ -198,10 +198,10 @@ namespace WheelsMarket.Services.Vehicles
                 Тransmission = addVehicleViewModel.Тransmission,
                 EuroStandard = addVehicleViewModel.EuroStandart,
                 VinNumber=addVehicleViewModel.VinNumber,
+                MoreInformation = addVehicleViewModel.MoreInformation,
                 HoursePower=addVehicleViewModel.HoursePower,
                 LocationRegion = addVehicleViewModel.LocationRegion,
                 LocationTown = addVehicleViewModel.LocationTown,
-                //MoreInformation =addVehicleViewModel.MoreInformation,
                 Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
                 //VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
@@ -210,6 +210,9 @@ namespace WheelsMarket.Services.Vehicles
             await this.context.Vehicles.AddAsync(model);
             await context.SaveChangesAsync();
         }//modify this code so specific vehicle to be to specific person
+	
+
+
 
         public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
         {
