@@ -1,0 +1,39 @@
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
+@model IEnumerable<AllVehicleViewModel>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Date of reading:</th>
+            <th>Pages</th>
+            <th>Author:</th>
+            <th>ISBN</th>
+            <th>Publishing year:<th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (AllVehicleViewModel vehicle in this.Model)
+        {
+                        <tr>
+                            <td>
+                                    <img class="card-ing-top" src="@vehicle.ImageURL" alt="Book Image" height="150" width="100">
+                            </td>
+                                <td>@vehicle.Color</td>
+                            <td>@DateTime.Now.ToString()</td>
+
+                            <td>
+
+                                        <a asp-controller="Vehicle" asp-action="RemoveFromFavourites" asp-route-vehicleId="@vehicle.Id" class="btn btn-warning" style="background-color:#FFAE42;
+                        transition: background-color 0.3s ease; display: inline-block; 
+                        padding: 0.5em 1em; text-decoration: none; color: white; border:none" 
+                                    onmouseover="this.style.backgroundColor='#FFD89C'" onmouseout="this.style.backgroundColor='#FFAE42'">Remove
+                                </a>
+                            </td>
+
+                        </tr>
+        }
+    </tbody>
+</table>

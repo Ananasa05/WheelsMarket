@@ -210,7 +210,84 @@ namespace WheelsMarket.Services.Vehicles
             await this.context.Vehicles.AddAsync(model);
             await context.SaveChangesAsync();
         }//modify this code so specific vehicle to be to specific person
-	
+
+		public async Task FavouritesVehicleAsync(Guid id, User user)
+		{
+			Vehicle vehicle = await this.context.Vehicles.FindAsync(id);
+
+			if (vehicle != null && user != null)
+			{
+				Favourite vehicle1 = new Favourite()
+				{
+					Vehicle = vehicle,
+					User = user
+				};
+				await this.context.Favourites.AddAsync(vehicle1);
+				await this.context.SaveChangesAsync();
+			}
+		}
+
+        public async Task<IEnumerable<AllVehicleViewModel>> VehicleFavouritesAsync(User user)
+        {
+            User? userWithVehicle = await context.Users
+                .Where(u => u.Id == user.Id)
+                .Include(u => u.Favourites)
+                .ThenInclude(v => v.Vehicle)
+                .ThenInclude(e => e.Edition)
+                .ThenInclude(b => b.Brand)
+                .ThenInclude(v => v.VehicleTypeType)
+                .ThenInclude(v => v.VehicleTypeSection)
+                .FirstOrDefaultAsync();
+
+            if (userWithVehicle.Favourites != null)
+            {
+                var vehicles = userWithVehicle.Favourites
+                     .Select(v => new AllVehicleViewModel()
+                     {
+                         Id = v.Vehicle.Id,
+                         Color = v.Vehicle.Color,
+                         Distance = v.Vehicle.Distance,
+                         Fuel = v.Vehicle.Fuel,
+                         Condition = v.Vehicle.Condition,
+                         ImageURL = v.Vehicle.ImageURL,
+                         Price = v.Vehicle.Price,
+                         Volume = v.Vehicle.Volume,
+                         Year = v.Vehicle.Year,
+                         Тransmission = v.Vehicle.Тransmission,
+                         EuroStandart = v.Vehicle.EuroStandard,
+                         VinNumber = v.Vehicle.VinNumber,
+                         HoursePower = v.Vehicle.HoursePower,
+                         LocationRegion = v.Vehicle.LocationRegion,
+                         LocationTown = v.Vehicle.LocationTown,
+                         MoreInformation = v.Vehicle.MoreInformation,
+                         Currency = v.Vehicle.Currency,
+                         EditionName = v.Vehicle.Edition.Name,
+                         BrandName = v.Vehicle.Edition.Brand.Name,
+                         TypeType = v.Vehicle.Edition.Brand.VehicleTypeType.Type,
+                         TypeSection = v.Vehicle.Edition.Brand.VehicleTypeType.VehicleTypeSection.Section,
+                     });
+                return vehicles;
+            }
+            throw new NullReferenceException();
+        }
+        
+        public async Task RemoveFromFavouritesAsync(Guid vehicleId, User user)
+        {
+            var favourite = await this.context.Favourites.Include(f => f.Vehicle)
+                .Include(f => f.User)
+                .Where(favourite => favourite.VehicleId == vehicleId && favourite.User == user)
+                .FirstOrDefaultAsync();
+
+            if (favourite != null)
+            {
+                this.context.Favourites.Remove(favourite);
+                await this.context.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
 
 
 

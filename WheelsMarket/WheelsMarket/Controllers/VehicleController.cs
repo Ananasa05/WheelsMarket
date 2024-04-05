@@ -8,9 +8,11 @@ using WheelsMarket.Services.Brands.ViewModel;
 using WheelsMarket.Services.Brands;
 using WheelsMarket.Services.Editions.ViewModel;
 using WheelsMarket.Services.Editions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize]
     public class VehicleController : Controller
     {
         private readonly IVehicleService vehicleService;
@@ -72,6 +74,61 @@ namespace WheelsMarket.Controllers
             }
             await this.vehicleService.AddVehicleAsync(viewModel);
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+        }
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> VehicleFavourite()
+        {
+            var user = await userManager.GetUserAsync(User);
+            try
+            {
+                return View(await vehicleService.VehicleFavouritesAsync(user));
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FavouriteVehicle(Guid id)
+        {
+            var user = await userManager.FindByNameAsync(User.Identity?.Name);
+
+            try
+            {
+                await this.vehicleService.FavouritesVehicleAsync(id, user);
+            }
+            catch (Exception)
+            {
+                TempData["message"] = "Book is already marked as favourite!";
+            }
+            return RedirectToAction("VehicleFavourite");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RemoveFromFavourites(Guid vehicleId)
+        {
+            User user = await userManager.GetUserAsync(User);
+
+            try
+            {
+                await this.vehicleService.RemoveFromFavouritesAsync(vehicleId, user);
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+            }
+            return RedirectToAction("VehicleFavourite");
         }
 
         [HttpGet]

@@ -18,7 +18,9 @@ namespace WheelsMarket.Services.Vehicles
         SelectList AddBrandAsync(Guid typeTypeId);
         SelectList AddVehicleTypeTypeAsync(Guid typeSectionId);
         SelectList AddVehicleTypeSectionAsync();
-		
+		Task FavouritesVehicleAsync(Guid id, User user);
+		Task<IEnumerable<AllVehicleViewModel>> VehicleFavouritesAsync(User user);
+        Task RemoveFromFavouritesAsync(Guid vehicleId, User user);
 
-    }
+	}
 }
