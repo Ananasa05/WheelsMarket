@@ -310,7 +310,68 @@ namespace WheelsMarket.Services.Vehicles
 		{
 			return new SelectList(this.context.Editions.Where(x => x.BrandId == brandId), "Id", "Name");
 		}
-      
+
+        public async Task<IEnumerable<AllVehicleViewModel>> SearchVehiclesAsync(string brandsName)
+        {
+            if (String.IsNullOrEmpty(brandsName))
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                //var brandId = await this.context.Brands.Where(brand => brand.Name == brandsName).FirstOrDefaultAsync();
+                //var editionId = await this.context.Editions.Where(edition => edition.BrandId == brandId.Id).FirstOrDefaultAsync();
+                //var vehicleId = await this.context.Vehicles.Where(vehicle => vehicle.EditionId == editionId.Id).ToListAsync();
+
+                // Retrieve all editions associated with brands having the specified name asynchronously
+                var brandIds = await this.context.Brands
+                    .Where(brand => brand.Name == brandsName)
+                    .Select(brand => brand.Id)
+                    .ToListAsync();
+
+                // Retrieve all vehicles associated with the editions having any of the extracted brand IDs asynchronously
+                var vehicles = await this.context.Vehicles
+                    .Where(vehicle => brandIds.Contains(
+                        this.context.Editions
+                            .Where(edition => edition.Id == vehicle.EditionId)
+                            .Select(edition => edition.BrandId)
+                            .FirstOrDefault()
+                    ))
+                    .ToListAsync();
+
+
+
+                return vehicles.Select(v => new AllVehicleViewModel
+                {
+                    Id = v.Id,
+                    Color = v.Color,
+                    Distance = v.Distance,
+                    Fuel = v.Fuel,
+                    Condition = v.Condition,
+                    ImageURL = v.ImageURL,
+                    Price = v.Price,
+                    Volume = v.Volume,
+                    Year = v.Year,
+                    Тransmission = v.Тransmission,
+                    EuroStandart = v.EuroStandard,
+                    VinNumber = v.VinNumber,
+                    HoursePower = v.HoursePower,
+                    LocationRegion = v.LocationRegion,
+                    LocationTown = v.LocationTown,
+                    MoreInformation = v.MoreInformation,
+                    Currency = v.Currency,
+                    EditionName = v.Edition.Name,
+                    BrandName = v.Edition.Brand.Name,
+                    TypeType = v.Edition.Brand.VehicleTypeType.Type,
+                    TypeSection = v.Edition.Brand.VehicleTypeType.VehicleTypeSection.Section,
+                });
+            }
+        }
+
+        //public Task<string?> ShowAllVehiclesAsync()
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
 

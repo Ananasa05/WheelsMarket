@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WheelsMarket.Controllers
 {
-    [Authorize]
     public class VehicleController : Controller
     {
         private readonly IVehicleService vehicleService;
@@ -32,6 +31,18 @@ namespace WheelsMarket.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(string brandName)
+        {
+            try
+            {
+                return View(await this.vehicleService.SearchVehiclesAsync(brandName));
+            }
+            catch (ArgumentNullException) { return View(/*await this.vehicleService.ShowAllVehiclesAsync()*/); }
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> ShowAllInfoForAVehicle([FromRoute] Guid id)
         {
