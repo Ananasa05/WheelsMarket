@@ -11,8 +11,8 @@ namespace WheelsMarket.Services.Vehicles
         Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? max, int? min, string? transName,string? fuel,string? editionName,string? brandName, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown);
         Task<AllVehicleViewModel> ShowAllInformationForVehicle(Guid id);
 		Task DeleteVehicleAdminAsync(Guid id);
-		Task<IEnumerable<AllVehicleViewModel>> ByPriceFilter(int min,int max);
-		Task<IEnumerable<AllVehicleViewModel>> ByTransmisionFilter(string name);
+		//Task<IEnumerable<AllVehicleViewModel>> ByPriceFilter(int min,int max);
+		//Task<IEnumerable<AllVehicleViewModel>> ByTransmisionFilter(string name);
         Task AddVehicleAsync(AddVehicleViewModel add);
         SelectList AddVehicleEditionAsync(Guid brandId);
         SelectList AddBrandAsync(Guid typeTypeId);

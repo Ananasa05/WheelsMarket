@@ -8,9 +8,13 @@
 
 <h1>Add Section</h1>
 <form method="post" action="Create" class="mt-5">
-    <div class="mb-3">
+    <div class="mb-5">
         <label for="" class="form-label">Name</label>
         <input type="text" class="form-control" asp-for="Section">
+        <span asp-validation-for="Section" class="text-danger"></span>
     </div>
      <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

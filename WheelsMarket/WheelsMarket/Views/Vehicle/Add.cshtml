@@ -168,6 +168,11 @@
 			</select>
 			<span asp-validation-for="Color" class="text-danger"></span>
 		 </div>
+			<div class="mb-3">
+				<label asp-for="@Model.MoreInformation" class="form-label">Допълнителна информация</label>
+				<input asp-for="@Model.MoreInformation" class="form-control" aria-required="false" />
+				<span asp-validation-for="MoreInformation" class="text-danger"></span>
+			</div>
 		 <div class="mb-3">
 			<label asp-for="@Model.LocationTown" class="form-label">Град/Село</label>
 			<input asp-for="@Model.LocationTown" class="form-control" aria-required="false"/>
@@ -210,3 +215,4 @@
 	  </form>
    </div>
 </div>
+

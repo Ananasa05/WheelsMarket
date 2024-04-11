@@ -9,7 +9,9 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
         public int Distance { get; set; }
         public string Fuel { get; set; }
         public string Condition { get; set; }
+        [DataType(DataType.ImageUrl)]
         public string ImageURL { get; set; }
+        [Range(0, 200)]
         public int Price { get; set; }
         public int Volume { get; set; }
         public int Year { get; set; }
@@ -21,9 +23,13 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		public string LocationTown { get; set; }
         public string MoreInformation { get; set; }
         public string Currency { get; set; }
-		public Guid EditionId { get; set; }
+        [ValidateNever]
+        public Guid EditionId { get; set; }
+        [ValidateNever]
         public Guid BrandId { get; set; }
+        [ValidateNever]
         public Guid VehicleTypeTypeId{ get; set; }
+        [ValidateNever]
         public Guid VehicleTypeSectionId { get; set; }
     }
 }

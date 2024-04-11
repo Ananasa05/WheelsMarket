@@ -22,6 +22,7 @@ namespace WheelsMarket.Controllers
             signInManager = _signInManager;
             applicationDbContext = dbContext;
         }
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
