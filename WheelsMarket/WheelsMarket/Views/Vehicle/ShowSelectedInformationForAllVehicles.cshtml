@@ -1,28 +1,29 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-<h1>Vehicles</h1>
+<body style="background-color:#A96CCF">
 
  <form asp-action="ShowSelectedInformationForAllVehicles" id="search" method="post">
         <div class="input-group md-form form-sm form-2 pl-0">
             <input name="BrandName" class="form-control my-0 py-1 red-border" type="text" placeholder="Search..." />
             <div class="input-group-append">
-                <span class="input-group-text red lighten-3" style="background-color:#FFAE42">
-                    <input type="submit" value="Search" style="border:none; background-color:#FFAE42" />
+                <span class="input-group-text red lighten-3" style="background-color:#6A3889">
+                    <input type="submit" value="Search" style="border:none; background-color:#6A3889" />
 
                 </span>
             </div>
         </div>
+        <br>
     </form>
 
-<a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-warning">By Price</a>
-<a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-warning">By Year</a>
-<a asp-controller="Vehicle" asp-action="ByTransFilter" class="bt363n btn-warning">By Trans</a>
-<a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-warning">By Fuel</a>
-<a asp-controller="Vehicle" asp-action="ByEditionFilter" class="btn btn-warning">By Edition</a>
-<a asp-controller="Vehicle" asp-action="ByBrandFilter" class="btn btn-warning">By Brand</a>
-<a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-warning">By House Power</a>
-
-
+    <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Price</a>
+    <a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Year</a>
+    <a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Trans</a>
+    <a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Fuel</a>
+    <a asp-controller="Vehicle" asp-action="ByEditionFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Edition</a>
+    <a asp-controller="Vehicle" asp-action="ByBrandFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By Brand</a>
+    <a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-primary" style="background-color:#6A3889;border:none;color:black;border-radius:10px">By House Power</a>
+<br>
+<br>
 <table class="table">
 
     <tbody>
@@ -30,7 +31,7 @@
                                        <div class="text-center row">
             @foreach (AllVehicleViewModel vehicle in this.Model)
             {
-        <div class="card col-4" style="width: 20rem;">
+                    <div class="card col-4" style="width: 20rem; background-color:#8A2BE2; padding:10px; margin:5px; border-radius:10px">
 
         <img class="card-img-top" src="@vehicle.ImageURL"  height="350">
         <div class="card-body">
@@ -42,8 +43,11 @@
         <p class="mb-0">Година: @vehicle.Year</p>
         <p class="mb-0">Марка: @vehicle.BrandName</p>
         <p class="mb-0">Модел: @vehicle.EditionName</p>
-                                                        <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger">Delete</a>
-                                                        <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
+                            <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Delete</a>
+
+
+                            <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
+
                                                                 <form class="input-group-sm" asp-controller="Vehicle" asp-action="FavouriteVehicle" asp-route-id="@vehicle.Id" method="post">
                             <button type="submit" class="fs-6 btn btn-success mb-3 p-2" style="border-radius: 50%; background-color:#FF7722; border-color:#FF7722;
             transition: background-color 0.3s ease; padding: 0.5em 1em; text-decoration: none;
@@ -62,5 +66,6 @@
 </div>
    </tbody>
 </table>
+</body>
 
 

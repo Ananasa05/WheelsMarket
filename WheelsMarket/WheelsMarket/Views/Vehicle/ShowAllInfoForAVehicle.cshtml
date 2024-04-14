@@ -3,50 +3,97 @@
 
 <form method="post" action="ShowAllInfoForAVehicle" class="mt-5">
 
-    <br />
+    <body style="background-color:#A96CCF">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img class="card-img-top" src="@Model.ImageURL" image-size="100%">
+                </div>
+                <div class="col-md-6">
+                    <style>
+                        .table {
+                            border-collapse: collapse;
+                            width: 100%;
+                        }
 
-    <h1 style="color:#fc6c85">Games:</h1>
+                            .table th, .table td {
+                                border: 1px solid #000000;
+                                text-align: left;
+                                padding: 8px;
+                            }
 
-    <table class="table">
-        <thead>
-            <tr style="color:#fc6c85">
-                <th>Марка</th>
-                <th>Модел</th>
-                <th>Цена</th>
-                <th>Дистанция</th>
-                <th>Тип двигател</th>
-                <th>Състояние</th>
-                <th>Обем на двигателя</th>
-                <th>Година на производство</th>
-                <th>Скоростна кутия</th>
-                <th>Евро стандарт</th>
-                <th>Мощност</th>
-                <th>Къде се намира</th>
-                <th>Vin номер</th>
-                <th>Допълнителна информация</th>
+                            .table tbody tr:nth-child(odd) {
+                                background-color: red
+                            }
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr style="color:#fc6c85">
-        <img class="card-img-top" src="@Model.ImageURL"  height="500">
+                            .table tbody tr:nth-child(even) {
+                                background-color: green;
+                            }
+                    </style>
 
-                <td>@Model.BrandName</td>
-                <td>@Model.EditionName</td>
-                <td>@Model.Price</td>
-                <td>@Model.Distance</td>
-                <td>@Model.Fuel</td>
-                <td>@Model.Volume</td>
-                <td>@Model.Year</td>
-                <td>@Model.Тransmission</td>
-                <td>@Model.EuroStandart</td>
-                <td>@Model.HoursePower</td>
-                <td>@Model.LocationRegion</td>
-                <td>@Model.LocationTown</td>
-                <td>@Model.VinNumber</td>
-                <td>@Model.MoreInformation</td>
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td><strong>Марка:</strong></td>
+                                <td>@Model.BrandName</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Модел:</strong></td>
+                                <td>@Model.EditionName</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Цена:</strong></td>
+                                <td>@Model.Price</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Дистанция:</strong></td>
+                                <td>@Model.Distance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Тип двигател:</strong></td>
+                                <td>@Model.Fuel</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Състояние:</strong></td>
+                                <td>@Model.Condition</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Обем на двигателя:</strong></td>
+                                <td>@Model.Volume</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Година на производство:</strong></td>
+                                <td>@Model.Year</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Скоростна кутия:</strong></td>
+                                <td>@Model.Тransmission</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Евро стандарт:</strong></td>
+                                <td>@Model.EuroStandart</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Мощност:</strong></td>
+                                <td>@Model.HoursePower</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Къде се намира:</strong></td>
+                                <td>@Model.LocationRegion</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Vin номер:</strong></td>
+                                <td>@Model.VinNumber</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Допълнителна информация:</strong></td>
+                                <td>@Model.MoreInformation</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-            </tr>
-        </tbody>
-    </table>
+                </div>
+            </div>
+        </div>
+    </body>
 </form>

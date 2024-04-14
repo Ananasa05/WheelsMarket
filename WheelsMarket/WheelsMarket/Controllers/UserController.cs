@@ -10,13 +10,13 @@ namespace WheelsMarket.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
-        private readonly ApplicationDbContext applicationDbContext;
+        private readonly WheelsMarketDbContext applicationDbContext;
 
         private readonly SignInManager<User> signInManager;
 
         public UserController(
             UserManager<User> _userManager,
-            SignInManager<User> _signInManager, ApplicationDbContext dbContext)
+            SignInManager<User> _signInManager, WheelsMarketDbContext dbContext)
         {
             userManager = _userManager;
             signInManager = _signInManager;

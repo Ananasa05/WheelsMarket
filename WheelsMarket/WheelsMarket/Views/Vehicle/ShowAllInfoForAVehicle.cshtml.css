@@ -1,0 +1,16 @@
+﻿.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-md-6 {
+    width: 50%;
+}
+
+.table td {
+    border: none;
+}
+
+.table th {
+    border: none;
+}

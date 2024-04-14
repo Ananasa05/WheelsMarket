@@ -8,9 +8,9 @@ namespace WheelsMarket.Services.VehicleTypeSections
 {
     public class VehicleTypeSectionService:IVehicleTypeSectionService
     {
-        private readonly ApplicationDbContext context;
+        private readonly WheelsMarketDbContext context;
 
-        public VehicleTypeSectionService(ApplicationDbContext dbcontext)
+        public VehicleTypeSectionService(WheelsMarketDbContext dbcontext)
         {
             this.context = dbcontext;
         }

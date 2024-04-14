@@ -7,10 +7,10 @@ using WheelsMarket.Data.Models;
 
 namespace WheelsMarket.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+    public class WheelsMarketDbContext : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     {
         private bool seedDB;
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, bool seedDB=true)
+        public WheelsMarketDbContext(DbContextOptions<WheelsMarketDbContext> options, bool seedDB=true)
             : base(options)
         {
             if (this.Database.IsRelational())

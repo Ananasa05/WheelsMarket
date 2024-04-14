@@ -9,9 +9,9 @@ namespace WheelsMarket.Services.Editions
 {
     public class EditionService : IEditionService
     {
-        private readonly ApplicationDbContext context;
+        private readonly WheelsMarketDbContext context;
 
-        public EditionService(ApplicationDbContext dbcontext)
+        public EditionService(WheelsMarketDbContext dbcontext)
         {
             this.context = dbcontext;
         }

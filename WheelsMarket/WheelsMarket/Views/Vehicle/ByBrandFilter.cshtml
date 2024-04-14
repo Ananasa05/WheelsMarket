@@ -1,35 +1,39 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
+@model AddVehicleViewModel
+@{
+}
 
-<h1>Filter By Vehicle</h1>
+<h1>Add Vehicle</h1>
 
+<h1>Add Vehicle</h1>
 <div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
-        <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-               <div class="mb-3">
-                <label class="form-label">Марка</label>
-                <select name="brandName" class="form-control">
-                    <option value="">-- Select Make --</option>
-                    <option value="Mercedes">Mercedes</option>
-                    <option value="Audi">Audi</option>
-                    <option value="Jeep">Jeep</option>
-                    <!-- Add more options for vehicle makes as needed -->
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        @*  <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-               <div class="mb-3">
-                <label class="form-label">Модел</label>
-                <select name="editionName" class="form-control">
-                <option value="">-- Select Make --</option>
-                    <option value="G-class">G-class</option>
-                    <option value="C-class">C-class</option>
-                    <!-- Add more options for vehicle makes as needed -->
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form> *@
-    </div>
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+		<form method="post" asp-action="Add">
+			<div class="mb-3">
+				<label for="" class="form-label">VehicleTypeSection</label>
+				<br />
+				<select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
+			</div>
+			<button type="submit" class="btn btn-warning">Ok</button>
+			<div class="mb-3">
+				<label for="" class="form-label">VehicleTypeType</label>
+				<br />
+				<select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
+			</div>
+			<button type="submit" class="btn btn-warning">Ok</button>
+			<div class="mb-3">
+				<label for="" class="form-label">BrandId</label>
+				<br />
+				<select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
+			</div>
+			<button type="submit" class="btn btn-warning">Ok</button>
+			<div class="mb-3">
+				<label for="" class="form-label">Edition</label>
+				<br />
+				<select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"></select>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
 </div>
+

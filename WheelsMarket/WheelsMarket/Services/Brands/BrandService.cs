@@ -10,9 +10,9 @@ namespace WheelsMarket.Services.Brands
 {
     public class BrandService:IBrandService
     {
-        private readonly ApplicationDbContext context;
+        private readonly WheelsMarketDbContext context;
 
-        public BrandService(ApplicationDbContext dbcontext)
+        public BrandService(WheelsMarketDbContext dbcontext)
         {
             this.context = dbcontext;
         }

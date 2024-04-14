@@ -11,7 +11,7 @@ using WheelsMarket.Data;
 
 namespace WheelsMarket.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(WheelsMarketDbContext))]
     [Migration("20240330111449_newDatabase")]
     partial class newDatabase
     {

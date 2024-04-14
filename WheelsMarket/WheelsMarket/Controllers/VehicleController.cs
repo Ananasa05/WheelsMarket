@@ -25,17 +25,41 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionName,string? brandName, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionId,string? brandId, string? typeTypeId, string? typeSectionId, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
         {
-            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionName, brandName,year,location,color,hoursePowerMin,hoursePowerMax,locationRegion,locationTown);
-
+            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionId, brandId,typeTypeId,typeSectionId,year,location,color,hoursePowerMin,hoursePowerMax,locationRegion,locationTown);
+            //ako vehicleTypeSection e != null post-a na Add
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(string brandName)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(BrandFilterViewModel viewModel)
         {
-            try
+			ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
+
+			if (viewModel.VehicleTypeSectionId != default(Guid))
+			{
+				ViewBag.VehicleTypeTypeId = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
+				if (viewModel.VehicleTypeTypeId != default(Guid))
+				{
+					ViewBag.BrandId = this.vehicleService.AddBrandAsync(viewModel.VehicleTypeTypeId);
+					if (viewModel.BrandId != default(Guid))
+					{
+						ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
+					}
+				}
+			}
+
+			if (!ModelState.IsValid
+				|| viewModel.VehicleTypeSectionId == default(Guid)
+				|| viewModel.VehicleTypeTypeId == default(Guid)
+				|| viewModel.BrandId == default(Guid)
+				|| viewModel.EditionId == default(Guid)
+			   )
+			{
+				return View(viewModel);
+			}
+			try
             {
                 return View(await this.vehicleService.SearchVehiclesAsync(brandName));
             }
@@ -86,14 +110,6 @@ namespace WheelsMarket.Controllers
             await this.vehicleService.AddVehicleAsync(viewModel);
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
-
-
-
-
-
-
-
-
 
         [HttpGet]
         public async Task<IActionResult> VehicleFavourite()
@@ -148,7 +164,7 @@ namespace WheelsMarket.Controllers
             Guid id)
         {
             await vehicleService.DeleteVehicleAdminAsync(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
 
         [HttpGet]

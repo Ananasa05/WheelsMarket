@@ -2,62 +2,125 @@
 @{
 }
 
-<h1 class=" mb-5">Type Sections</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
-<div class=" justify-content-center row" >
-    <div class=" col-4 text-center"><a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning">Add Section</a></div>
-</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Table</title>
+    <style>
+        /* Table styling */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-image: url(https://wallpapers.com/images/hd/1920-x-1080-car-4sdj5tojfx747aly.jpg); /* Specify the path to your image */
+            background-size: cover; /* Cover the entire table */
+        }
 
+        th, td {
+            border: 1px solid black;
+            text-align: left;
+            padding: 8px;
+        }
 
-<table class="table">
+        /* Alternate row colors */
+        tr:nth-child(even) {
+            background-color: #8A2BE2; /* Even rows */
+        }
 
-    <table class="table table-dark table-striped">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>do</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>fat</td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>twitter</td>
-            </tr>
-        </tbody>
-    </table>
+        tr:nth-child(odd) {
+            background-color: #ab36cf; /* Odd rows */
+        }
 
+        /* Customize header background color */
+        th {
+            background-color: #450d69;
+            color: white;
+        }
+    </style>
+</head>
+<body style="background-color:#A96CCF">
+
+    @* <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-content {
+            margin-top: 50px;
+        }
+
+        .btn-warning {
+            background-color: #FFA500;
+            border-color: #FFA500;
+            color: #333;
+        }
+
+            .btn-warning:hover {
+                background-color: #FF8C00;
+                border-color: #FF8C00;
+                color: #fff;
+            }
+    </style> *@
+
+        <div class="header">
+            <h1 class="mb-5">Type Sections</h1>
+        </div>
+
+        <div class="container main-content">
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center">
+                <a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning" style="background-color:#6A3889;border:none;border-radius:5px;color:black" >Add Section</a>
+                </div>
+            </div>
+        </div>
+<br></br>
+<table>
     <thead>
         <tr>
-            <th> Name </th>
-            <th> Delete </th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
         </tr>
     </thead>
     <tbody>
+        <tr>
+            <td>John</td>
+            <td>25</td>
+            <td>New York</td>
+        </tr>
+        <tr>
+            <td>Jane</td>
+            <td>30</td>
+            <td>Los Angeles</td>
+        </tr>
+        <tr>
+            <td>Mike</td>
+            <td>22</td>
+            <td>Chicago</td>
+        </tr>
         @foreach (var cat in this.Model)
         {
-                           <tr>
-                        <td>@cat.Section</td>
-                            <td><a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Delete</a></td>
-                            <td><a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-danger">Edit</a></td>
-                        
-                    </tr>
+            <tr>
+                <td>@cat.Section</td>
+                    <td><a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger" style="background-color:#6A3889;border:none;border-radius:7px">Delete</a></td>
+                    <td>
+                        <a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary" style="background-color:#A96CCF ;border:none;border-radius:7px">Edit</a>
+                    </td>
+            </tr>
         }
-
-
-    </tbody>
 </table>
+
+</body>
+</html>

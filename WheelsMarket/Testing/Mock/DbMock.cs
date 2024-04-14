@@ -10,15 +10,15 @@ namespace Testing.Mock
 {
     public class DbMock
     {
-        public static ApplicationDbContext Instance
+        public static WheelsMarketDbContext Instance
         {
             get
             {
-                var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                var options = new DbContextOptionsBuilder<WheelsMarketDbContext>()
                     .UseInMemoryDatabase("WheelsMarketInMemoryDb" + Guid.NewGuid().ToString())
                     .Options;
 
-                return new ApplicationDbContext(options, false);
+                return new WheelsMarketDbContext(options, false);
             }
         }
     }

@@ -14,12 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("WheelsMarketConnectionstring");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<WheelsMarketDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<WheelsMarketDbContext>();
 builder.Services.AddScoped<IVehicleTypeSectionService, VehicleTypeSectionService>();
 builder.Services.AddScoped<IVehicleTypeTypeService, VehicleTypeTypeService>();
 builder.Services.AddScoped<IBrandService, BrandService>();

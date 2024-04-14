@@ -2,8 +2,61 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+@* <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+ *@
+
+//от на класната подаръците текста
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Screen Image Link</title>
+    <style>
+        /* Remove default margin and padding */
+        body, html {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Make the image fill the entire screen */
+        .full-screen-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensure the image is behind other content */
+        }
+
+        /* Center the link within the page */
+        .link-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ensure the link container takes up the full height of the viewport */
+        }
+
+        /* Style the link text */
+        .link-text {
+            color: white;
+            font-size: 24px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://example.com" class="full-screen-image" target="_blank">
+        <img src="https://wallpaperaccess.com/full/724592.jpg" alt="Full Screen Image" class="full-screen-image">
+    </a>
+
+    <div class="link-container">
+        <a href="https://example.com" class="link-text" target="_blank">Click here to visit the link</a>
+    </div>
+</body>
+</html>
 
