@@ -9,6 +9,8 @@ using WheelsMarket.Services.Brands;
 using WheelsMarket.Services.Editions.ViewModel;
 using WheelsMarket.Services.Editions;
 using Microsoft.AspNetCore.Authorization;
+using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
+using WheelsMarket.Services.VehicleTypeTypes;
 
 namespace WheelsMarket.Controllers
 {
@@ -32,42 +34,18 @@ namespace WheelsMarket.Controllers
             return View(model);
         }
 
-   //     [HttpPost]
-   //     public async Task<IActionResult> ShowSelectedInformationForAllVehicles(BrandFilterViewModel viewModel)
-   //     {
-			//ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
-
-			//if (viewModel.VehicleTypeSectionId != default(Guid))
-			//{
-			//	ViewBag.VehicleTypeTypeId = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
-			//	if (viewModel.VehicleTypeTypeId != default(Guid))
-			//	{
-			//		ViewBag.BrandId = this.vehicleService.AddBrandAsync(viewModel.VehicleTypeTypeId);
-			//		if (viewModel.BrandId != default(Guid))
-			//		{
-			//			ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
-			//		}
-			//	}
-			//}
-
-			//if (!ModelState.IsValid
-			//	|| viewModel.VehicleTypeSectionId == default(Guid)
-			//	|| viewModel.VehicleTypeTypeId == default(Guid)
-			//	|| viewModel.BrandId == default(Guid)
-			//	|| viewModel.EditionId == default(Guid)
-			//   )
-			//{
-			//	return View(viewModel);
-			//}
-			//try
-   //         {
-   //             return View(await this.vehicleService.SearchVehiclesAsync(brandName));
-   //         }
-   //         catch (ArgumentNullException) { return View(); }
-   //     }
+		[HttpPost]
+		public async Task<IActionResult> ShowSelectedInformationForAllVehicles(string brandName)
+		{
+			try
+			{
+				return View(await this.vehicleService.SearchVehiclesAsync(brandName));
+			}
+			catch (ArgumentNullException) { return View(); }
+		}
 
 
-        [HttpGet]
+		[HttpGet]
         public async Task<IActionResult> ShowAllInfoForAVehicle([FromRoute] Guid id)
         {
             var model = await vehicleService.ShowAllInformationForVehicle(id);
@@ -156,9 +134,45 @@ namespace WheelsMarket.Controllers
                 ModelState.AddModelError("", ex.Message);
             }
             return RedirectToAction("VehicleFavourite");
-        }
+		}
 
-        [HttpGet]
+		[HttpGet]
+		public async Task<IActionResult> EditIsApproved(Guid id)
+		{
+			Vehicle vehicle = await vehicleService.GetVehicleIdAsync(id);
+
+			if (vehicle != null)
+			{
+				EditVehicleViewModel viewModel = new EditVehicleViewModel()
+				{
+					Id = vehicle.Id,
+					IsApproved = vehicle.IsVehicleApproved
+				};
+				return View("EditIsApproved", viewModel);
+			}
+			return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> EditIsApproved(EditVehicleViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+                Vehicle vehicle = await vehicleService.GetVehicleIdAsync(model.Id);
+
+				if (vehicle != null)
+				{
+					vehicle.IsVehicleApproved= model.IsApproved;
+
+					await vehicleService.UpdateVehicleIsApproved(vehicle);
+
+					return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+				}
+			}
+			return View("EditIsApproved", model);
+		}
+
+		[HttpGet]
         public async Task<IActionResult> Delete(
           [FromRoute]
             Guid id)

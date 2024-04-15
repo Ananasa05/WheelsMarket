@@ -38,6 +38,7 @@ namespace WheelsMarket.Data
                 builder.ApplyConfiguration(new EditionConfiguration());
                 builder.ApplyConfiguration(new VehicleTypeSectionConfiguration());
                 builder.ApplyConfiguration(new VehicleTypeTypeConfiguration());
+                builder.ApplyConfiguration(new VehicleConfiguration());
             }
           
             builder.Entity<Favourite>().HasKey(x => new

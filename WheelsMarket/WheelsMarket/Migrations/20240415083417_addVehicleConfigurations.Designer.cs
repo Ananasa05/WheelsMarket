@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WheelsMarket.Data;
 
@@ -11,9 +12,10 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240415083417_addVehicleConfigurations")]
+    partial class addVehicleConfigurations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -507,9 +509,6 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsVehicleApproved")
-                        .HasColumnType("bit");
-
                     b.Property<string>("LocationRegion")
                         .HasColumnType("nvarchar(max)");
 
@@ -557,8 +556,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 5",
                             Fuel = "Дизел",
                             HoursePower = 170,
-                            ImageURL = "https://s1.1zoom.me/b4067/303/Audi_2019_A4_allroad_quattro_Grey_Metallic_Estate_570422_1920x1080.jpg",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906746.jpg",
                             LocationRegion = "Стара Загора",
                             LocationTown = "Казанлък",
                             MoreInformation = "Колата няма никакви забележки, само задната лява седалка е скъсана.",
@@ -579,8 +577,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 6",
                             Fuel = "Бензин",
                             HoursePower = 150,
-                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQevdE1eAryK9STmDnZYNZhk4j2TA2f4HYutWX_U4zJoA&s",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906747.jpg",
                             LocationRegion = "София",
                             LocationTown = "София",
                             MoreInformation = "Перфектно запазен автомобил с пълен сервизен история. Има леки драскотини на предния капак.",
@@ -601,8 +598,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 4",
                             Fuel = "Дизел",
                             HoursePower = 120,
-                            ImageURL = "https://wallpapers.com/images/hd/audi-q7-1920-x-1080-wallpaper-ty4995qkcstpam9g.jpg",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906748.jpg",
                             LocationRegion = "Варна",
                             LocationTown = "Звездица",
                             MoreInformation = "Добре поддържан семейен автомобил. Нови гуми и спирачни дискове.",
@@ -623,8 +619,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 6",
                             Fuel = "Хибрид",
                             HoursePower = 200,
-                            ImageURL = "https://i.pinimg.com/originals/1a/e6/ef/1ae6efcc6d506cbf6856226e430c4089.webp",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906749.jpg",
                             LocationRegion = "Пловдив",
                             LocationTown = "Хисаря",
                             MoreInformation = "Луксозен седан с пълен пакет от екстри. Идеален за градско и извънградско шофиране.",
@@ -645,8 +640,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 5",
                             Fuel = "Бензин",
                             HoursePower = 90,
-                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrnXVaRLhg0-IVMjYYDpNcglt-_gBc6Milsv556WeEdQ&s",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906750.jpg",
                             LocationRegion = "Бургас",
                             LocationTown = "Айтос",
                             MoreInformation = "Изключително икономичен автомобил, подходящ за градско пътуване. Нови амортисьори.",
@@ -667,8 +661,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 4",
                             Fuel = "Дизел",
                             HoursePower = 140,
-                            ImageURL = "https://i.pinimg.com/originals/12/0d/6b/120d6b8793349feb2388eb99bea99fc2.jpg",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906751.jpg",
                             LocationRegion = "Русе",
                             LocationTown = "Мартен",
                             MoreInformation = "Надежден и здрав пикап. Има леки външни забележки.",
@@ -689,8 +682,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 6",
                             Fuel = "Бензин",
                             HoursePower = 160,
-                            ImageURL = "https://cdn.motor1.com/images/mgl/OoeOzl/s1/bmw-i5-edrive40-touring-2024.jpg",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906752.jpg",
                             LocationRegion = "Стара Загора",
                             LocationTown = "Раднево",
                             MoreInformation = "Спортен хечбек с елегантен дизайн. Пълен сервизен история в оторизиран сервиз.",
@@ -711,8 +703,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 5",
                             Fuel = "Дизел",
                             HoursePower = 120,
-                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgaB8Wc0vQIF1fAdhaeFqEmq88MxsP8jn4JCAK7bwY9A&s",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906753.jpg",
                             LocationRegion = "Плевен",
                             LocationTown = "Плевен",
                             MoreInformation = "Семеен автомобил с комфортна икономичност. Идеален за пътувания с цялото семейство.",
@@ -733,8 +724,7 @@ namespace WheelsMarket.Migrations
                             EuroStandard = "Euro 6",
                             Fuel = "Бензин",
                             HoursePower = 130,
-                            ImageURL = "https://wallpapers.com/images/hd/bmw-x5-1920-x-1080-wallpaper-v6n1t0uhafvmg7q3.jpg",
-                            IsVehicleApproved = false,
+                            ImageURL = "https://s.car.info/image_files/1920/side-1-906753.jpg",
                             LocationRegion = "Хасково",
                             LocationTown = "Харманли",
                             MoreInformation = "Здрав и надежден автомобил.",

@@ -25,5 +25,6 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
         public string? BrandName { get; set; }
 		public string? TypeType { get; set; }
 		public string? TypeSection { get; set; }
+		public string? IsApproved { get; set; }
 	}
 }

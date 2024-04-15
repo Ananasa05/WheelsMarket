@@ -2,39 +2,56 @@
 
 <h1>Filter By Age</h1>
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
-        <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-            <div class="mb-3">
-                <label class="form-label">Скоростна кутия</label>
-                <select id="minYear" name="min" class="form-control">
-                    <option value="">-- Select Min Year --</option>
-                    @for (int year = DateTime.Now.Year; year >= 1990; year--)
-                    {
-                            <option value="@year">@year</option>
-                    }
-                </select>
+<h1>Тук може да филтрирате автомобилите по цена:</h1>
 
-                <select id="maxYear" name="max" class="form-control">
-                    <option value="">-- Select Max Year --</option>
-                </select>
-            </div>
+<head>
+    <title>Your Page Title</title>
+    <style>
+        /* Define your custom dropdown styles */
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    document.getElementById("minYear").addEventListener("change", function () {
-        var minYear = parseInt(this.value);
-        var maxYearSelect = document.getElementById("maxYear");
-        maxYearSelect.innerHTML = "<option value=''>-- Select Max Year --</option>";
-        for (var year = minYear + 1; year <= new Date().getFullYear(); year++) {
-            var option = document.createElement("option");
-            option.value = year;
-            option.text = year;
-            maxYearSelect.appendChild(option);
+        .form-select {
+            border: 1px solid #ced4da; /* Default border color */
+            border-radius: .25rem; /* Rounded corners */
+            padding: .375rem .75rem; /* Padding */
+            background-color: #fff; /* Default background color */
+            color: #000000; /* Default text color */
         }
-    });
-</script>
+
+            /* Stripped colors for dropdown options */
+            .form-select option:nth-child(odd) {
+                background-color: #ae75de; /* Lighter background color */
+                color: #000000; /* Default text color */
+            }
+
+            .form-select option:nth-child(even) {
+                background-color: #d4b6ed; /* Darker background color */
+                color: #000000; /* Default text color */
+            }
+    </style>
+</head>
+<body style="background-color:#ab36cf">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+            <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
+                <div class="mb-3">
+                    <label class="form-label">Скоростна кутия</label>
+                    <select id="minYear" name="min" class="form-select">
+                        <option value="">-- Select Min Year --</option>
+                        @for (int year = DateTime.Now.Year; year >= 1990; year--)
+                        {
+                            <option value="@year">@year</option>
+                        }
+                    </select>
+
+                    <select id="maxYear" name="max" class="form-select">
+                        <option value="">-- Select Max Year --</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+   
+</body>

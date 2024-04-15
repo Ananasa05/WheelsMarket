@@ -14,32 +14,32 @@ namespace Testing
 
     public class VehicleServiceTests
     {
-        private DbContextOptions<WheelsMarketDbContext> dbOptions;
-        private WheelsMarketDbContext dbContext;
-        private IVehicleService vehicleService;
+        //private DbContextOptions<WheelsMarketDbContext> dbOptions;
+        //private WheelsMarketDbContext dbContext;
+        //private IVehicleService vehicleService;
 
 
-        [SetUp]
-        public void SetUp()
-        {
-            this.dbOptions = new DbContextOptionsBuilder<WheelsMarketDbContext>()
-                    .UseInMemoryDatabase("WheelsMarketInMemoryDb" + Guid.NewGuid().ToString())
-                    .Options;
+        //[SetUp]
+        //public void SetUp()
+        //{
+        //    this.dbOptions = new DbContextOptionsBuilder<WheelsMarketDbContext>()
+        //            .UseInMemoryDatabase("WheelsMarketInMemoryDb" + Guid.NewGuid().ToString())
+        //            .Options;
 
-            this.dbContext = new WheelsMarketDbContext(this.dbOptions, false);
-            this.dbContext.Database.EnsureCreated();
-            SeedDatabase(this.dbContext);
+        //    this.dbContext = new WheelsMarketDbContext(this.dbOptions, false);
+        //    this.dbContext.Database.EnsureCreated();
+        //    SeedDatabase(this.dbContext);
 
 
-            this.vehicleService = new VehicleService(dbContext);
+        //    this.vehicleService = new VehicleService(dbContext);
 
-        }
+        //}
 
-        [TearDown]
-        public void TearDown()
-        {
-            dbContext.Database.EnsureDeleted();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    dbContext.Database.EnsureDeleted();
+        //}
 
         //[Test]
 

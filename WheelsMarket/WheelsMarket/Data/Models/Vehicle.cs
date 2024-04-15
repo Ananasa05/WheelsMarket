@@ -5,7 +5,7 @@ namespace WheelsMarket.Data.Models
 {
     public class Vehicle
     {
-        [Key]
+		[Key]
         public Guid Id { get; set; }
         public string? Тransmission { get; set; } = null;
         public int? Volume { get; set; } = null;
@@ -23,6 +23,7 @@ namespace WheelsMarket.Data.Models
         public string? LocationTown { get; set; } = null;
         public string? ImageURL { get; set; } = null;
         public string? MoreInformation { get; set; } = null;
+        public bool? IsVehicleApproved { get; set; } = false;
 
 
         [ForeignKey(nameof(Models.Edition))]

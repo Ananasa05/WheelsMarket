@@ -22,6 +22,10 @@ namespace WheelsMarket.Services.Vehicles
 		Task<IEnumerable<AllVehicleViewModel>> VehicleFavouritesAsync(User user);
         Task RemoveFromFavouritesAsync(Guid vehicleId, User user);
         Task<IEnumerable<AllVehicleViewModel>> SearchVehiclesAsync(string brandsName);
-        //Task<string?> ShowAllVehiclesAsync();//добавенето чрез visual studeio AI заради catch в поста на Index
-    }
+		Task UpdateVehicleIsApproved(Vehicle vehicle);
+		Task<Vehicle> GetVehicleIdAsync(Guid id);
+
+
+		//Task<string?> ShowAllVehiclesAsync();//добавенето чрез visual studeio AI заради catch в поста на Index
+	}
 }

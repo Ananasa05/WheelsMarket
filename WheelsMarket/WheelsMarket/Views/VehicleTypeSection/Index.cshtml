@@ -14,112 +14,74 @@
         table {
             border-collapse: collapse;
             width: 100%;
-            background-image: url(https://wallpapers.com/images/hd/1920-x-1080-car-4sdj5tojfx747aly.jpg); /* Specify the path to your image */
             background-size: cover; /* Cover the entire table */
+            color: black; /* Text color */
         }
 
         th, td {
             border: 1px solid black;
             text-align: left;
-            padding: 8px;
+            padding: 10px; /* Increased padding for bolder appearance */
+            font-weight: bold; /* Bold text */
         }
 
         /* Alternate row colors */
         tr:nth-child(even) {
-            background-color: #8A2BE2; /* Even rows */
+            background-color: #bb5cd8; /* Even rows */
         }
 
         tr:nth-child(odd) {
-            background-color: #ab36cf; /* Odd rows */
+            background-color: #a02fc3; /* Odd rows */
         }
 
         /* Customize header background color */
         th {
-            background-color: #450d69;
-            color: white;
+            background-color: #936C7B;
         }
     </style>
 </head>
-<body style="background-color:#A96CCF">
-
-    @* <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .main-content {
-            margin-top: 50px;
-        }
-
-        .btn-warning {
-            background-color: #FFA500;
-            border-color: #FFA500;
-            color: #333;
-        }
-
-            .btn-warning:hover {
-                background-color: #FF8C00;
-                border-color: #FF8C00;
-                color: #fff;
-            }
-    </style> *@
+<body style="background-color:#ab36cf">
 
         <div class="header">
-            <h1 class="mb-5">Type Sections</h1>
+            <h1 class="mb-5">Тук се добавят секциите автомобили.</h1>
         </div>
 
-        <div class="container main-content">
-            <div class="row justify-content-center">
-                <div class="col-md-4 text-center">
-                <a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning" style="background-color:#6A3889;border:none;border-radius:5px;color:black" >Add Section</a>
-                </div>
+    <div class="container main-content">
+        <div class="row">
+            <div class="col-md-2 text-center">
+                <a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning" style="background-color:#b68eb8;border:none;border-radius:5px;color:black; font-weight: bold;">Add Section</a>
+
             </div>
         </div>
+    </div>
+
+
+
+
 <br></br>
-<table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>City</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>John</td>
-            <td>25</td>
-            <td>New York</td>
-        </tr>
-        <tr>
-            <td>Jane</td>
-            <td>30</td>
-            <td>Los Angeles</td>
-        </tr>
-        <tr>
-            <td>Mike</td>
-            <td>22</td>
-            <td>Chicago</td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th> Name </th>
+                <th> Edit </th>
+                <th> Delete </th>
+            </tr>
+        </thead>
+        <tbody>
         @foreach (var cat in this.Model)
         {
             <tr>
                 <td>@cat.Section</td>
-                    <td><a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger" style="background-color:#6A3889;border:none;border-radius:7px">Delete</a></td>
                     <td>
-                        <a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary" style="background-color:#A96CCF ;border:none;border-radius:7px">Edit</a>
+                        <a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary" style="background-color:#4246d7;border:none;border-radius:7px; font-weight: bold; color: black;">Edit</a>
                     </td>
+                    <td>
+                        <a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger" style="background-color:#ac4568;border:none;border-radius:7px; font-weight: bold; color: black;">Delete</a>
+                    </td>
+
             </tr>
         }
+        </tbody>
 </table>
 
 </body>

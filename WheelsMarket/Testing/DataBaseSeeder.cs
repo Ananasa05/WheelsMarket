@@ -10,14 +10,14 @@ namespace Testing
 {
     public class DataBaseSeeder
     {
-        public static void SeedDatabase(WheelsMarketDbContext context)
-        {
-            SeedVehicle(context);
-            SeedBook(context);
-            SeedUser(context);
+        //public static void SeedDatabase(WheelsMarketDbContext context)
+        //{
+        //    SeedVehicle(context);
+        //    SeedBook(context);
+        //    SeedUser(context);
 
-            context.SaveChanges();
-        }
+        //    context.SaveChanges();
+        //}
         //public static void SeedVehicle(WheelsMarketDbContext context)
         //{
         //    var publisher1 = new Vehicle()

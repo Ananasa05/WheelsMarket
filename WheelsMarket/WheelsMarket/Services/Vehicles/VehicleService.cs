@@ -18,8 +18,17 @@ namespace WheelsMarket.Services.Vehicles
         {
             this.context = context;
         }
+		public async Task<Vehicle> GetVehicleIdAsync(Guid id)
+		{
+			return await context.Vehicles.FindAsync(id);
+		}
+		public async Task UpdateVehicleIsApproved(Vehicle vehicle)
+		{
+			context.Update(vehicle);
+			await context.SaveChangesAsync();
+		}
 
-        public async Task DeleteVehicleAdminAsync(Guid id)
+		public async Task DeleteVehicleAdminAsync(Guid id)
         {
             var model = await this.context.Vehicles
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -60,15 +69,12 @@ namespace WheelsMarket.Services.Vehicles
                     Year = Convert.ToInt32(model.Year),//
                     Тransmission = model.Тransmission,//
                     EuroStandart = model.EuroStandard,//
-                    //Location = model.Location,//
                     MoreInformation = model.MoreInformation,//
                     Currency = model.Currency,//
                     VinNumber = Convert.ToInt32(model.VinNumber),
                     HoursePower = Convert.ToInt32(model.HoursePower),
                     EditionName= model.Edition.Name,
                     BrandName= model.Edition.Brand.Name,
-                    //TypeType = model.VehicleTypeType.Type,
-                    //TypeSection = model.VehicleTypeType.VehicleTypeSection.Section
                 };
 
                 return vehicle;
@@ -82,7 +88,7 @@ namespace WheelsMarket.Services.Vehicles
 
         public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel,string? editionId,string? brandId,string? typeTypeId, string? typeSectionId, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
         {
-            var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand).AsQueryable();
+            var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand)./*Where(x=>x.IsVehicleApproved==fal)*/AsQueryable();
 
             if (min != null && max != null)
             {
@@ -364,53 +370,6 @@ namespace WheelsMarket.Services.Vehicles
                 });
             }
         }
-
-		//public async Task<IEnumerable<AllVehicleViewModel>> FilterByAllTablesAsync(string brandsName)
-		//{
-		//		//var brandId = await this.context.Brands.Where(brand => brand.Name == brandsName).FirstOrDefaultAsync();
-		//		//var editionId = await this.context.Editions.Where(edition => edition.BrandId == brandId.Id).FirstOrDefaultAsync();
-		//		//var vehicleId = await this.context.Vehicles.Where(vehicle => vehicle.EditionId == editionId.Id).ToListAsync();
-
-		//		// Retrieve all vehicles associated with the editions having any of the extracted brand IDs asynchronously
-		//		var vehicles = await this.context.Vehicles.Include(x => x.Edition)
-		//			.ThenInclude(x => x.Brand)
-		//			.ThenInclude(x => x.VehicleTypeType)
-		//			.ThenInclude(x => x.VehicleTypeSection)
-		//			.Where(vehicle => brandIds.Contains(
-		//				this.context.Editions
-		//					.Where(edition => edition.Id == vehicle.EditionId)
-		//					.Select(edition => edition.BrandId)
-		//					.FirstOrDefault()
-		//			))
-		//			.ToListAsync();
-
-
-
-		//		return vehicles.Select(v => new AllVehicleViewModel
-		//		{
-		//			Id = v.Id,
-		//			Color = v.Color,
-		//			Distance = v.Distance,
-		//			Fuel = v.Fuel,
-		//			Condition = v.Condition,
-		//			ImageURL = v.ImageURL,
-		//			Price = v.Price,
-		//			Volume = v.Volume,
-		//			Year = v.Year,
-		//			Тransmission = v.Тransmission,
-		//			EuroStandart = v.EuroStandard,
-		//			VinNumber = v.VinNumber,
-		//			HoursePower = v.HoursePower,
-		//			LocationRegion = v.LocationRegion,
-		//			LocationTown = v.LocationTown,
-		//			MoreInformation = v.MoreInformation,
-		//			Currency = v.Currency,
-		//			EditionName = v.Edition.Name,
-		//			BrandName = v.Edition.Brand.Name,
-		//			TypeType = v.Edition.Brand.VehicleTypeType.Type,
-		//			TypeSection = v.Edition.Brand.VehicleTypeType.VehicleTypeSection.Section,
-		//		});
-		//}
 
 	}
 }

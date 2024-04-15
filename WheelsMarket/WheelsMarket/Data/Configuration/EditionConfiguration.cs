@@ -30,8 +30,6 @@ namespace WheelsMarket.Data.Configuration
             };
             editions.Add(edition);
 
-
-
             edition = new Edition()
             {
                 Id = Guid.Parse("94187284-2cdf-4d3c-8ae3-47c266122a26"),
