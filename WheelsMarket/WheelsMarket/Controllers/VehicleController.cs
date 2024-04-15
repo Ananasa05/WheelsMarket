@@ -32,39 +32,39 @@ namespace WheelsMarket.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(BrandFilterViewModel viewModel)
-        {
-			ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
+   //     [HttpPost]
+   //     public async Task<IActionResult> ShowSelectedInformationForAllVehicles(BrandFilterViewModel viewModel)
+   //     {
+			//ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
 
-			if (viewModel.VehicleTypeSectionId != default(Guid))
-			{
-				ViewBag.VehicleTypeTypeId = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
-				if (viewModel.VehicleTypeTypeId != default(Guid))
-				{
-					ViewBag.BrandId = this.vehicleService.AddBrandAsync(viewModel.VehicleTypeTypeId);
-					if (viewModel.BrandId != default(Guid))
-					{
-						ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
-					}
-				}
-			}
+			//if (viewModel.VehicleTypeSectionId != default(Guid))
+			//{
+			//	ViewBag.VehicleTypeTypeId = this.vehicleService.AddVehicleTypeTypeAsync(viewModel.VehicleTypeSectionId);
+			//	if (viewModel.VehicleTypeTypeId != default(Guid))
+			//	{
+			//		ViewBag.BrandId = this.vehicleService.AddBrandAsync(viewModel.VehicleTypeTypeId);
+			//		if (viewModel.BrandId != default(Guid))
+			//		{
+			//			ViewBag.EditionId = this.vehicleService.AddVehicleEditionAsync(viewModel.BrandId);
+			//		}
+			//	}
+			//}
 
-			if (!ModelState.IsValid
-				|| viewModel.VehicleTypeSectionId == default(Guid)
-				|| viewModel.VehicleTypeTypeId == default(Guid)
-				|| viewModel.BrandId == default(Guid)
-				|| viewModel.EditionId == default(Guid)
-			   )
-			{
-				return View(viewModel);
-			}
-			try
-            {
-                return View(await this.vehicleService.SearchVehiclesAsync(brandName));
-            }
-            catch (ArgumentNullException) { return View(/*await this.vehicleService.ShowAllVehiclesAsync()*/); }
-        }
+			//if (!ModelState.IsValid
+			//	|| viewModel.VehicleTypeSectionId == default(Guid)
+			//	|| viewModel.VehicleTypeTypeId == default(Guid)
+			//	|| viewModel.BrandId == default(Guid)
+			//	|| viewModel.EditionId == default(Guid)
+			//   )
+			//{
+			//	return View(viewModel);
+			//}
+			//try
+   //         {
+   //             return View(await this.vehicleService.SearchVehiclesAsync(brandName));
+   //         }
+   //         catch (ArgumentNullException) { return View(); }
+   //     }
 
 
         [HttpGet]
