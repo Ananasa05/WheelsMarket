@@ -1,8 +1,6 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-<h1>Тук може да филтрирате автомобилите по гориво</h1>
-
-
+<h1>Тук може да филтрирате автомобилите по локация</h1>
 
 <head>
     <title>Your Page Title</title>
@@ -27,22 +25,19 @@
             }
     </style>
 </head>
+
 <body style="background-color:#ab36cf">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
             <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
                 <div class="mb-3">
-                    <label class="form-label">Вид гориво</label>
-                    <select name="fuelName" class="form-select">
-                        <option value="">-- Избери --</option>
-                        <option value="Бензин">Бензин</option>
-                        <option value="Дизел">Дизел</option>
-                        <option value="Метан">Метан</option>
-                        <option value="Газ/Бензин">Газ/Бензин</option>
-                        <!-- Add more options for vehicle makes as needed -->
-                    </select>
+                    <label class="form-label">Град</label>
+                    <input type="text" name="locationTown" class="form-control" placeholder="Въведи тук">
                 </div>
-
+                <div class="mb-3">
+                    <label class="form-label">Област</label>
+                    <input type="text" name="locationRegion" class="form-control" placeholder="Въведи тук">
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

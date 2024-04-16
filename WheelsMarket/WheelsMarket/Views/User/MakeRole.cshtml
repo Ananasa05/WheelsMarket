@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@model IdentityRole
+
+<h1>Make Role:</h1>
+<form method="post" action="MakeRole" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Name:</label>
+        <br />
+        <input type="text" class="form-control" asp-for="Name" />
+        <br />
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="background-color: #FFAE42; border-color:#FFAE42">Add</button>
+</form>
+

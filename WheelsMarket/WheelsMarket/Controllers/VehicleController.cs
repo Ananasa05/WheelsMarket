@@ -11,6 +11,7 @@ using WheelsMarket.Services.Editions;
 using Microsoft.AspNetCore.Authorization;
 using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using WheelsMarket.Services.VehicleTypeTypes;
+using WheelsMarket.Services.VehicleTypeSections.ViewModel;
 
 namespace WheelsMarket.Controllers
 {
@@ -27,9 +28,9 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? min, int? max, string? transName,string? fuel,string? editionId,string? brandId, string? typeTypeId, string? typeSectionId, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
         {
-            var model = await vehicleService.ShowAllVehiclesAsync(min, max, transName,fuel,editionId, brandId,typeTypeId,typeSectionId,year,location,color,hoursePowerMin,hoursePowerMax,locationRegion,locationTown);
+            var model = await vehicleService.ShowAllVehiclesAsync(priceMin, priceMax, yearMin, yearMax, transmissionName, fuelName, horsePowerMin,horsePowerMax, locationTown,locationRegion,colorName);
             //ako vehicleTypeSection e != null post-a na Add
             return View(model);
         }
@@ -136,43 +137,44 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("VehicleFavourite");
 		}
 
-		[HttpGet]
-		public async Task<IActionResult> EditIsApproved(Guid id)
-		{
-			Vehicle vehicle = await vehicleService.GetVehicleIdAsync(id);
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            Vehicle vtt = await vehicleService.GetEditIsApproved(id);
 
-			if (vehicle != null)
-			{
-				EditVehicleViewModel viewModel = new EditVehicleViewModel()
-				{
-					Id = vehicle.Id,
-					IsApproved = vehicle.IsVehicleApproved
-				};
-				return View("EditIsApproved", viewModel);
-			}
-			return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
-		}
+            if (vtt != null)
+            {
+                EditIsApprovedViewModel viewModel = new EditIsApprovedViewModel()
+                {
+                    Id = vtt.Id,
+                    IsApproved = vtt.IsVehicleApproved
+                };
+                return View("Edit", viewModel);
+            }
+            return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+        }
 
-		[HttpPost]
-		public async Task<IActionResult> EditIsApproved(EditVehicleViewModel model)
-		{
-			if (ModelState.IsValid)
-			{
-                Vehicle vehicle = await vehicleService.GetVehicleIdAsync(model.Id);
+        [HttpPost]
+        public async Task<IActionResult> Edit(EditIsApprovedViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Vehicle vtt = await vehicleService.GetEditIsApproved(model.Id);
 
-				if (vehicle != null)
-				{
-					vehicle.IsVehicleApproved= model.IsApproved;
+                if (vtt != null)
+                {
+                    vtt.IsVehicleApproved = model.IsApproved;
+                    //vts.VehicleTypeSectionId = model.VehicleTypeSectionsId;
 
-					await vehicleService.UpdateVehicleIsApproved(vehicle);
+                    await vehicleService.EditIsApproved(vtt);
 
-					return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
-				}
-			}
-			return View("EditIsApproved", model);
-		}
+                    return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+                }
+            }
+            return View("Edit", model);
+        }
 
-		[HttpGet]
+        [HttpGet]
         public async Task<IActionResult> Delete(
           [FromRoute]
             Guid id)
@@ -202,16 +204,6 @@ namespace WheelsMarket.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult ByEditionFilter()
-        {
-            return View();
-        }
-        [HttpGet]
-        public IActionResult ByBrandFilter()
-        {
-            return View();
-        }
 		[HttpGet]
 		public IActionResult ByColorFilter()
 		{
@@ -223,12 +215,7 @@ namespace WheelsMarket.Controllers
 			return View();
 		}
 		[HttpGet]
-		public IActionResult ByLocationTownFilter()
-		{
-			return View();
-		}
-		[HttpGet]
-		public IActionResult ByLocationRegionFilter()
+		public IActionResult ByLocationTownAndLocationRegionFilter()
 		{
 			return View();
 		}

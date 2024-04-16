@@ -59,17 +59,13 @@
 		<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
 			<form method="get" asp-action="ShowSelectedInformationForAllVehicles">
 				<div class="mb-3">
-					<label asp-for="@Model.min" class="form-label">Min Price</label>
-					<input asp-for="@Model.min" class="form-control" aria-required="true" />
-					<span asp-validation-for="min" class="text-danger"></span>
+					<label class="form-label">Минимална цена</label>
+					<input type="text" name="priceMin" class="form-control" placeholder="Въведи тук">
 				</div>
 				<div class="mb-3">
-					<label asp-for="@Model.max" class="form-label">Max Price</label>
-					<input asp-for="@Model.max" class="form-control" aria-required="true" />
-					<span asp-validation-for="max" class="text-danger"></span>
+					<label class="form-label">Максимална цена</label>
+					<input type="text" name="priceMax" class="form-control" placeholder="Въведи тук">
 				</div>
-
-
 				<button type="submit" class="btn btn-primary">Submit</button>
 
 			</form>

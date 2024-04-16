@@ -1,0 +1,27 @@
+﻿@model WheelsMarket.Services.Vehicles.ViewModel.EditIsApprovedViewModel
+@{
+}
+
+<h1>Edit VehicleTypeType</h1>
+
+<form method="post" action="Edit" class="mt-5">
+    <div class="mb-3">
+        <label for="" class="form-label">Id</label>
+        <br />
+        <input type="text" class="form-control" asp-for="Id" readonly />
+        <br />
+    </div>
+<div class="mb-3">
+    <label for="approvalStatus" class="form-label">Type</label>
+    <br />
+    <select id="approvalStatus" class="form-control" asp-for="IsApproved">
+        <option value="true">Approved</option>
+        <option value="false">Not Approved</option>
+    </select>
+    <br />
+</div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+

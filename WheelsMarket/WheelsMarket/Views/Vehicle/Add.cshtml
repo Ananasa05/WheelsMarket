@@ -211,6 +211,14 @@
 					<input asp-for="@Model.VinNumber" class="form-control" aria-required="false" />
 					<span asp-validation-for="VinNumber" class="text-danger"></span>
 				</div>
+				 @if (User.IsInRole("Administrator"))
+                            {
+				<div class="mb-3">
+					<label asp-for="@Model.IsApproved" class="form-label">Пъблична ли да бъде колата</label>
+					<input asp-for="@Model.IsApproved" class="form-control" aria-required="false" />
+					<span asp-validation-for="IsApproved" class="text-danger"></span>
+				</div>
+							}
 				<div class="mb-3">
 					<label for="" class="form-label">VehicleTypeSection</label>
 					<br />

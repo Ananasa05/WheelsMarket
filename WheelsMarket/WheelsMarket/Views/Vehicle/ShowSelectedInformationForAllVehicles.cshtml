@@ -15,13 +15,12 @@
         <br>
     </form>
 
-    <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Price</a>
-    <a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Year</a>
-    <a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Trans</a>
-    <a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Fuel</a>
-    <a asp-controller="Vehicle" asp-action="ByEditionFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Edition</a>
-    <a asp-controller="Vehicle" asp-action="ByBrandFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By Brand</a>
-    <a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">By House Power</a>
+    <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Цена</a>
+    <a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Година</a>
+    <a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Скорости</a>
+    <a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Гориво</a>
+    <a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Мощност</a>
+    <a asp-controller="Vehicle" asp-action="ByLocationTownAndLocationRegionFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Локация</a>
 <br>
 <br>
     <table class="table">
@@ -39,7 +38,10 @@
                             <p class="mb-0">Година: @vehicle.Year</p>
                             <p class="mb-0">Марка: @vehicle.BrandName</p>
                             <p class="mb-0">Модел: @vehicle.EditionName</p>
-                            <p class="mb-0">Модел: @vehicle.IsApproved</p>
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <p class="mb-0">Модел: @vehicle.IsApproved</p>
+                            }
                             <br>
                             <div class="mb-3">
                                 <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
@@ -52,10 +54,14 @@
                             <div class="mb-3">
                                 <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Delete</a>
                             </div>
+                            @if (User.IsInRole("Administrator"))
+                            {
                             <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="IsApproved" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Approve</a>
+                                <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Approve</a>
                             </div>
-                           
+                               
+                            }
+
                            
                         </div>
                     </div>

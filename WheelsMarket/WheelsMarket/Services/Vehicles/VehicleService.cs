@@ -18,17 +18,17 @@ namespace WheelsMarket.Services.Vehicles
         {
             this.context = context;
         }
-		public async Task<Vehicle> GetVehicleIdAsync(Guid id)
-		{
-			return await context.Vehicles.FindAsync(id);
-		}
-		public async Task UpdateVehicleIsApproved(Vehicle vehicle)
-		{
-			context.Update(vehicle);
-			await context.SaveChangesAsync();
-		}
+        public async Task<Vehicle> GetEditIsApproved(Guid id)
+        {
+            return await context.Vehicles.FindAsync(id);
+        }
 
-		public async Task DeleteVehicleAdminAsync(Guid id)
+        public async Task EditIsApproved(Vehicle vehicle)
+        {
+            context.Update(vehicle);
+            await context.SaveChangesAsync();
+        }
+        public async Task DeleteVehicleAdminAsync(Guid id)
         {
             var model = await this.context.Vehicles
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -86,82 +86,37 @@ namespace WheelsMarket.Services.Vehicles
         }
 
 
-        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? min, int? max, string? transName,string? fuel,string? editionId,string? brandId,string? typeTypeId, string? typeSectionId, string? year, string? location, string? color, int? hoursePowerMin, int? hoursePowerMax, string? locationRegion, string? locationTown)
+        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
         {
             var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand)./*Where(x=>x.IsVehicleApproved==fal)*/AsQueryable();
 
-            if (min != null && max != null)
+            if (yearMin != null && yearMax != null)
             {
-                entitiesDb = entitiesDb.Where(x => x.Year >= min && x.Year <= max);
+                entitiesDb = entitiesDb.Where(x => x.Year >= yearMin && x.Year <= yearMax);
             }
-            if (transName != null)
+            if (priceMin!= null && priceMax != null)
             {
-                entitiesDb = entitiesDb.Where(x => x.Тransmission == transName);
+                entitiesDb = entitiesDb.Where(x => x.Price >= priceMin&& x.Price <= priceMax);
             }
-            if (fuel != null)
+            if (transmissionName != null)
             {
-                entitiesDb = entitiesDb.Where(x => x.Fuel== fuel);
+                entitiesDb = entitiesDb.Where(x => x.Тransmission == transmissionName);
             }
-            if (brandId!=null && editionId != null&&typeSectionId!=null&&typeTypeId!=null)
+            if (fuelName != null)
             {
-                // var brandIds = await this.context.Brands
-                //.Where(brand => brand.Name == brandName)
-                //.Select(brand => brand.Id)
-                //.ToListAsync();
-
-                // entitiesDb = entitiesDb.Where(vehicle => brandIds.Contains(
-                //         this.context.Editions
-                //             .Where(edition => edition.Id == vehicle.EditionId)
-                //             .Select(edition => edition.BrandId)
-                //             .FirstOrDefault()
-                //     ))
-                //     .AsQueryable();
-
-                
-               //var vehicleTypeSectionId = await this.context.VehicleTypeSection
-               //    .Where(section => section.Name == vehicleTypeSectionName)
-               //    .Select(section => section.Id)
-               //    .FirstOrDefaultAsync();
-
-               // // Retrieve all vehicleTypeTypeIds associated with the vehicleTypeSectionId and filtered by name
-               // var vehicleTypeTypeIds = await this.context.VehicleTypeType
-               //     .Where(type => type.VehicleTypeSectionId == vehicleTypeSectionId && type.Name == vehicleTypeTypeName)
-               //     .Select(type => type.Id)
-               //     .ToListAsync();
-
-               // // Retrieve all brandIds associated with the vehicleTypeTypeIds
-               // var brandIds = await this.context.Brands
-               //     .Where(brand => vehicleTypeTypeIds.Contains(brand.VehicleTypeTypeId))
-               //     .Select(brand => brand.Id)
-               //     .ToListAsync();
-
-               // // Filter brands by name
-               // var filteredBrandIds = await this.context.Brands
-               //     .Where(brand => brandIds.Contains(brand.VehicleTypeTypeId) && brand.Name == brandName)
-               //     .Select(brand => brand.Id)
-               //     .ToListAsync();
-
-               // // Retrieve all editions associated with the filtered brandIds and filtered by name
-               // var editions = await this.context.Editions
-               //     .Where(edition => filteredBrandIds.Contains(edition.BrandId) && edition.Name == editionName)
-               //     .ToListAsync();
-
+                entitiesDb = entitiesDb.Where(x => x.Fuel== fuelName);
             }
-            if (color!=null)
+            if (colorName!=null)
             {
-				entitiesDb = entitiesDb.Where(x => x.Color == color);
+				entitiesDb = entitiesDb.Where(x => x.Color == colorName);
 			}
-            if (hoursePowerMin != null && hoursePowerMax != null)
+            if (horsePowerMin != null && horsePowerMax!= null)
             {
-                entitiesDb = entitiesDb.Where(x => x.HoursePower >= hoursePowerMin && x.HoursePower <= hoursePowerMax);
+                entitiesDb = entitiesDb.Where(x => x.HoursePower >= horsePowerMin && x.HoursePower <= horsePowerMax);
             }
-			if (locationRegion != null)
+			if (locationRegion != null&&locationTown!=null)
 			{
-				entitiesDb = entitiesDb.Where(x => x.LocationRegion == locationRegion);
-			}
-			if (locationTown!= null)
-			{
-				entitiesDb = entitiesDb.Where(x => x.LocationTown == locationTown);
+				entitiesDb = entitiesDb.Where(x => x.LocationRegion == locationRegion&&x.LocationTown==locationTown);
 			}
 
 			var entities = await entitiesDb
@@ -173,10 +128,13 @@ namespace WheelsMarket.Services.Vehicles
                     Id = b.Id,
                     Distance = Convert.ToInt32(b.Distance),
                     Fuel = b.Fuel,
+                    LocationTown = b.LocationTown,
+                    LocationRegion = b.LocationRegion,
                     ImageURL = b.ImageURL,
                     Price = Convert.ToInt32(b.Price),
                     Volume = Convert.ToInt32(b.Volume),
                     Year = Convert.ToInt32(b.Year),
+                    IsApproved = b.IsVehicleApproved,
                     EditionName = b.Edition.Name,
                     BrandName = b.Edition.Brand.Name,
                 });
@@ -204,6 +162,7 @@ namespace WheelsMarket.Services.Vehicles
                 LocationTown = addVehicleViewModel.LocationTown,
                 Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
+                IsVehicleApproved = addVehicleViewModel.IsApproved
                 //VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };
 
@@ -319,17 +278,11 @@ namespace WheelsMarket.Services.Vehicles
             }
             else
             {
-                //var brandId = await this.context.Brands.Where(brand => brand.Name == brandsName).FirstOrDefaultAsync();
-                //var editionId = await this.context.Editions.Where(edition => edition.BrandId == brandId.Id).FirstOrDefaultAsync();
-                //var vehicleId = await this.context.Vehicles.Where(vehicle => vehicle.EditionId == editionId.Id).ToListAsync();
-
-                // Retrieve all editions associated with brands having the specified name asynchronously
                 var brandIds = await this.context.Brands
                     .Where(brand => brand.Name == brandsName)
                     .Select(brand => brand.Id)
                     .ToListAsync();
 
-                // Retrieve all vehicles associated with the editions having any of the extracted brand IDs asynchronously
                 var vehicles = await this.context.Vehicles.Include(x=>x.Edition)
                     .ThenInclude(x=>x.Brand)
                     .ThenInclude(x=>x.VehicleTypeType)

@@ -23,6 +23,7 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		public string LocationTown { get; set; }
         public string MoreInformation { get; set; }
         public string Currency { get; set; }
+        public bool IsApproved { get; set; }
         [ValidateNever]
         public Guid EditionId { get; set; }
         [ValidateNever]

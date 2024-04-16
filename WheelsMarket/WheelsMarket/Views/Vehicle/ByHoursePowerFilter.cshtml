@@ -1,45 +1,84 @@
-﻿<h1>Filter By Horsepower</h1>
+﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
-        <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
-            <div class="mb-3">
-                <label class="form-label">Horsepower</label>
-                <select id="minHorsepower" name="min" class="form-control">
-                    <option value="">-- Select Min Horsepower --</option>
-                    @for (int hp = 50; hp <= 510; hp += 20)
-                    {
-                            <option value="@hp">@hp</option>
-                    }
-                </select>
+<h1>Тук може да филтрирате автомобилите по мощтност:</h1>
 
-                <select id="maxHorsepower" name="max" class="form-control">
-                    <option value="">-- Select Max Horsepower --</option>
-                </select>
-            </div>
+<head>
+    <title>Your Page Title</title>
+    <style>
+        /* Define your custom dropdown styles */
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</div>
-
-<script>
-    document.getElementById("minHorsepower").addEventListener("change", function () {
-        var minHorsepower = parseInt(this.value);
-        var maxHorsepowerSelect = document.getElementById("maxHorsepower");
-        maxHorsepowerSelect.innerHTML = "<option value=''>-- Select Max Horsepower --</option>";
-        if (minHorsepower >= 510) {
-            var option = document.createElement("option");
-            option.value = "510+";
-            option.text = "510+";
-            maxHorsepowerSelect.appendChild(option);
-        } else {
-            for (var hp = minHorsepower + 20; hp <= 510; hp += 20) {
-                var option = document.createElement("option");
-                option.value = hp;
-                option.text = hp;
-                maxHorsepowerSelect.appendChild(option);
-            }
+        .form-select {
+            border: 1px solid #ced4da; /* Default border color */
+            border-radius: .25rem; /* Rounded corners */
+            padding: .375rem .75rem; /* Padding */
+            background-color: #fff; /* Default background color */
+            color: #000000; /* Default text color */
         }
-    });
-</script>
+
+            /* Stripped colors for dropdown options */
+            .form-select option:nth-child(odd) {
+                background-color: #ae75de; /* Lighter background color */
+                color: #000000; /* Default text color */
+            }
+
+            .form-select option:nth-child(even) {
+                background-color: #d4b6ed; /* Darker background color */
+                color: #000000; /* Default text color */
+            }
+    </style>
+</head>
+<body style="background-color:#ab36cf">
+    <div class="row">
+        <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+            <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
+                <div class="mb-3">
+                    <label class="form-label">Минимална мощтност</label>
+                    <select id="minHorsepower" name="horsePowerMin" class="form-control">
+                        <option value="">-- Избери --</option>
+                        @for (int hp = 50; hp <= 510; hp += 20)
+                        {
+                            <option value="@hp">@hp</option>
+                        }
+                    </select>
+                    <label class="form-label">Максимална мощтност</label>
+
+                    <select id="maxHorsepower" name="horsePowerMax" class="form-control">
+                        <option value="">-- Избери --</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("minHorsepower").addEventListener("change", function () {
+            var minHorsepower = parseInt(this.value);
+            var maxHorsepowerSelect = document.getElementById("maxHorsepower");
+            maxHorsepowerSelect.innerHTML = "<option value=''>-- Select Max Horsepower --</option>";
+            if (minHorsepower >= 510) {
+                var option = document.createElement("option");
+                option.value = 10000;
+                option.text = "510+";
+                maxHorsepowerSelect.appendChild(option);
+            } else {
+                for (var hp = minHorsepower + 20; hp <= 510; hp += 20) {
+                    var option = document.createElement("option");
+                    option.value = hp;
+                    option.text = hp;
+                    maxHorsepowerSelect.appendChild(option);
+                }
+            }
+        });
+
+        document.getElementById("maxHorsepower").addEventListener("change", function () {
+            var maxHorsepower = parseInt(this.value);
+            var minHorsepowerSelect = document.getElementById("minHorsepower");
+            var minHorsepower = parseInt(minHorsepowerSelect.value);
+            if (maxHorsepower == "510+" && minHorsepower < 510) {
+                minHorsepowerSelect.value = "510";
+            }
+        });
+    </script>
+</body>

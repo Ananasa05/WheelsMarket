@@ -11,17 +11,48 @@ namespace WheelsMarket.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly WheelsMarketDbContext applicationDbContext;
+        //private readonly RoleManager<IdentityRole> roleManager;
 
         private readonly SignInManager<User> signInManager;
 
         public UserController(
             UserManager<User> _userManager,
-            SignInManager<User> _signInManager, WheelsMarketDbContext dbContext)
+            SignInManager<User> _signInManager, WheelsMarketDbContext dbContext/*, RoleManager<IdentityRole> roleManager*/)
         {
             userManager = _userManager;
             signInManager = _signInManager;
             applicationDbContext = dbContext;
+            //this.roleManager = roleManager;
+            //this.CreateRoles();
         }
+
+        //[HttpGet]
+        //[Authorize(Roles = "Administrator")]
+        //public IActionResult MakeRole()
+        //{
+        //    return View();
+        //}
+        //[HttpPost]
+        //[Authorize(Roles = "Administrator")]
+        //public async Task<IActionResult> MakeRole(IdentityRole model)
+        //{
+        //    if (!roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
+        //    {
+        //        roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
+        //    }
+        //    return RedirectToAction("MakeRole");
+        //}
+
+        //private async Task CreateRoles()
+        //{
+        //    if (this.roleManager.Roles.Count() == 0)
+        //    {
+        //        await roleManager.CreateAsync(new IdentityRole() { Name = "User" });
+        //        await roleManager.CreateAsync(new IdentityRole() { Name = "Administrator" });
+        //    }
+
+        //}
+
 
         [HttpGet]
         [AllowAnonymous]
