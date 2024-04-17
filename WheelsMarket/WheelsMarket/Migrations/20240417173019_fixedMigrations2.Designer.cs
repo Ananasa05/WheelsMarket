@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WheelsMarket.Data;
 
@@ -11,9 +12,10 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417173019_fixedMigrations2")]
+    partial class fixedMigrations2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,6 +50,22 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256"),
+                            ConcurrencyStamp = "6465a1d8-97a9-4448-89ea-e484ea2921ac",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae"),
+                            ConcurrencyStamp = "e1b5e66c-62cb-442f-9a3b-542348e36a7e",
+                            Name = "Client",
+                            NormalizedName = "CLIENT"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -134,6 +152,18 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            RoleId = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256")
+                        },
+                        new
+                        {
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            RoleId = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -428,6 +458,14 @@ namespace WheelsMarket.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -472,6 +510,44 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "af0ac38c-3935-4029-87de-7f567f7adcf9",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Lyudmil",
+                            LastName = "Atanasov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAELbOfevKoM4RPTThUTzzzdyS0jxGuax1Z7NlvVvmuhrn69D8gZAlFVZ9wZuknYdkew==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2df85017-21dd-40ed-814e-9b5fefbe8b4b",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "34ac4505-699d-4dc1-97d7-580df4f0b74b",
+                            Email = "client@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Иван",
+                            LastName = "Иванов",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CLIENT@GMAIL.COM",
+                            NormalizedUserName = "CLIENT_1",
+                            PasswordHash = "AQAAAAEAACcQAAAAENQiKvC5ZgYvS1PCMw6IewtH7JLxBsyaih8Y3f+kS72HUIs5CE3U73431WxXmtOqzQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "07b1eb8a-d2ce-43d8-979d-e4a590135932",
+                            TwoFactorEnabled = false,
+                            UserName = "Client 1"
+                        });
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.Vehicle", b =>
@@ -563,6 +639,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Казанлък",
                             MoreInformation = "Колата няма никакви забележки, само задната лява седалка е скъсана.",
                             Price = 15399,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10001,
                             Volume = 2500,
                             Year = 2009,
@@ -585,6 +662,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "София",
                             MoreInformation = "Перфектно запазен автомобил с пълен сервизен история. Има леки драскотини на предния капак.",
                             Price = 21999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10002,
                             Volume = 1800,
                             Year = 2015,
@@ -607,6 +685,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Звездица",
                             MoreInformation = "Добре поддържан семейен автомобил. Нови гуми и спирачни дискове.",
                             Price = 13500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10003,
                             Volume = 2200,
                             Year = 2012,
@@ -629,6 +708,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Хисаря",
                             MoreInformation = "Луксозен седан с пълен пакет от екстри. Идеален за градско и извънградско шофиране.",
                             Price = 28900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10004,
                             Volume = 3000,
                             Year = 2018,
@@ -651,6 +731,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Айтос",
                             MoreInformation = "Изключително икономичен автомобил, подходящ за градско пътуване. Нови амортисьори.",
                             Price = 8500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10005,
                             Volume = 1600,
                             Year = 2010,
@@ -673,6 +754,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Мартен",
                             MoreInformation = "Надежден и здрав пикап. Има леки външни забележки.",
                             Price = 12300,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10006,
                             Volume = 2500,
                             Year = 2011,
@@ -695,6 +777,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Раднево",
                             MoreInformation = "Спортен хечбек с елегантен дизайн. Пълен сервизен история в оторизиран сервиз.",
                             Price = 18900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10007,
                             Volume = 2000,
                             Year = 2017,
@@ -717,6 +800,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Плевен",
                             MoreInformation = "Семеен автомобил с комфортна икономичност. Идеален за пътувания с цялото семейство.",
                             Price = 10500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10008,
                             Volume = 1800,
                             Year = 2013,
@@ -739,6 +823,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Харманли",
                             MoreInformation = "Здрав и надежден автомобил.",
                             Price = 14999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10009,
                             Volume = 2200,
                             Year = 2016,

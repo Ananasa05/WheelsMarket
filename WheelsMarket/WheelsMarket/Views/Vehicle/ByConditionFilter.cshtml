@@ -1,6 +1,6 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-<h1>Тук може да филтрирате автомобилите по локация.</h1>
+<h1>Тук може да филтрирате автомобилите състояние.</h1>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,13 +15,16 @@
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
             <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
                 <div class="mb-3">
-                    <label class="form-label">Град</label>
-                    <input type="text" name="locationTown" class="form-control" placeholder="Въведи тук">
+                    <label class="form-label"></label>
+                    <select name="condition" class="form-select">
+                        <option value="">-- Избери --</option>
+                        <option value="Нов">Нов</option>
+                        <option value="Употребяван">Употребяван</option>
+                        <option value="За части">За части</option>
+                        <!-- Add more options for vehicle makes as needed -->
+                    </select>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label">Област</label>
-                    <input type="text" name="locationRegion" class="form-control" placeholder="Въведи тук">
-                </div>
+
                 <button type="submit" class="btn btn-primary">Потвърди</button>
             </form>
         </div>

@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WheelsMarket.Data;
 
@@ -12,10 +11,9 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    [Migration("20240403052539_fixedFavourites")]
-    partial class fixedFavourites
+    partial class WheelsMarketDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,6 +48,22 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256"),
+                            ConcurrencyStamp = "6465a1d8-97a9-4448-89ea-e484ea2921ac",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae"),
+                            ConcurrencyStamp = "e1b5e66c-62cb-442f-9a3b-542348e36a7e",
+                            Name = "Client",
+                            NormalizedName = "CLIENT"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -136,6 +150,18 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            RoleId = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256")
+                        },
+                        new
+                        {
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            RoleId = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -430,6 +456,14 @@ namespace WheelsMarket.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -474,6 +508,44 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "af0ac38c-3935-4029-87de-7f567f7adcf9",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Lyudmil",
+                            LastName = "Atanasov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAELbOfevKoM4RPTThUTzzzdyS0jxGuax1Z7NlvVvmuhrn69D8gZAlFVZ9wZuknYdkew==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "2df85017-21dd-40ed-814e-9b5fefbe8b4b",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "34ac4505-699d-4dc1-97d7-580df4f0b74b",
+                            Email = "client@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Иван",
+                            LastName = "Иванов",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CLIENT@GMAIL.COM",
+                            NormalizedUserName = "CLIENT_1",
+                            PasswordHash = "AQAAAAEAACcQAAAAENQiKvC5ZgYvS1PCMw6IewtH7JLxBsyaih8Y3f+kS72HUIs5CE3U73431WxXmtOqzQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "07b1eb8a-d2ce-43d8-979d-e4a590135932",
+                            TwoFactorEnabled = false,
+                            UserName = "Client 1"
+                        });
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.Vehicle", b =>
@@ -509,6 +581,9 @@ namespace WheelsMarket.Migrations
                     b.Property<string>("ImageURL")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsVehicleApproved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LocationRegion")
                         .HasColumnType("nvarchar(max)");
 
@@ -543,6 +618,215 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Vehicles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("06befde8-a6ae-411d-9597-3705449e5bd1"),
+                            Color = "Зелен",
+                            Condition = "Нов",
+                            Currency = "лв",
+                            Distance = 185639,
+                            EditionId = new Guid("94187284-2cdf-4d3c-8ae3-47c266122a26"),
+                            EuroStandard = "Euro 5",
+                            Fuel = "Дизел",
+                            HoursePower = 170,
+                            ImageURL = "https://s1.1zoom.me/b4067/303/Audi_2019_A4_allroad_quattro_Grey_Metallic_Estate_570422_1920x1080.jpg",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Стара Загора",
+                            LocationTown = "Казанлък",
+                            MoreInformation = "Колата няма никакви забележки, само задната лява седалка е скъсана.",
+                            Price = 15399,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10001,
+                            Volume = 2500,
+                            Year = 2009,
+                            Тransmission = "Ръчна"
+                        },
+                        new
+                        {
+                            Id = new Guid("f6a6597e-f73c-46a1-abb2-b448f1883f96"),
+                            Color = "Червен",
+                            Condition = "Употребяван",
+                            Currency = "USD",
+                            Distance = 95000,
+                            EditionId = new Guid("15e67473-da39-433b-8c24-50ae8344a48a"),
+                            EuroStandard = "Euro 6",
+                            Fuel = "Бензин",
+                            HoursePower = 150,
+                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQevdE1eAryK9STmDnZYNZhk4j2TA2f4HYutWX_U4zJoA&s",
+                            IsVehicleApproved = false,
+                            LocationRegion = "София",
+                            LocationTown = "София",
+                            MoreInformation = "Перфектно запазен автомобил с пълен сервизен история. Има леки драскотини на предния капак.",
+                            Price = 21999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10002,
+                            Volume = 1800,
+                            Year = 2015,
+                            Тransmission = "Автоматична"
+                        },
+                        new
+                        {
+                            Id = new Guid("0a1f1c92-f170-481f-a301-46c8f72c9b82"),
+                            Color = "Син",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 128000,
+                            EditionId = new Guid("d06fd2a8-60f9-44fe-9484-5358855851b8"),
+                            EuroStandard = "Euro 4",
+                            Fuel = "Дизел",
+                            HoursePower = 120,
+                            ImageURL = "https://wallpapers.com/images/hd/audi-q7-1920-x-1080-wallpaper-ty4995qkcstpam9g.jpg",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Варна",
+                            LocationTown = "Звездица",
+                            MoreInformation = "Добре поддържан семейен автомобил. Нови гуми и спирачни дискове.",
+                            Price = 13500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10003,
+                            Volume = 2200,
+                            Year = 2012,
+                            Тransmission = "Ръчна"
+                        },
+                        new
+                        {
+                            Id = new Guid("2e1506d8-3bf5-44a3-a123-f61b2d8372ba"),
+                            Color = "Сив",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 75000,
+                            EditionId = new Guid("2e89ffec-aae1-4620-b5f9-81b3fd59b04d"),
+                            EuroStandard = "Euro 6",
+                            Fuel = "Хибрид",
+                            HoursePower = 200,
+                            ImageURL = "https://i.pinimg.com/originals/1a/e6/ef/1ae6efcc6d506cbf6856226e430c4089.webp",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Пловдив",
+                            LocationTown = "Хисаря",
+                            MoreInformation = "Луксозен седан с пълен пакет от екстри. Идеален за градско и извънградско шофиране.",
+                            Price = 28900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10004,
+                            Volume = 3000,
+                            Year = 2018,
+                            Тransmission = "Автоматична"
+                        },
+                        new
+                        {
+                            Id = new Guid("30040efe-5fae-4561-a0cc-ddf6c8506fcf"),
+                            Color = "Бял",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 105000,
+                            EditionId = new Guid("addca70a-f8e1-4165-9ad6-ead636411b65"),
+                            EuroStandard = "Euro 5",
+                            Fuel = "Бензин",
+                            HoursePower = 90,
+                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrnXVaRLhg0-IVMjYYDpNcglt-_gBc6Milsv556WeEdQ&s",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Бургас",
+                            LocationTown = "Айтос",
+                            MoreInformation = "Изключително икономичен автомобил, подходящ за градско пътуване. Нови амортисьори.",
+                            Price = 8500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10005,
+                            Volume = 1600,
+                            Year = 2010,
+                            Тransmission = "Ръчна"
+                        },
+                        new
+                        {
+                            Id = new Guid("473c0c59-59b5-4fcb-811d-9ec16be8227b"),
+                            Color = "Черен",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 185000,
+                            EditionId = new Guid("71545e27-d6f3-41c6-ad01-d422b733c252"),
+                            EuroStandard = "Euro 4",
+                            Fuel = "Дизел",
+                            HoursePower = 140,
+                            ImageURL = "https://i.pinimg.com/originals/12/0d/6b/120d6b8793349feb2388eb99bea99fc2.jpg",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Русе",
+                            LocationTown = "Мартен",
+                            MoreInformation = "Надежден и здрав пикап. Има леки външни забележки.",
+                            Price = 12300,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10006,
+                            Volume = 2500,
+                            Year = 2011,
+                            Тransmission = "Ръчна"
+                        },
+                        new
+                        {
+                            Id = new Guid("cb214956-0b7f-4d4e-954b-ab193df28bcc"),
+                            Color = "Сребрист",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 67000,
+                            EditionId = new Guid("1e9ade8f-9650-43cd-9cb9-cf167e53d61e"),
+                            EuroStandard = "Euro 6",
+                            Fuel = "Бензин",
+                            HoursePower = 160,
+                            ImageURL = "https://cdn.motor1.com/images/mgl/OoeOzl/s1/bmw-i5-edrive40-touring-2024.jpg",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Стара Загора",
+                            LocationTown = "Раднево",
+                            MoreInformation = "Спортен хечбек с елегантен дизайн. Пълен сервизен история в оторизиран сервиз.",
+                            Price = 18900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10007,
+                            Volume = 2000,
+                            Year = 2017,
+                            Тransmission = "Автоматична"
+                        },
+                        new
+                        {
+                            Id = new Guid("46e5e670-a3c7-4d9c-ae21-36ea81e7130e"),
+                            Color = "Син",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 98000,
+                            EditionId = new Guid("9b5026f5-a2da-4fd1-9d64-adfbd1e1034e"),
+                            EuroStandard = "Euro 5",
+                            Fuel = "Дизел",
+                            HoursePower = 120,
+                            ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgaB8Wc0vQIF1fAdhaeFqEmq88MxsP8jn4JCAK7bwY9A&s",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Плевен",
+                            LocationTown = "Плевен",
+                            MoreInformation = "Семеен автомобил с комфортна икономичност. Идеален за пътувания с цялото семейство.",
+                            Price = 10500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10008,
+                            Volume = 1800,
+                            Year = 2013,
+                            Тransmission = "Ръчна"
+                        },
+                        new
+                        {
+                            Id = new Guid("ff6a5a93-ceff-4ac3-bf26-c321717816cb"),
+                            Color = "Червен",
+                            Condition = "Употребяван",
+                            Currency = "лв",
+                            Distance = 74000,
+                            EditionId = new Guid("aa7212f8-75b8-474a-91e2-dda3bc404caf"),
+                            EuroStandard = "Euro 6",
+                            Fuel = "Бензин",
+                            HoursePower = 130,
+                            ImageURL = "https://wallpapers.com/images/hd/bmw-x5-1920-x-1080-wallpaper-v6n1t0uhafvmg7q3.jpg",
+                            IsVehicleApproved = false,
+                            LocationRegion = "Хасково",
+                            LocationTown = "Харманли",
+                            MoreInformation = "Здрав и надежден автомобил.",
+                            Price = 14999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            VinNumber = 10009,
+                            Volume = 2200,
+                            Year = 2016,
+                            Тransmission = "Автоматична"
+                        });
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.VehicleTypeSection", b =>

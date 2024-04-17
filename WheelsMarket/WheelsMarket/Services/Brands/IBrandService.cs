@@ -18,5 +18,6 @@ namespace WheelsMarket.Services.Brands
         Task<Brand> GetBrandIdAsync(Guid id);
         Task EditBrandAsync(Brand vts);
 
+
     }
 }

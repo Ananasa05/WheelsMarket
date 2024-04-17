@@ -1,44 +1,7 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
 @model IEnumerable<AllVehicleViewModel>
 
-@* 
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Марка</th>
-            <th>Модел</th>
-            <th>Цена</th>
-            <th>Година</th>
-            <th>Област</th>
-            <th>Publishing year:<th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (AllVehicleViewModel vehicle in this.Model)
-        {
-                        <tr>
-                            <td>
-                                    <img class="card-ing-top" src="@vehicle.ImageURL" alt="Book Image" height="150" width="100">
-                            </td>
-                                <td>@vehicle.Color</td>
-                            <td>@DateTime.Now.ToString()</td>
-
-                            <td>
-
-                                        <a asp-controller="Vehicle" asp-action="RemoveFromFavourites" asp-route-vehicleId="@vehicle.Id" class="btn btn-warning" style="background-color:#FFAE42;
-                        transition: background-color 0.3s ease; display: inline-block; 
-                        padding: 0.5em 1em; text-decoration: none; color: white; border:none" 
-                                    onmouseover="this.style.backgroundColor='#FFD89C'" onmouseout="this.style.backgroundColor='#FFAE42'">Remove
-                                </a>
-                            </td>
-
-                        </tr>
-        }
-    </tbody>
-</table> *@
-
-<body style="background-color:#ab36cf">
+<body style="background-color:#d2d8db">
     <div class="header">
         <h1 class="mb-5">Всички любими автомобили:</h1>
     </div>
@@ -48,7 +11,7 @@
             <div class="text-center row">
                 @foreach (AllVehicleViewModel vehicle in this.Model)
                 {
-                    <div class="card col-4" style="max-width: 20rem; background-color:#8A2BE2; padding:10px; margin:5px; border-radius:10px; overflow: hidden;">
+                    <div class="card col-4" style="max-width: 20rem; background-color:white; padding:10px; margin:5px; border-radius:10px; overflow: hidden;">
                         <img class="card-img-top" src="@vehicle.ImageURL" style="width: 300px; height: 190px; border-radius:10px">
                         <div class="card-body text-left">
                             <p class="mb-0">Цена: @vehicle.Price</p>
@@ -61,9 +24,9 @@
                             <p class="mb-0">Модел: @vehicle.IsApproved</p>
                             <br>
                             <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
+                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger" style="background-color:">Check</a>
                             </div>
-                            <a asp-controller="Vehicle" asp-action="RemoveFromFavourites" asp-route-vehicleId="@vehicle.Id" class="btn btn-warning" style="background-color:#FFAE42;
+                            <a asp-controller="Vehicle" asp-action="RemoveFromFavourites" asp-route-vehicleId="@vehicle.Id" class="btn btn-warning" style="background-color:#930607;
                         transition: background-color 0.3s ease; display: inline-block;
                         padding: 0.5em 1em; text-decoration: none; color: white; border:none"
                                onmouseover="this.style.backgroundColor='#FFD89C'" onmouseout="this.style.backgroundColor='#FFAE42'">

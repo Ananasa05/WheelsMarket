@@ -54,6 +54,14 @@ namespace WheelsMarket.Services.Vehicles
                  //.ThenInclude(x=>x.VehicleTypeSection)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
+            var vehicleId = await this.context.Vehicles
+                .Where(x => x.Id == id)
+                .FirstOrDefaultAsync();
+
+            var model2 = await this.context.User
+                .Where(x=>x.Id==vehicleId.UserId)
+                .FirstOrDefaultAsync();
+
             if (model != null)
             {
                 var vehicle = new AllVehicleViewModel()
@@ -75,6 +83,9 @@ namespace WheelsMarket.Services.Vehicles
                     HoursePower = Convert.ToInt32(model.HoursePower),
                     EditionName= model.Edition.Name,
                     BrandName= model.Edition.Brand.Name,
+                    
+                    UserFirstName = model2.FirstName,
+                    UserLastName = model2.LastName
                 };
 
                 return vehicle;
@@ -86,7 +97,7 @@ namespace WheelsMarket.Services.Vehicles
         }
 
 
-        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
+        public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(string? condition, int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
         {
             var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand)./*Where(x=>x.IsVehicleApproved==fal)*/AsQueryable();
 
@@ -117,6 +128,10 @@ namespace WheelsMarket.Services.Vehicles
 			if (locationRegion != null&&locationTown!=null)
 			{
 				entitiesDb = entitiesDb.Where(x => x.LocationRegion == locationRegion&&x.LocationTown==locationTown);
+			}
+			if (condition != null)
+			{
+				entitiesDb = entitiesDb.Where(x => x.Condition== condition);
 			}
 
 			var entities = await entitiesDb
@@ -162,7 +177,8 @@ namespace WheelsMarket.Services.Vehicles
                 LocationTown = addVehicleViewModel.LocationTown,
                 Currency=addVehicleViewModel.Currency,
                 EditionId = addVehicleViewModel.EditionId,
-                IsVehicleApproved = addVehicleViewModel.IsApproved
+                IsVehicleApproved = addVehicleViewModel.IsApproved,
+                UserId = addVehicleViewModel.UserId
                 //VehicleTypeTypeId = addVehicleViewModel.VehicleTypeTypeId
             };
 
@@ -248,7 +264,15 @@ namespace WheelsMarket.Services.Vehicles
             }
         }
 
-
+        public async Task<Vehicle> GetVehicleId(Guid id)
+        {
+            return await context.Vehicles.FindAsync(id);
+        }
+        public async Task EditVehicleAsync(Vehicle vehicle)
+        {
+            context.Update(vehicle);
+            await context.SaveChangesAsync();
+        }
 
         public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
         {

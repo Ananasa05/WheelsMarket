@@ -80,7 +80,6 @@ namespace WheelsMarket.Controllers
                 if (brand != null)
                 {
                     brand.Name = model.Name;
-                    //vts.VehicleTypeSectionId = model.VehicleTypeSectionsId;
 
                     await brandService.EditBrandAsync(brand);
 

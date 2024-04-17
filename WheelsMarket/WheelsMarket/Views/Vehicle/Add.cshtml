@@ -3,44 +3,52 @@
 @{
 }
 <h1>Тук може да добавите автомобил за продажба:</h1>
-
+<br>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Your Page Title</title>
-	<style>
-		/* Define your custom dropdown styles */
-
-		.form-select {
-			border: 1px solid #ced4da; /* Default border color */
-			border-radius: .25rem; /* Rounded corners */
-			padding: .375rem .75rem; /* Padding */
-			background-color: #fff; /* Default background color */
-			color: #000000; /* Default text color */
-		}
-
-			/* Define the stripped colors for dropdown options */
-			/* Define the stripped colors for dropdown options */
-			.form-select option:nth-child(even) {
-				background-color: #ae75de; /* Lighter shade */
-			}
-
-			.form-select option:nth-child(odd) {
-				background-color: #d4b6ed; /* Darker shade */
-			}
-	</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Customizable Table</title>
+	<link rel="stylesheet" href="/css/site.css">
 </head>
-<body style="background-color:#ab36cf">
-	<div class="row">
-		<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
+<body class="body">
 			<form method="post" asp-action="Add">
+		<div class="mb-3">
+			<label for="" class="form-label">VehicleTypeSection</label>
+			<br />
+			<select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control">
+				<option>Избери</option>
+			</select>
+		</div>
+
+
+		<button type="submit" class="btn btn-warning">Ok</button>
+		<div class="mb-3">
+			<label for="" class="form-label">VehicleTypeType</label>
+			<br />
+			<select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"><option>Избери</option></select>
+		</div>
+		<button type="submit" class="btn btn-warning">Ok</button>
+		<div class="mb-3">
+			<label for="" class="form-label">BrandId</label>
+			<br />
+			<select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"><option>Избери</option></select>
+		</div>
+		<button type="submit" class="btn btn-warning">Ok</button>
+		<div class="mb-3">
+			<label for="" class="form-label">Edition</label>
+			<br />
+			<select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"><option>Избери</option></select>
+		</div>
 				 <div class="mb-3">
                     <label asp-for="@Model.Fuel" class="form-label">Type Engine</label>
                     <select asp-for="@Model.Fuel" class="form-select" aria-required="false">
                         <option value="">Избери</option>
-                        <option value="Бензинов">Бензинов</option>
-                        <option value="Дизелов">Дизелов</option>
-                        <option value="Електрически">Електрически</option>
-                        <option value="Хибриден">Хибриден</option>
-                        <option value="Plug-in хибрид">Plug-in хибрид</option>
+						<option value="Бензин">Бензин</option>
+						<option value="Дизел">Дизел</option>
+						<option value="Метан">Метан</option>
+						<option value="Газ/Бензин">Газ/Бензин</option>
                     </select>
                     <span asp-validation-for="Fuel" class="text-danger"></span>
                 </div>
@@ -211,41 +219,8 @@
 					<input asp-for="@Model.VinNumber" class="form-control" aria-required="false" />
 					<span asp-validation-for="VinNumber" class="text-danger"></span>
 				</div>
-				 @if (User.IsInRole("Administrator"))
-                            {
-				<div class="mb-3">
-					<label asp-for="@Model.IsApproved" class="form-label">Пъблична ли да бъде колата</label>
-					<input asp-for="@Model.IsApproved" class="form-control" aria-required="false" />
-					<span asp-validation-for="IsApproved" class="text-danger"></span>
-				</div>
-							}
-				<div class="mb-3">
-					<label for="" class="form-label">VehicleTypeSection</label>
-					<br />
-					<select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
-				</div>
-				<button type="submit" class="btn btn-warning">Ok</button>
-				<div class="mb-3">
-					<label for="" class="form-label">VehicleTypeType</label>
-					<br />
-					<select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
-				</div>
-				<button type="submit" class="btn btn-warning">Ok</button>
-				<div class="mb-3">
-					<label for="" class="form-label">BrandId</label>
-					<br />
-					<select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
-				</div>
-				<button type="submit" class="btn btn-warning">Ok</button>
-				<div class="mb-3">
-					<label for="" class="form-label">Edition</label>
-					<br />
-					<select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"></select>
-				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
-		</div>
-	</div>
 
 </body>
 

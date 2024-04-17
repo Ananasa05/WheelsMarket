@@ -1,31 +1,16 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
+<h1>Тук може да филтрирате автомобилите по скоростна кутия.</h1>
 
-<h1>Filter By Transmission</h1>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Your Page Title</title>
-    <style>
-        /* Define your custom dropdown styles */
-
-        .form-select {
-            border: 1px solid #ced4da; /* Default border color */
-            border-radius: .25rem; /* Rounded corners */
-            padding: .375rem .75rem; /* Padding */
-            color: #000000; /* Default text color */
-            /* Add your desired background-color */
-        }
-
-            /* Define striped colors for dropdown options */
-            .form-select option:nth-child(odd) {
-                background-color: var(--odd-color, #ae75de); /* Default lighter background color */
-            }
-
-            .form-select option:nth-child(even) {
-                background-color: var(--even-color, #d4b6ed); /* Default darker background color */
-            }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Table</title>
+    <link rel="stylesheet" href="/css/site.css">
 </head>
-<body style="background-color:#ab36cf">
+<body class"body">
     <div class="row">
         <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
             <form method="get" asp-action="ShowSelectedInformationForAllVehicles">
@@ -35,12 +20,12 @@
                         <option value="">-- Избери --</option>
                         <option value="Ръчна">Ръчна</option>
                         <option value="Автоматична">Автоматична</option>
-                        <option value="Полуавтоматично">Полуавтоматично</option>
+                        <option value="Полуавтоматична">Полуавтоматично</option>
                         <!-- Add more options for vehicle makes as needed -->
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Потвърди</button>
             </form>
         </div>
     </div>

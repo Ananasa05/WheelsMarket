@@ -3,66 +3,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customizable Table</title>
-    <style>
-        /* Table styling */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background-size: cover; /* Cover the entire table */
-            color: black; /* Text color */
-        }
-
-        th, td {
-            border: 1px solid black;
-            text-align: left;
-            padding: 10px; /* Increased padding for bolder appearance */
-            font-weight: bold; /* Bold text */
-        }
-
-        /* Alternate row colors */
-        tr:nth-child(even) {
-            background-color: #bb5cd8; /* Even rows */
-        }
-
-        tr:nth-child(odd) {
-            background-color: #a02fc3; /* Odd rows */
-        }
-
-        /* Customize header background color */
-        th {
-            background-color: #936C7B;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/site.css">
 </head>
-<body style="background-color:#ab36cf">
+<body class="body">
 
     <div class="header">
-        <h1 class="mb-5">Тук се добавят моделите на марките автомобили автомобили.</h1>
+        <h1 class="mb-5">Моделите автомобили.</h1>
     </div>
 
-    <div class="container main-content">
-        <div class="row">
-            <div class="col-md-2 text-center">
-                <a asp-controller="Edition" asp-action="Create" class="btn btn-warning" style="background-color:#b68eb8;border:none;border-radius:5px;color:black; font-weight: bold;">Add Brand</a>
-
-            </div>
-        </div>
-    </div>
-
-
+    <div class="container">
+                <a asp-controller="Edition" asp-action="Create" class="btn btn-warning">Добави</a>
 
 
     <br></br>
     <table class="table">
         <thead>
             <tr>
-                <th> Name </th>
-                <th> Edit </th>
-                <th> Delete </th>
+                <th> Име </th>
+                <th> Редактиране </th>
+                <th> Изтриване </th>
             </tr>
         </thead>
         <tbody>
@@ -72,16 +34,17 @@
                     <td>@cat.Name</td>
 
                     <td>
-                        <a asp-controller="Edition" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary" style="background-color:#4246d7;border:none;border-radius:7px; font-weight: bold; color: black;">Edit</a>
+                        <a asp-controller="Edition" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">Редактиране</a>
                     </td>
                     <td>
-                        <a asp-controller="Edition" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger" style="background-color:#ac4568;border:none;border-radius:7px; font-weight: bold; color: black;">Delete</a>
+                        <a asp-controller="Edition" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Изтриване</a>
                     </td>
 
                 </tr>
             }
         </tbody>
     </table>
+    </div>
 
 </body>
 </html>

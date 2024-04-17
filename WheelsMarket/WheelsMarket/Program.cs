@@ -16,10 +16,13 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("WheelsMarketConnectionstring");
 builder.Services.AddDbContext<WheelsMarketDbContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole<Guid>>()
     .AddEntityFrameworkStores<WheelsMarketDbContext>();
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
 builder.Services.AddScoped<IVehicleTypeSectionService, VehicleTypeSectionService>();
 builder.Services.AddScoped<IVehicleTypeTypeService, VehicleTypeTypeService>();
 builder.Services.AddScoped<IBrandService, BrandService>();

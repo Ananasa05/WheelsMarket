@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Authorization;
 using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using WheelsMarket.Services.VehicleTypeTypes;
 using WheelsMarket.Services.VehicleTypeSections.ViewModel;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Drawing;
+using System.Security.Claims;
 
 namespace WheelsMarket.Controllers
 {
@@ -28,9 +31,9 @@ namespace WheelsMarket.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
+        public async Task<IActionResult> ShowSelectedInformationForAllVehicles(string? condition,int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
         {
-            var model = await vehicleService.ShowAllVehiclesAsync(priceMin, priceMax, yearMin, yearMax, transmissionName, fuelName, horsePowerMin,horsePowerMax, locationTown,locationRegion,colorName);
+            var model = await vehicleService.ShowAllVehiclesAsync(condition, priceMin, priceMax, yearMin, yearMax, transmissionName, fuelName, horsePowerMin,horsePowerMax, locationTown,locationRegion,colorName);
             //ako vehicleTypeSection e != null post-a na Add
             return View(model);
         }
@@ -76,6 +79,9 @@ namespace WheelsMarket.Controllers
                     }
                 }
             }
+
+            User user = await userManager.GetUserAsync(User);
+            viewModel.UserId = user.Id;
 
             if (!ModelState.IsValid 
                 || viewModel.VehicleTypeSectionId == default(Guid)
@@ -174,6 +180,73 @@ namespace WheelsMarket.Controllers
             return View("Edit", model);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> EditVehicle(Guid id)
+        {
+            Vehicle vehicle = await vehicleService.GetVehicleId(id);
+
+            if (vehicle != null)
+            {
+                EditAllVehicleParameters viewModel = new EditAllVehicleParameters()
+                {
+                    Id = vehicle.Id,
+                    Distance = Convert.ToInt32(vehicle.Distance),//
+                    Fuel = vehicle.Fuel,//
+                    Color = vehicle.Color,//
+                    Condition = vehicle.Condition,//
+                    ImageURL = vehicle.ImageURL,//
+                    Price = Convert.ToInt32(vehicle.Price),//
+                    Volume = Convert.ToInt32(vehicle.Volume),//
+                    Year = Convert.ToInt32(vehicle.Year),//
+                    VinNumber = Convert.ToInt32(vehicle.VinNumber),//
+                    Тransmission = vehicle.Тransmission,//
+                    EuroStandart = vehicle.EuroStandard,
+                    MoreInformation = vehicle.MoreInformation,//
+                    Currency = vehicle.Currency,//
+                    LocationRegion = vehicle.LocationRegion,//
+                    LocationTown = vehicle.LocationTown,//
+                    HoursePower = Convert.ToInt32(vehicle.HoursePower),//
+                };
+                return View("EditVehicle", viewModel);
+            }
+            return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditVehicle(EditAllVehicleParameters model)
+        {
+            if (ModelState.IsValid)
+            {
+                Vehicle vehicle = await vehicleService.GetVehicleId(model.Id);
+
+                if (vehicle != null)
+                {
+                    vehicle.Distance = Convert.ToInt32(model.Distance);//
+                    vehicle.Fuel = model.Fuel;//
+                    vehicle.Color = model.Color;//
+                    vehicle.Condition = model.Condition;//
+                    vehicle.ImageURL = model.ImageURL;//
+                    vehicle.Price = Convert.ToInt32(model.Price);//
+                    vehicle.Volume = Convert.ToInt32(vehicle.Volume);//
+                    vehicle.Year = Convert.ToInt32(vehicle.Year);//
+                    vehicle.VinNumber = Convert.ToInt32(vehicle.VinNumber);//
+                    vehicle.Тransmission = vehicle.Тransmission;//
+                    vehicle.EuroStandard= vehicle.EuroStandard;
+                    vehicle.MoreInformation = vehicle.MoreInformation;//
+                    vehicle.Currency = vehicle.Currency;//
+                    vehicle.LocationRegion = vehicle.LocationRegion;//
+                    vehicle.LocationTown = vehicle.LocationTown;//
+                    vehicle.HoursePower = Convert.ToInt32(vehicle.HoursePower);//
+
+                    await vehicleService.EditVehicleAsync(vehicle);
+
+                    return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
+                }
+            }
+            return View("EditVehicle", model);
+        }
+
         [HttpGet]
         public async Task<IActionResult> Delete(
           [FromRoute]
@@ -182,8 +255,12 @@ namespace WheelsMarket.Controllers
             await vehicleService.DeleteVehicleAdminAsync(id);
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
-
-        [HttpGet]
+		[HttpGet]
+		public IActionResult ByConditionFilter()
+		{
+			return View();
+		}
+		[HttpGet]
         public IActionResult ByPriceFilter()
         {
             return View();

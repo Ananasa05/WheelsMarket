@@ -1,21 +1,26 @@
 ﻿@model WheelsMarket.Services.Brands.ViewModel.AddBrandViewModel
-@* @model List<WheelsMarket.Services.VehicleTypeSections.ViewModel.AllVehicleTypeSectionViewModel> *@
 @using WheelsMarket.Data.Models
 @{
 }
 
-@* @foreach (VehicleTypeSection ) *@
-
-<h1>Add Brand</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Table</title>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<h1>Добави марка.</h1>
 <form method="post" action="Create" class="mt-5">
     <div class="mb-3">
-        <label for="" class="form-label">Name</label>
+        <label for="" class="form-label">Име</label>
         <input type="text" class="form-control" asp-for="Name">
     </div>
      <div class="mb-3">
-             <label for="" class="form-label">TypeTypeId</label>
+             <label for="" class="form-label">Тип</label>
              <br />
              <select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"></select>
              </div>
-     <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Потвърди</button>
 </form>

@@ -2,25 +2,28 @@
 @model AddVehicleTypeTypeViewModel
 @{
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Table</title>
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<h1>Добави тип автомобил.</h1>
 
-<h1>Add Type</h1>
-
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 coll-xl-6">
         <form method="post" action="Create">
             <div class="mb-3">
-            <label asp-for="@Model.Type" class="form-label">Title</label>
+            <label asp-for="@Model.Type" class="form-label">Име</label>
             <input asp-for="@Model.Type" class="form-control" aria-required="true"/>
             <span asp-validation-for="Type" class="text-danger"></span>
             </div>
 
              <div class="mb-3">
-             <label for="" class="form-label">Publisher</label>
+             <label for="" class="form-label">Секция</label>
              <br />
              <select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control"></select>
              </div>
-     <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Потвърди</button>
 
          </form>
-    </div>
-</div>

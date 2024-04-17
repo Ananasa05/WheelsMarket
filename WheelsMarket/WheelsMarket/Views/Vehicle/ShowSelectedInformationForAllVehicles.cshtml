@@ -1,6 +1,6 @@
 ﻿@using WheelsMarket.Services.Vehicles.ViewModel
 
-<body style="background-color:#ab36cf">
+<body style="background-color: #d2d8db">
 
  <form asp-action="ShowSelectedInformationForAllVehicles" id="search" method="post">
         <div class="input-group md-form form-sm form-2 pl-0">
@@ -15,12 +15,13 @@
         <br>
     </form>
 
-    <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Цена</a>
-    <a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Година</a>
-    <a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Скорости</a>
-    <a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Гориво</a>
-    <a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Мощност</a>
-    <a asp-controller="Vehicle" asp-action="ByLocationTownAndLocationRegionFilter" class="btn btn-primary" style="background-color:#4246d7;border:none;color:black;border-radius:10px">Локация</a>
+    <a asp-controller="Vehicle" asp-action="ByPriceFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Цена</a>
+    <a asp-controller="Vehicle" asp-action="ByYearsFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Година</a>
+    <a asp-controller="Vehicle" asp-action="ByTransFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Скорости</a>
+    <a asp-controller="Vehicle" asp-action="ByFuelFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Гориво</a>
+    <a asp-controller="Vehicle" asp-action="ByHoursePowerFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Мощност</a>
+    <a asp-controller="Vehicle" asp-action="ByLocationTownAndLocationRegionFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Локация</a>
+    <a asp-controller="Vehicle" asp-action="ByConditionFilter" class="btn btn-primary" style="background-color:#930607;border:none;color:white;border-radius:10px">Състояние</a>
 <br>
 <br>
     <table class="table">
@@ -28,7 +29,7 @@
             <div class="text-center row">
                 @foreach (AllVehicleViewModel vehicle in this.Model)
                 {
-                    <div class="card col-4" style="max-width: 20rem; background-color:#8A2BE2; padding:10px; margin:5px; border-radius:10px; overflow: hidden;">
+                    <div class="card col-4" style="max-width: 20rem; background-color:white; padding:10px; margin:5px; border-radius:10px; overflow: hidden;">
                         <img class="card-img-top" src="@vehicle.ImageURL" style="width: 300px; height: 190px; border-radius:10px">
                         <div class="card-body text-left">
                             <p class="mb-0">Цена: @vehicle.Price</p>
@@ -44,25 +45,31 @@
                             }
                             <br>
                             <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Check</a>
+                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger">Разгледай</a>
                             </div>
                             <form class="input-group-sm" asp-controller="Vehicle" asp-action="FavouriteVehicle" asp-route-id="@vehicle.Id" method="post">
-                                <button type="submit" class="fs-6 btn btn-success mb-3 p-2" style="border-radius: 50%; background-color:#fb0704; border-color:#fb0704; transition: background-color 0.3s ease; padding: 0.5em 1em; text-decoration: none; color: darkred; border:none; width: 50px; height: 50px; font-size: 24px;" onmouseover="this.style.backgroundColor='#FFD89C'" onmouseout="this.style.backgroundColor='#FF7722'">
-                                    <span style="font-size: 24px;">💗</span>
+                                <button type="submit" class="fs-6 btn btn-success mb-3 p-2" style="border-radius: 50%; background-color: #fb0704; border-color: #fb0704; transition: background-color 0.3s ease; padding: 0.5em 1em; text-decoration: none; color: darkred; border: none; width: 50px; height: 50px; font-size: 24px; box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); font-weight: bold;">
+                                    <span style="font-size: 24px;">❤️</span>
                                 </button>
                             </form>
+
                             <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Delete</a>
+                                <a asp-controller="Vehicle" asp-action="Delete" asp-route-id="@vehicle.Id" class="btn mr-3" style="background-color: #930607; color: white;">Изтрий</a>
                             </div>
                             @if (User.IsInRole("Administrator"))
                             {
-                            <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id" class="btn btn-danger mr-3">Approve</a>
-                            </div>
-                               
+                                <div class="mb-3">
+                                    <a asp-controller="Vehicle" asp-action="EditVehicle" asp-route-id="@vehicle.Id" class="btn mr-3" style="background-color: #930607; color: white;">Редактирай</a>
+                                </div>
                             }
-
-                           
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <div class="mb-3">
+                                    <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@vehicle.Id" class="btn mr-3" style="background-color: #930607; color: white;">Потвърди</a>
+                                </div>
+                            }
+                            
+                               
                         </div>
                     </div>
                 }

@@ -39,8 +39,11 @@ namespace WheelsMarket.Data
                 builder.ApplyConfiguration(new VehicleTypeSectionConfiguration());
                 builder.ApplyConfiguration(new VehicleTypeTypeConfiguration());
                 builder.ApplyConfiguration(new VehicleConfiguration());
+                builder.ApplyConfiguration(new RoleConfiguration());
+                builder.ApplyConfiguration(new UserConfiguration());
+                builder.ApplyConfiguration(new UserRoleConfiguration());
             }
-          
+
             builder.Entity<Favourite>().HasKey(x => new
             {
                 x.UserId,

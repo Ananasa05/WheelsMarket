@@ -12,8 +12,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    [Migration("20240415150020_addingApprovelInVehicle")]
-    partial class addingApprovelInVehicle
+    [Migration("20240417172831_fixedMigrations1")]
+    partial class fixedMigrations1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,22 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256"),
+                            ConcurrencyStamp = "48d5aee8-558b-403f-bff0-007f766d946e",
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae"),
+                            ConcurrencyStamp = "65ad19f5-806e-43ee-8687-8139d9cbe884",
+                            Name = "Client",
+                            NormalizedName = "CLIENT"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -136,6 +152,18 @@ namespace WheelsMarket.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            RoleId = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256")
+                        },
+                        new
+                        {
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            RoleId = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -430,6 +458,14 @@ namespace WheelsMarket.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -474,6 +510,44 @@ namespace WheelsMarket.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "1b069de7-5c34-4eba-9e3f-8625eaece52a",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Lyudmil",
+                            LastName = "Atanasov",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM4iv4IDwa4x37qZU9vdsBPmtu/YVATB4OnqwalU0fx6fJrSeXiliOFqjnbqdxmzkQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "555bcd73-3ce8-4719-a41f-c4a6173e5fc2",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "fc821531-60e0-41b0-85d3-23ef9423732b",
+                            Email = "client@gmail.com",
+                            EmailConfirmed = false,
+                            FirstName = "Иван",
+                            LastName = "Иванов",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "CLIENT@GMAIL.COM",
+                            NormalizedUserName = "CLIENT_1",
+                            PasswordHash = "AQAAAAEAACcQAAAAELGPfWSguqG/9OZZQGlNIfyM82AfBfXj1kT5IyunR5A8bE8dw8/+15blvmJSQRDWBw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ad3660c3-e4f8-404f-9399-d200899888bd",
+                            TwoFactorEnabled = false,
+                            UserName = "Client 1"
+                        });
                 });
 
             modelBuilder.Entity("WheelsMarket.Data.Models.Vehicle", b =>

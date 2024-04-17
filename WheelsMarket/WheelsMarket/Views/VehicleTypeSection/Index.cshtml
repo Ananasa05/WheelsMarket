@@ -1,88 +1,47 @@
 ﻿@model List<WheelsMarket.Services.VehicleTypeSections.ViewModel.AllVehicleTypeSectionViewModel>
-@{
-}
 
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customizable Table</title>
-    <style>
-        /* Table styling */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background-size: cover; /* Cover the entire table */
-            color: black; /* Text color */
-        }
-
-        th, td {
-            border: 1px solid black;
-            text-align: left;
-            padding: 10px; /* Increased padding for bolder appearance */
-            font-weight: bold; /* Bold text */
-        }
-
-        /* Alternate row colors */
-        tr:nth-child(even) {
-            background-color: #bb5cd8; /* Even rows */
-        }
-
-        tr:nth-child(odd) {
-            background-color: #a02fc3; /* Odd rows */
-        }
-
-        /* Customize header background color */
-        th {
-            background-color: #936C7B;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/site.css">
 </head>
-<body style="background-color:#ab36cf">
-
-        <div class="header">
-            <h1 class="mb-5">Тук се добавят секциите автомобили.</h1>
-        </div>
-
-    <div class="container main-content">
-        <div class="row">
-            <div class="col-md-2 text-center">
-                <a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning" style="background-color:#b68eb8;border:none;border-radius:5px;color:black; font-weight: bold;">Add Section</a>
-
-            </div>
-        </div>
+<body class="body">
+    <div class="header" >
+        <h1>Секциите автомобили.</h1>
     </div>
 
+    <div class="container">
+        <a asp-controller="VehicleTypeSection" asp-action="Create" class="btn btn-warning">Добави</a>
 
+        <br><br>
 
-
-<br></br>
-    <table class="table">
-        <thead>
-            <tr>
-                <th> Name </th>
-                <th> Edit </th>
-                <th> Delete </th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach (var cat in this.Model)
-        {
-            <tr>
-                <td>@cat.Section</td>
-                    <td>
-                        <a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary" style="background-color:#4246d7;border:none;border-radius:7px; font-weight: bold; color: black;">Edit</a>
-                    </td>
-                    <td>
-                        <a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger" style="background-color:#ac4568;border:none;border-radius:7px; font-weight: bold; color: black;">Delete</a>
-                    </td>
-
-            </tr>
-        }
-        </tbody>
-</table>
-
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Име</th>
+                    <th>Редакция</th>
+                    <th>Изтриване</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in Model)
+                {
+                    <tr>
+                        <td>@cat.Section</td>
+                        <td>
+                            <a asp-controller="VehicleTypeSection" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">Редактирай</a>
+                        </td>
+                        <td>
+                            <a asp-controller="VehicleTypeSection" asp-action="Delete" asp-route-id="@cat.Id" class="btn btn-danger">Изтрий</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

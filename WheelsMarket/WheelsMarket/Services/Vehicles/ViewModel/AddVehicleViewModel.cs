@@ -24,6 +24,7 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
         public string MoreInformation { get; set; }
         public string Currency { get; set; }
         public bool IsApproved { get; set; }
+        public Guid UserId { get; set; }
         [ValidateNever]
         public Guid EditionId { get; set; }
         [ValidateNever]

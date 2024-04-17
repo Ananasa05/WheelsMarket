@@ -1,58 +1,32 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using WheelsMarket.Data;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Services.Account;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly UserManager<User> userManager;
         private readonly WheelsMarketDbContext applicationDbContext;
-        //private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> roleManager;
 
         private readonly SignInManager<User> signInManager;
 
         public UserController(
             UserManager<User> _userManager,
-            SignInManager<User> _signInManager, WheelsMarketDbContext dbContext/*, RoleManager<IdentityRole> roleManager*/)
+            SignInManager<User> _signInManager, WheelsMarketDbContext dbContext, RoleManager<IdentityRole<Guid>> roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
             applicationDbContext = dbContext;
-            //this.roleManager = roleManager;
-            //this.CreateRoles();
+            this.roleManager = roleManager;
         }
-
-        //[HttpGet]
-        //[Authorize(Roles = "Administrator")]
-        //public IActionResult MakeRole()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //[Authorize(Roles = "Administrator")]
-        //public async Task<IActionResult> MakeRole(IdentityRole model)
-        //{
-        //    if (!roleManager.RoleExistsAsync(model.Name).GetAwaiter().GetResult())
-        //    {
-        //        roleManager.CreateAsync(new IdentityRole(model.Name)).GetAwaiter().GetResult();
-        //    }
-        //    return RedirectToAction("MakeRole");
-        //}
-
-        //private async Task CreateRoles()
-        //{
-        //    if (this.roleManager.Roles.Count() == 0)
-        //    {
-        //        await roleManager.CreateAsync(new IdentityRole() { Name = "User" });
-        //        await roleManager.CreateAsync(new IdentityRole() { Name = "Administrator" });
-        //    }
-
-        //}
-
 
         [HttpGet]
         [AllowAnonymous]
@@ -84,6 +58,15 @@ namespace WheelsMarket.Controllers
 
             if (result.Succeeded)
             {
+                await userManager.AddClaimAsync(user, new Claim("email", user.Email));
+                if (model.Email == "admin@gmail.com")
+                {
+                    await userManager.AddToRoleAsync(user, "Administrator");
+                }
+                else
+                {
+                    await userManager.AddToRoleAsync(user, model.Role);
+                }
                 await signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");
             }

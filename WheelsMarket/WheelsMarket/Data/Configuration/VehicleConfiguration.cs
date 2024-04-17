@@ -33,7 +33,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL= "https://s1.1zoom.me/b4067/303/Audi_2019_A4_allroad_quattro_Grey_Metallic_Estate_570422_1920x1080.jpg",
 				MoreInformation= "Колата няма никакви забележки, само задната лява седалка е скъсана.",
 				LocationRegion= "Стара Загора",
-				EditionId = Guid.Parse("94187284-2cdf-4d3c-8ae3-47c266122a26")
+				EditionId = Guid.Parse("94187284-2cdf-4d3c-8ae3-47c266122a26"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -56,7 +57,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQevdE1eAryK9STmDnZYNZhk4j2TA2f4HYutWX_U4zJoA&s",
 				MoreInformation = "Перфектно запазен автомобил с пълен сервизен история. Има леки драскотини на предния капак.",
 				LocationRegion = "София",
-				EditionId = Guid.Parse("15e67473-da39-433b-8c24-50ae8344a48a")
+				EditionId = Guid.Parse("15e67473-da39-433b-8c24-50ae8344a48a"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -79,7 +81,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://wallpapers.com/images/hd/audi-q7-1920-x-1080-wallpaper-ty4995qkcstpam9g.jpg",
 				MoreInformation = "Добре поддържан семейен автомобил. Нови гуми и спирачни дискове.",
 				LocationRegion = "Варна",
-				EditionId = Guid.Parse("d06fd2a8-60f9-44fe-9484-5358855851b8")
+				EditionId = Guid.Parse("d06fd2a8-60f9-44fe-9484-5358855851b8"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -102,7 +105,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://i.pinimg.com/originals/1a/e6/ef/1ae6efcc6d506cbf6856226e430c4089.webp",
 				MoreInformation = "Луксозен седан с пълен пакет от екстри. Идеален за градско и извънградско шофиране.",
 				LocationRegion = "Пловдив",
-				EditionId = Guid.Parse("2e89ffec-aae1-4620-b5f9-81b3fd59b04d")
+				EditionId = Guid.Parse("2e89ffec-aae1-4620-b5f9-81b3fd59b04d"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -125,7 +129,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrnXVaRLhg0-IVMjYYDpNcglt-_gBc6Milsv556WeEdQ&s",
 				MoreInformation = "Изключително икономичен автомобил, подходящ за градско пътуване. Нови амортисьори.",
 				LocationRegion = "Бургас",
-				EditionId = Guid.Parse("addca70a-f8e1-4165-9ad6-ead636411b65")
+				EditionId = Guid.Parse("addca70a-f8e1-4165-9ad6-ead636411b65"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -148,7 +153,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://i.pinimg.com/originals/12/0d/6b/120d6b8793349feb2388eb99bea99fc2.jpg",
 				MoreInformation = "Надежден и здрав пикап. Има леки външни забележки.",
 				LocationRegion = "Русе",
-				EditionId = Guid.Parse("71545e27-d6f3-41c6-ad01-d422b733c252")
+				EditionId = Guid.Parse("71545e27-d6f3-41c6-ad01-d422b733c252"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -171,7 +177,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://cdn.motor1.com/images/mgl/OoeOzl/s1/bmw-i5-edrive40-touring-2024.jpg",
 				MoreInformation = "Спортен хечбек с елегантен дизайн. Пълен сервизен история в оторизиран сервиз.",
 				LocationRegion = "Стара Загора",
-				EditionId = Guid.Parse("1e9ade8f-9650-43cd-9cb9-cf167e53d61e")
+				EditionId = Guid.Parse("1e9ade8f-9650-43cd-9cb9-cf167e53d61e"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -194,7 +201,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgaB8Wc0vQIF1fAdhaeFqEmq88MxsP8jn4JCAK7bwY9A&s",
 				MoreInformation = "Семеен автомобил с комфортна икономичност. Идеален за пътувания с цялото семейство.",
 				LocationRegion = "Плевен",
-				EditionId = Guid.Parse("9b5026f5-a2da-4fd1-9d64-adfbd1e1034e")
+				EditionId = Guid.Parse("9b5026f5-a2da-4fd1-9d64-adfbd1e1034e"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
@@ -217,7 +225,8 @@ namespace WheelsMarket.Data.Configuration
 				ImageURL = "https://wallpapers.com/images/hd/bmw-x5-1920-x-1080-wallpaper-v6n1t0uhafvmg7q3.jpg",
 				MoreInformation = "Здрав и надежден автомобил.",
 				LocationRegion = "Хасково",
-				EditionId = Guid.Parse("aa7212f8-75b8-474a-91e2-dda3bc404caf")
+				EditionId = Guid.Parse("aa7212f8-75b8-474a-91e2-dda3bc404caf"),
+				UserId = Guid.Parse("58481143-B8F4-4D21-BDEC-5B118DD8A15A")
 			};//
 			vehicles.Add(vehicle);
 
