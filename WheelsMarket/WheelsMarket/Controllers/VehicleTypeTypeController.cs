@@ -6,9 +6,11 @@ using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WheelsMarket.Data;
 using WheelsMarket.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class VehicleTypeTypeController:Controller
     {
         private readonly IVehicleTypeTypeService vehicleTypeTypeService;
@@ -37,7 +39,7 @@ namespace WheelsMarket.Controllers
         {
             if (!ModelState.IsValid) { return View(viewModel); }
             await this.vehicleTypeTypeService.AddVehicleTypeTypeAsync(viewModel);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

@@ -15,7 +15,7 @@
 <body class="body">
 			<form method="post" asp-action="Add">
 		<div class="mb-3">
-			<label for="" class="form-label">VehicleTypeSection</label>
+			<label for="" class="form-label">Секция</label>
 			<br />
 			<select asp-for="VehicleTypeSectionId" asp-items="@ViewBag.VehicleTypeSectionId" class="form-control">
 				<option>Избери</option>
@@ -25,19 +25,19 @@
 
 		<button type="submit" class="btn btn-warning">Ok</button>
 		<div class="mb-3">
-			<label for="" class="form-label">VehicleTypeType</label>
+			<label for="" class="form-label">Тип</label>
 			<br />
 			<select asp-for="VehicleTypeTypeId" asp-items="@ViewBag.VehicleTypeTypeId" class="form-control"><option>Избери</option></select>
 		</div>
 		<button type="submit" class="btn btn-warning">Ok</button>
 		<div class="mb-3">
-			<label for="" class="form-label">BrandId</label>
+			<label for="" class="form-label">Марка</label>
 			<br />
 			<select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"><option>Избери</option></select>
 		</div>
 		<button type="submit" class="btn btn-warning">Ok</button>
 		<div class="mb-3">
-			<label for="" class="form-label">Edition</label>
+			<label for="" class="form-label">Модел</label>
 			<br />
 			<select asp-for="EditionId" asp-items="@ViewBag.EditionId" class="form-control"><option>Избери</option></select>
 		</div>
@@ -219,7 +219,7 @@
 					<input asp-for="@Model.VinNumber" class="form-control" aria-required="false" />
 					<span asp-validation-for="VinNumber" class="text-danger"></span>
 				</div>
-				<button type="submit" class="btn btn-primary">Submit</button>
+				<button type="submit" class="btn btn-primary">Потвърди</button>
 			</form>
 
 </body>

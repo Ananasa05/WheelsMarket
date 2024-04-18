@@ -15,6 +15,7 @@
                             border-collapse: collapse;
                             border: 2px solid black; /* Outer border for the table */
                             background-color: #ffffff; /* Set background color of the table */
+                            border-radius: 10px; /* Rounded corners for the table */
                         }
 
                         th, td {
@@ -23,6 +24,7 @@
                             text-align: left;
                         }
                     </style>
+
 
                     <table>
 
@@ -43,7 +45,7 @@
                             <td>@Model.Distance</td>
                         </tr>
                         <tr>
-                            <td><strong>Тип двигател:</strong></td>
+                            <td><strong>Тип гориво:</strong></td>
                             <td>@Model.Fuel</td>
                         </tr>
                         <tr>
@@ -71,24 +73,36 @@
                             <td>@Model.HoursePower</td>
                         </tr>
                         <tr>
-                            <td><strong>Къде се намира:</strong></td>
+                            <td><strong>Облат:</strong></td>
                             <td>@Model.LocationRegion</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Град/Село:</strong></td>
+                            <td>@Model.LocationTown</td>
                         </tr>
                         <tr>
                             <td><strong>Vin номер:</strong></td>
                             <td>@Model.VinNumber</td>
                         </tr>
                         <tr>
+                            <td><strong>Валута:</strong></td>
+                            <td>@Model.Currency</td>
+                        </tr>
+                        <tr>
                             <td><strong>Допълнителна информация:</strong></td>
                             <td>@Model.MoreInformation</td>
                         </tr>
                         <tr>
-                            <td><strong>Допълнителна информация:</strong></td>
+                            <td><strong>Първо име на потребител:</strong></td>
                             <td>@Model.UserFirstName</td>
                         </tr>
                         <tr>
-                            <td><strong>Допълнителна информация:</strong></td>
+                            <td><strong>Второ име на потребител:</strong></td>
                             <td>@Model.UserLastName</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Телефонен номер:</strong></td>
+                            <td>@Model.PhoneNumber</td>
                         </tr>
                     </table>
                 </div>

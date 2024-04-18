@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-controller="User" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link text-white" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-white" style="box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)">Излизане</button>
             </form>
         </li>
     }
@@ -25,12 +25,12 @@
     {
         <li class="nav-item">
             <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Register" style="font-size: 15px;">
-                Register
+                Ригистриране
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Login" style="font-size: 15px; ">
-                Login
+                Влизане
             </a>
         </li>
     }

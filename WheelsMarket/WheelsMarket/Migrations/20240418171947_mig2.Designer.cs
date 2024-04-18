@@ -12,8 +12,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    [Migration("20240417172831_fixedMigrations1")]
-    partial class fixedMigrations1
+    [Migration("20240418171947_mig2")]
+    partial class mig2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,14 +55,14 @@ namespace WheelsMarket.Migrations
                         new
                         {
                             Id = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256"),
-                            ConcurrencyStamp = "48d5aee8-558b-403f-bff0-007f766d946e",
+                            ConcurrencyStamp = "dd3edad8-bcb4-4436-a4a2-6fd7b0a1951c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae"),
-                            ConcurrencyStamp = "65ad19f5-806e-43ee-8687-8139d9cbe884",
+                            ConcurrencyStamp = "8d2083ca-3275-4b2b-a12f-76f44c337972",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -516,7 +516,7 @@ namespace WheelsMarket.Migrations
                         {
                             Id = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b069de7-5c34-4eba-9e3f-8625eaece52a",
+                            ConcurrencyStamp = "d7f3dcdb-7e60-43ea-8e1c-fd54f798f2c7",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Lyudmil",
@@ -524,9 +524,10 @@ namespace WheelsMarket.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM4iv4IDwa4x37qZU9vdsBPmtu/YVATB4OnqwalU0fx6fJrSeXiliOFqjnbqdxmzkQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKljz7jt4Kpg/AvZREOVAIG4OWWReSk1RxEh1ABUybRFKrycLOfXr0xVO7p5RkVRMQ==",
+                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "555bcd73-3ce8-4719-a41f-c4a6173e5fc2",
+                            SecurityStamp = "2765c00b-ea54-4a3b-8fb1-3337ccc58a37",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -534,7 +535,7 @@ namespace WheelsMarket.Migrations
                         {
                             Id = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fc821531-60e0-41b0-85d3-23ef9423732b",
+                            ConcurrencyStamp = "6cfd64ac-99cc-49c4-a0a1-4ea7f0cef37e",
                             Email = "client@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Иван",
@@ -542,9 +543,10 @@ namespace WheelsMarket.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@GMAIL.COM",
                             NormalizedUserName = "CLIENT_1",
-                            PasswordHash = "AQAAAAEAACcQAAAAELGPfWSguqG/9OZZQGlNIfyM82AfBfXj1kT5IyunR5A8bE8dw8/+15blvmJSQRDWBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF/Mfq057BXIRpZ6Y3mSCyndeD5Umcj4B1pIaVuKSa3+YXvhP1CW22+lx1ErhXLMRw==",
+                            PhoneNumber = "1234567891",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad3660c3-e4f8-404f-9399-d200899888bd",
+                            SecurityStamp = "368cd1ad-2343-45b9-a40a-b32f57ad305e",
                             TwoFactorEnabled = false,
                             UserName = "Client 1"
                         });
@@ -639,6 +641,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Казанлък",
                             MoreInformation = "Колата няма никакви забележки, само задната лява седалка е скъсана.",
                             Price = 15399,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10001,
                             Volume = 2500,
                             Year = 2009,
@@ -661,6 +664,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "София",
                             MoreInformation = "Перфектно запазен автомобил с пълен сервизен история. Има леки драскотини на предния капак.",
                             Price = 21999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10002,
                             Volume = 1800,
                             Year = 2015,
@@ -683,6 +687,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Звездица",
                             MoreInformation = "Добре поддържан семейен автомобил. Нови гуми и спирачни дискове.",
                             Price = 13500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10003,
                             Volume = 2200,
                             Year = 2012,
@@ -705,6 +710,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Хисаря",
                             MoreInformation = "Луксозен седан с пълен пакет от екстри. Идеален за градско и извънградско шофиране.",
                             Price = 28900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10004,
                             Volume = 3000,
                             Year = 2018,
@@ -727,6 +733,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Айтос",
                             MoreInformation = "Изключително икономичен автомобил, подходящ за градско пътуване. Нови амортисьори.",
                             Price = 8500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10005,
                             Volume = 1600,
                             Year = 2010,
@@ -749,6 +756,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Мартен",
                             MoreInformation = "Надежден и здрав пикап. Има леки външни забележки.",
                             Price = 12300,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10006,
                             Volume = 2500,
                             Year = 2011,
@@ -771,6 +779,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Раднево",
                             MoreInformation = "Спортен хечбек с елегантен дизайн. Пълен сервизен история в оторизиран сервиз.",
                             Price = 18900,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10007,
                             Volume = 2000,
                             Year = 2017,
@@ -793,6 +802,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Плевен",
                             MoreInformation = "Семеен автомобил с комфортна икономичност. Идеален за пътувания с цялото семейство.",
                             Price = 10500,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10008,
                             Volume = 1800,
                             Year = 2013,
@@ -815,6 +825,7 @@ namespace WheelsMarket.Migrations
                             LocationTown = "Харманли",
                             MoreInformation = "Здрав и надежден автомобил.",
                             Price = 14999,
+                            UserId = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             VinNumber = 10009,
                             Volume = 2200,
                             Year = 2016,

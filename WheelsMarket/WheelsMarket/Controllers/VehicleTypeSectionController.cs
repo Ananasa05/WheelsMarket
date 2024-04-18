@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Services.VehicleTypeSections;
 using WheelsMarket.Services.VehicleTypeSections.ViewModel;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class VehicleTypeSectionController:Controller
     {
         private readonly IVehicleTypeSectionService vehicleTypeSectionService;

@@ -10,7 +10,7 @@
     <title>Customizable Table</title>
     <link rel="stylesheet" href="/css/site.css">
 </head>
-<h1>Добави модел.</h1>
+<h1>Добави модел:</h1>
 
         <form method="post" asp-action="Create">
             <div class="mb-3">
@@ -19,11 +19,12 @@
             <span asp-validation-for="Name" class="text-danger"></span>
             </div>
 
-             <div class="mb-3">
              <label for="" class="form-label">Марка</label>
              <br />
              <select asp-for="BrandId" asp-items="@ViewBag.BrandId" class="form-control"></select>
+             <br>
+    <button type="submit" class="btn btn-primary">Потвърди</button>
+
              </div>
-            <button type="submit" class="btn btn-primary">Потвърди</button>
 
          </form>

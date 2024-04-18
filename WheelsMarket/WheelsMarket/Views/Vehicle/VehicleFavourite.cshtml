@@ -15,22 +15,21 @@
                         <img class="card-img-top" src="@vehicle.ImageURL" style="width: 300px; height: 190px; border-radius:10px">
                         <div class="card-body text-left">
                             <p class="mb-0">Цена: @vehicle.Price</p>
-                            <p class="mb-0">Дистанция: @vehicle.Distance</p>
+                            <p class="mb-0">Дистанция: @vehicle.Distance км</p>
                             <p class="mb-0">Гориво: @vehicle.Fuel</p>
-                            <p class="mb-0">Обем: @vehicle.Volume</p>
+                            <p class="mb-0">Обем: @vehicle.Volume куб.см</p>
                             <p class="mb-0">Година: @vehicle.Year</p>
                             <p class="mb-0">Марка: @vehicle.BrandName</p>
                             <p class="mb-0">Модел: @vehicle.EditionName</p>
-                            <p class="mb-0">Модел: @vehicle.IsApproved</p>
                             <br>
                             <div class="mb-3">
-                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger" style="background-color:">Check</a>
+                                <a asp-controller="Vehicle" asp-action="ShowAllInfoForAVehicle" asp-route-id="@vehicle.Id" class="btn btn-danger" style="background-color:">Разгледай</a>
                             </div>
                             <a asp-controller="Vehicle" asp-action="RemoveFromFavourites" asp-route-vehicleId="@vehicle.Id" class="btn btn-warning" style="background-color:#930607;
                         transition: background-color 0.3s ease; display: inline-block;
                         padding: 0.5em 1em; text-decoration: none; color: white; border:none"
                                onmouseover="this.style.backgroundColor='#FFD89C'" onmouseout="this.style.backgroundColor='#FFAE42'">
-                                Remove
+                                Премахни
                             </a>
                         </div>
                     </div>

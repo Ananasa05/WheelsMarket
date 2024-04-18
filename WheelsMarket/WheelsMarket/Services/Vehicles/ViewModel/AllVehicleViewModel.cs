@@ -28,5 +28,6 @@ namespace WheelsMarket.Services.Vehicles.ViewModel
 		public bool? IsApproved { get; set; }
 		public string? UserFirstName { get; set; }
 		public string? UserLastName { get; set; }
+		public string? PhoneNumber { get; set; }
 	}
 }

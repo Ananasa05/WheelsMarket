@@ -9,7 +9,7 @@
     <title>Customizable Table</title>
     <link rel="stylesheet" href="/css/site.css">
 </head>
-<h1>Редактирай тип автомобил.</h1>
+<h1>Редактирай тип автомобил:</h1>
 
 <form method="post" action="Edit" class="mt-5">
     <div class="mb-3">
@@ -23,6 +23,8 @@
         <label for="" class="form-label">Тип</label>
         <br />
         <input type="text" class="form-control" asp-for="Type" />
+        <span asp-validation-for="Type" class="text-danger"></span>
+
         <br />
     </div>
 

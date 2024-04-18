@@ -6,9 +6,11 @@ using WheelsMarket.Services.Editions.ViewModel;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Services.Brands.ViewModel;
 using WheelsMarket.Services.Brands;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class EditionController:Controller
     {
         private readonly IEditionService editionService;

@@ -12,8 +12,8 @@ using WheelsMarket.Data;
 namespace WheelsMarket.Migrations
 {
     [DbContext(typeof(WheelsMarketDbContext))]
-    [Migration("20240417172735_fixedMigrations")]
-    partial class fixedMigrations
+    [Migration("20240418171934_mig1")]
+    partial class mig1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

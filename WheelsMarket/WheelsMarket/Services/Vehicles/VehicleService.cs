@@ -9,6 +9,7 @@ using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 
 namespace WheelsMarket.Services.Vehicles
 {
+
     public class VehicleService : IVehicleService
     {
 
@@ -81,11 +82,14 @@ namespace WheelsMarket.Services.Vehicles
                     Currency = model.Currency,//
                     VinNumber = Convert.ToInt32(model.VinNumber),
                     HoursePower = Convert.ToInt32(model.HoursePower),
+                    LocationRegion = model.LocationRegion,
+                    LocationTown = model.LocationTown,
                     EditionName= model.Edition.Name,
                     BrandName= model.Edition.Brand.Name,
                     
                     UserFirstName = model2.FirstName,
-                    UserLastName = model2.LastName
+                    UserLastName = model2.LastName,
+                    PhoneNumber = model2.PhoneNumber
                 };
 
                 return vehicle;

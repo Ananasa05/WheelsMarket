@@ -6,9 +6,11 @@ using WheelsMarket.Services.Brands.ViewModel;
 using WheelsMarket.Data.Models;
 using WheelsMarket.Services.VehicleTypeTypes.ViewModel;
 using WheelsMarket.Services.VehicleTypeTypes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class BrandController:Controller
     {
         private readonly IBrandService brandService;

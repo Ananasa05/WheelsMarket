@@ -10,7 +10,7 @@
     <title>Customizable Table</title>
     <link rel="stylesheet" href="/css/site.css">
 </head>
-<h1>Редактирай секция автомобил.</h1>
+<h1>Редактирай секция автомобил:</h1>
 <form method="post" action="Edit" class="mt-5">
 
     <div class="mb-3">
@@ -23,6 +23,8 @@
         <label for="" class="form-label">Секция</label>
         <br />
         <input type="text" class="form-control" asp-for="Section" />
+        <span asp-validation-for="Section" class="text-danger"></span>
+
         <br />
     </div>
     <button type="submit" class="btn btn-primary">Потвърди</button>

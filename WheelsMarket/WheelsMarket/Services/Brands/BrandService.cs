@@ -30,18 +30,6 @@ namespace WheelsMarket.Services.Brands
             return model;
         }
 
-        //public async Task AddBrandAdminAsync(AddBrandViewModel addBrandViewModel)
-        //{
-        //    var brand = new Brand()
-        //    {
-        //        Name = addBrandViewModel.Name,
-        //        VehicleTypeTypeId = addBrandViewModel.VehicleTypeTypeId,
-        //    };
-
-        //    await context.Brands.AddAsync(brand);
-        //    await context.SaveChangesAsync();
-        //}
-
         public SelectList AddBrandAdminAsync()
         {
             return new SelectList(this.context.VehicleTypeTypes, "Id", "Type");

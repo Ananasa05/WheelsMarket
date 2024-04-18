@@ -18,6 +18,8 @@ using System.Security.Claims;
 
 namespace WheelsMarket.Controllers
 {
+    [Authorize]
+
     public class VehicleController : Controller
     {
         private readonly IVehicleService vehicleService;
@@ -55,6 +57,7 @@ namespace WheelsMarket.Controllers
             var model = await vehicleService.ShowAllInformationForVehicle(id);
             return View(model);
         }
+        [Authorize(Roles = "Client")]
 
         [HttpGet]
         public IActionResult Add()
@@ -62,6 +65,8 @@ namespace WheelsMarket.Controllers
             ViewBag.VehicleTypeSectionId = this.vehicleService.AddVehicleTypeSectionAsync();
             return View();
         }
+        [Authorize(Roles = "Client")]
+
         [HttpPost]
         public async Task<IActionResult> Add(AddVehicleViewModel viewModel)
         {
@@ -95,6 +100,7 @@ namespace WheelsMarket.Controllers
             await this.vehicleService.AddVehicleAsync(viewModel);
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
+        [Authorize(Roles = "Client")]
 
         [HttpGet]
         public async Task<IActionResult> VehicleFavourite()
@@ -110,11 +116,12 @@ namespace WheelsMarket.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [Authorize(Roles = "Client")]
 
         [HttpPost]
         public async Task<IActionResult> FavouriteVehicle(Guid id)
         {
-            var user = await userManager.FindByNameAsync(User.Identity?.Name);
+            var user = await userManager.GetUserAsync(User);
 
             try
             {
@@ -126,6 +133,7 @@ namespace WheelsMarket.Controllers
             }
             return RedirectToAction("VehicleFavourite");
         }
+        [Authorize(Roles = "Client")]
 
         [HttpGet]
         public async Task<IActionResult> RemoveFromFavourites(Guid vehicleId)
@@ -142,6 +150,7 @@ namespace WheelsMarket.Controllers
             }
             return RedirectToAction("VehicleFavourite");
 		}
+        [Authorize(Roles = "Administrator")]
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -159,6 +168,7 @@ namespace WheelsMarket.Controllers
             }
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
+        [Authorize(Roles = "Administrator")]
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditIsApprovedViewModel model)
@@ -180,6 +190,7 @@ namespace WheelsMarket.Controllers
             return View("Edit", model);
         }
 
+        [Authorize(Roles = "Administrator")]
 
         [HttpGet]
         public async Task<IActionResult> EditVehicle(Guid id)
@@ -212,6 +223,7 @@ namespace WheelsMarket.Controllers
             }
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
+        [Authorize(Roles = "Administrator")]
 
         [HttpPost]
         public async Task<IActionResult> EditVehicle(EditAllVehicleParameters model)
@@ -246,6 +258,7 @@ namespace WheelsMarket.Controllers
             }
             return View("EditVehicle", model);
         }
+        [Authorize(Roles = "Administrator")]
 
         [HttpGet]
         public async Task<IActionResult> Delete(

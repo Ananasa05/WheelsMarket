@@ -52,7 +52,10 @@ namespace WheelsMarket.Controllers
             var user = new User()
             {
                 Email = model.Email,
-                UserName = model.UserName
+                UserName = model.UserName,
+                PhoneNumber = model.PhoneNumber,
+                FirstName = model.FirstName,
+                LastName = model.LastName
             };
             var result = await userManager.CreateAsync(user, model.Password);
 
@@ -65,7 +68,7 @@ namespace WheelsMarket.Controllers
                 }
                 else
                 {
-                    await userManager.AddToRoleAsync(user, model.Role);
+                    await userManager.AddToRoleAsync(user, "Client");
                 }
                 await signInManager.SignInAsync(user, isPersistent: false);
                 return RedirectToAction("Index", "Home");

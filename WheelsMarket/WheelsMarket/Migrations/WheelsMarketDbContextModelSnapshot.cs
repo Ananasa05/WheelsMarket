@@ -53,14 +53,14 @@ namespace WheelsMarket.Migrations
                         new
                         {
                             Id = new Guid("24da8b40-25fa-4fb5-a453-b168ac1a6256"),
-                            ConcurrencyStamp = "6465a1d8-97a9-4448-89ea-e484ea2921ac",
+                            ConcurrencyStamp = "dd3edad8-bcb4-4436-a4a2-6fd7b0a1951c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
                             Id = new Guid("13ead2ca-3577-444c-a1ec-6dce24ad5bae"),
-                            ConcurrencyStamp = "e1b5e66c-62cb-442f-9a3b-542348e36a7e",
+                            ConcurrencyStamp = "8d2083ca-3275-4b2b-a12f-76f44c337972",
                             Name = "Client",
                             NormalizedName = "CLIENT"
                         });
@@ -514,7 +514,7 @@ namespace WheelsMarket.Migrations
                         {
                             Id = new Guid("d1a1ff64-6926-4a47-a358-ff0f76f634b3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "af0ac38c-3935-4029-87de-7f567f7adcf9",
+                            ConcurrencyStamp = "d7f3dcdb-7e60-43ea-8e1c-fd54f798f2c7",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Lyudmil",
@@ -522,9 +522,10 @@ namespace WheelsMarket.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAELbOfevKoM4RPTThUTzzzdyS0jxGuax1Z7NlvVvmuhrn69D8gZAlFVZ9wZuknYdkew==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKljz7jt4Kpg/AvZREOVAIG4OWWReSk1RxEh1ABUybRFKrycLOfXr0xVO7p5RkVRMQ==",
+                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2df85017-21dd-40ed-814e-9b5fefbe8b4b",
+                            SecurityStamp = "2765c00b-ea54-4a3b-8fb1-3337ccc58a37",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -532,7 +533,7 @@ namespace WheelsMarket.Migrations
                         {
                             Id = new Guid("58481143-b8f4-4d21-bdec-5b118dd8a15a"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "34ac4505-699d-4dc1-97d7-580df4f0b74b",
+                            ConcurrencyStamp = "6cfd64ac-99cc-49c4-a0a1-4ea7f0cef37e",
                             Email = "client@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Иван",
@@ -540,9 +541,10 @@ namespace WheelsMarket.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "CLIENT@GMAIL.COM",
                             NormalizedUserName = "CLIENT_1",
-                            PasswordHash = "AQAAAAEAACcQAAAAENQiKvC5ZgYvS1PCMw6IewtH7JLxBsyaih8Y3f+kS72HUIs5CE3U73431WxXmtOqzQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEF/Mfq057BXIRpZ6Y3mSCyndeD5Umcj4B1pIaVuKSa3+YXvhP1CW22+lx1ErhXLMRw==",
+                            PhoneNumber = "1234567891",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "07b1eb8a-d2ce-43d8-979d-e4a590135932",
+                            SecurityStamp = "368cd1ad-2343-45b9-a40a-b32f57ad305e",
                             TwoFactorEnabled = false,
                             UserName = "Client 1"
                         });

@@ -25,6 +25,7 @@ namespace WheelsMarket.Data.Configuration
                 Email = "admin@gmail.com",
                 FirstName = "Lyudmil",
                 LastName = "Atanasov",
+                PhoneNumber = "1234567890",
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
@@ -40,6 +41,7 @@ namespace WheelsMarket.Data.Configuration
                 Email = "client@gmail.com",
                 FirstName = "Иван",
                 LastName = "Иванов",
+                PhoneNumber = "1234567891",
                 NormalizedEmail = "CLIENT@GMAIL.COM",
                 SecurityStamp = Guid.NewGuid().ToString(),
             };
