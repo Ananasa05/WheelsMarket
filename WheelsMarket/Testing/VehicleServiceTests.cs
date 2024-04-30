@@ -5,112 +5,173 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WheelsMarket.Data;
+using WheelsMarket.Data.Models;
+using WheelsMarket.Services.Editions;
 using WheelsMarket.Services.Vehicles;
+using WheelsMarket.Services.Vehicles.ViewModel;
 using static Testing.DataBaseSeeder;
 
 namespace Testing
 {
-    [TestFixture]
-
     public class VehicleServiceTests
     {
-        //private DbContextOptions<WheelsMarketDbContext> dbOptions;
-        //private WheelsMarketDbContext dbContext;
-        //private IVehicleService vehicleService;
+        private DbContextOptions<WheelsMarketDbContext> dbOptions;
+        private WheelsMarketDbContext dbContext;
+        private IVehicleService vehicleService;
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.dbOptions = new DbContextOptionsBuilder<WheelsMarketDbContext>()
+                    .UseInMemoryDatabase("WheelsMarketInMemoryDb" + Guid.NewGuid().ToString())
+                    .Options;
+
+            this.dbContext = new WheelsMarketDbContext(this.dbOptions, false);
+            this.dbContext.Database.EnsureCreated();
+            SeedDatabase(this.dbContext);
 
 
-        //[SetUp]
-        //public void SetUp()
-        //{
-        //    this.dbOptions = new DbContextOptionsBuilder<WheelsMarketDbContext>()
-        //            .UseInMemoryDatabase("WheelsMarketInMemoryDb" + Guid.NewGuid().ToString())
-        //            .Options;
+            this.vehicleService = new VehicleService(dbContext);
 
-        //    this.dbContext = new WheelsMarketDbContext(this.dbOptions, false);
-        //    this.dbContext.Database.EnsureCreated();
-        //    SeedDatabase(this.dbContext);
+        }
 
+        [TearDown]
+        public void TearDown()
+        {
+            dbContext.Database.EnsureDeleted();
+        }
 
-        //    this.vehicleService = new VehicleService(dbContext);
+        [Test]
+        public async Task FavoriteVehicleAsync_AddsBookToUserFavorites()
+        {
+            // Arrange
+            var user = dbContext.Users.First();
+            var vehicle = dbContext.Vehicles.First();
 
-        //}
+            // Act
+            await vehicleService.FavouritesVehicleAsync(vehicle.Id, user);
 
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    dbContext.Database.EnsureDeleted();
-        //}
+            // Assert
+            Assert.AreEqual(1, dbContext.Favourites.Count());
+            var addedFavorite = dbContext.Favourites.First();
+            Assert.AreEqual(user.Id, addedFavorite.UserId);
+            Assert.AreEqual(vehicle.Id, addedFavorite.VehicleId);
+        }
 
-        //[Test]
+        [Test]
+        public async Task FavoriteVehicleAsync_VehicleNotFound_DoesNotAddToUserFavorites()
+        {
+            // Arrange
+            var user = dbContext.Users.First();
+            var nonExistingBookId = Guid.NewGuid();
 
-        //public async Task DeleteVehicleAdminAsync_ValidId_DeletesVehicle()
+            // Act
+            await vehicleService.FavouritesVehicleAsync(nonExistingBookId, user);
 
-        //{
+            // Assert
+            Assert.IsEmpty(dbContext.Favourites);
+        }
 
-        //    // Arrange
+        [Test]
+        public async Task VehicleFavoriteAsync_ReturnsFavoriteVehiclesForUser()
+        {
+            // Arrange
+            var user = dbContext.Users.First();
 
-        //    var service = new VehicleService(/* initialize context here */);
+            // Act
+            var result = await vehicleService.VehicleFavouritesAsync(user);
 
-        //    var vehicleId = Guid.Parse("ea3480ae-657b-4bcf-ac44-8e45081b58e6");
+            // Assert
+            Assert.NotNull(result);
+            Assert.AreEqual(user.Favourites.Count, result.Count());
+        }
 
+        
 
-        //    // Act
+        [Test]
+        public async Task GetVehicleByIdAsync_ReturnsNull_WhenVehicleNotFound()
+        {
+            // Arrange
+            var nonExistentId = Guid.NewGuid(); 
 
-        //    await service.DeleteVehicleAdminAsync(vehicleId);
+            // Act
+            var result = await vehicleService.GetVehicleId(nonExistentId);
 
+            // Assert
+            Assert.IsNull(result);
+        }
 
-        //    // Assert
+        [Test]
+        public async Task GetVehicleIsApprovedByIdAsync_ReturnsNull_WhenVehicleNotFound()
+        {
+            // Arrange
+            var nonExistentId = Guid.NewGuid(); 
 
-        //    var vehicle = await /* context.Vehicles.FindAsync(vehicleId) */;
+            // Act
+            var result = await vehicleService.GetEditIsApproved(nonExistentId);
 
-        //    Assert.IsNull(vehicle);
+            // Assert
+            Assert.IsNull(result);
+        }
 
-        //}
+        [Test]
+        public void DeleteVehiclesAsync_ThrowsException_WhenIdNotFound()
+        {
+            // Arrange
+            var nonExistentId = Guid.NewGuid();
 
+            // Act & Assert
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await vehicleService.DeleteVehicleAdminAsync(nonExistentId));
+        }
 
-        //[Test]
+        [Test]
+        public async Task DeleteVehiclesAsync_RemovesAssociatedFavourites()
+        {
+            // Arrange
+            var vehicleId = Guid.Parse("0a1f1c92-f170-481f-a301-46c8f72c9b82");
 
-        //public async Task DeleteVehicleAdminAsync_InvalidId_ThrowsArgumentNullException()
+            // Act
+            await vehicleService.DeleteVehicleAdminAsync(vehicleId);
 
-        //{
+            // Assert
+            var brands = await dbContext.Favourites.Where(b => b.VehicleId== vehicleId).ToListAsync();
+            Assert.IsEmpty(brands);
+        }
 
-        //    // Arrange
+        [Test]
+        public async Task DeleteVehiclesAsync_ThrowsException_WhenIdIsEmptyGuid()
+        {
+            // Arrange
+            var emptyGuid = Guid.Empty;
 
-        //    var service = new VehicleService(/* initialize context here */);
+            // Act & Assert
+            Assert.ThrowsAsync<ArgumentNullException>(async () => await vehicleService.DeleteVehicleAdminAsync(emptyGuid));
+        }
 
-        //    var vehicleId = Guid.NewGuid();
+        [Test]
+        public async Task DeleteVehiclesAsync_DoesNotRemoveOtherVehicles()
+        {
+            // Arrange
+            var vehicleId = Guid.Parse("0a1f1c92-f170-481f-a301-46c8f72c9b82");
+            var remainingVehicleId = Guid.Parse("2e1506d8-3bf5-44a3-a123-f61b2d8372ba");
 
+            // Act
+            await vehicleService.DeleteVehicleAdminAsync(vehicleId);
 
-        //    // Act & Assert
+            // Assert
+            var remainingVehicle = await dbContext.Vehicles.FindAsync(remainingVehicleId);
+            Assert.IsNotNull(remainingVehicle);
+        }
 
-        //    await Assert.ThrowsAsync<ArgumentNullException>(() => service.DeleteVehicleAdminAsync(vehicleId));
+        [Test]
+        public async Task DeleteVehiclesAsync_ThrowsException_WhenIdIsInvalid()
+        {
+            // Arrange
+            var invalidId = "InvalidId";
 
-        //}
-
-
-        //[Test]
-
-        //public async Task DeleteVehicleAdminAsync_SeededData_DeletesVehicle()
-
-        //{
-
-        //    // Arrange
-
-        //    var service = new VehicleService(/* initialize context here */);
-
-
-        //    // Act
-
-        //    await service.DeleteVehicleAdminAsync(Guid.Parse("ea3480ae-657b-4bcf-ac44-8e45081b58e6"));
-
-
-        //    // Assert
-
-        //    var vehicle = await /* context.Vehicles.FindAsync(Guid.Parse("ea3480ae-657b-4bcf-ac44-8e45081b58e6")) */;
-
-        //    Assert.IsNull(vehicle);
-
-        //}
+            // Act & Assert
+            Assert.ThrowsAsync<FormatException>(async () => await vehicleService.DeleteVehicleAdminAsync(Guid.Parse(invalidId)));
+        }
 
     }
 }

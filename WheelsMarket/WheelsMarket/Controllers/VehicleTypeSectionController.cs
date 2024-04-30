@@ -16,11 +16,6 @@ namespace WheelsMarket.Controllers
             this.vehicleTypeSectionService = vehicleTypeSectionService;
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
         public async Task<IActionResult> Index()
         {
             var model = await vehicleTypeSectionService.ShowAllVehicleTypeSectionAsync();

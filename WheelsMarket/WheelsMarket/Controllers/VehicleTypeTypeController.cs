@@ -62,7 +62,6 @@ namespace WheelsMarket.Controllers
                 {
                     Id = vtt.Id,
                     Type = vtt.Type
-                    //VehicleTypeSectionsId = (Guid)vts.VehicleTypeSectionId,
                 };
                 return View("Edit", viewModel);
             }

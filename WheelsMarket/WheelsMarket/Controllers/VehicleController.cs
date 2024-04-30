@@ -169,7 +169,6 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
         [Authorize(Roles = "Administrator")]
-
         [HttpPost]
         public async Task<IActionResult> Edit(EditIsApprovedViewModel model)
         {
@@ -224,7 +223,6 @@ namespace WheelsMarket.Controllers
             return RedirectToAction("ShowSelectedInformationForAllVehicles", "Vehicle");
         }
         [Authorize(Roles = "Administrator")]
-
         [HttpPost]
         public async Task<IActionResult> EditVehicle(EditAllVehicleParameters model)
         {

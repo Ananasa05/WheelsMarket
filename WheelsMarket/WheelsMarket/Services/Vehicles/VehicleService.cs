@@ -68,18 +68,18 @@ namespace WheelsMarket.Services.Vehicles
                 var vehicle = new AllVehicleViewModel()
                 {
                     Id = model.Id,
-                    Distance = Convert.ToInt32(model.Distance),//
-                    Fuel = model.Fuel,//
-                    Color = model.Color,//
-                    Condition = model.Condition,//
-                    ImageURL = model.ImageURL,//
-                    Price = Convert.ToInt32(model.Price),//
-                    Volume = Convert.ToInt32(model.Volume),//
-                    Year = Convert.ToInt32(model.Year),//
-                    Тransmission = model.Тransmission,//
-                    EuroStandart = model.EuroStandard,//
-                    MoreInformation = model.MoreInformation,//
-                    Currency = model.Currency,//
+                    Distance = Convert.ToInt32(model.Distance),
+                    Fuel = model.Fuel,
+                    Color = model.Color,
+                    Condition = model.Condition,
+                    ImageURL = model.ImageURL,
+                    Price = Convert.ToInt32(model.Price),
+                    Volume = Convert.ToInt32(model.Volume),
+                    Year = Convert.ToInt32(model.Year),
+                    Тransmission = model.Тransmission,
+                    EuroStandart = model.EuroStandard,
+                    MoreInformation = model.MoreInformation,
+                    Currency = model.Currency,
                     VinNumber = Convert.ToInt32(model.VinNumber),
                     HoursePower = Convert.ToInt32(model.HoursePower),
                     LocationRegion = model.LocationRegion,
@@ -103,7 +103,7 @@ namespace WheelsMarket.Services.Vehicles
 
         public async Task<IEnumerable<AllVehicleViewModel>> ShowAllVehiclesAsync(string? condition, int? priceMin, int? priceMax, int? yearMin, int? yearMax, string? transmissionName, string? fuelName, int? horsePowerMin, int? horsePowerMax, string? locationTown, string? locationRegion, string? colorName)
         {
-            var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand)./*Where(x=>x.IsVehicleApproved==fal)*/AsQueryable();
+            var entitiesDb = context.Vehicles.Include(x=>x.Edition).ThenInclude(b=>b.Brand).AsQueryable();
 
             if (yearMin != null && yearMax != null)
             {
@@ -188,7 +188,7 @@ namespace WheelsMarket.Services.Vehicles
 
             await this.context.Vehicles.AddAsync(model);
             await context.SaveChangesAsync();
-        }//modify this code so specific vehicle to be to specific person
+        }
 
 		public async Task FavouritesVehicleAsync(Guid id, User user)
 		{
@@ -277,17 +277,14 @@ namespace WheelsMarket.Services.Vehicles
             context.Update(vehicle);
             await context.SaveChangesAsync();
         }
-
-        public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
-        {
-            return new SelectList(this.context.VehicleTypeTypes.Where(x => x.VehicleTypeSectionId == typeSectionId), "Id", "Type");
-        }
-
         public SelectList AddVehicleTypeSectionAsync()
         {
             return new SelectList(this.context.VehicleTypeSections, "Id", "Section");
         }
-
+        public SelectList AddVehicleTypeTypeAsync(Guid typeSectionId)
+        {
+            return new SelectList(this.context.VehicleTypeTypes.Where(x => x.VehicleTypeSectionId == typeSectionId), "Id", "Type");
+        }
 		public SelectList AddBrandAsync(Guid typeTypeId)
 		{
 			return new SelectList(this.context.Brands.Where(x=>x.VehicleTypeTypeId==typeTypeId), "Id", "Name");
